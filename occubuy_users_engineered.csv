@@ -1,0 +1,892 @@
+budget_range,property_type,bedrooms,bathrooms,features,neighborhood,pre_approval,timeline,purpose,motivation,points_interest,budget_min,budget_max,budget_mid,bedrooms_num,bathrooms_num,pre_approval_bin,timeline_score,pref_house,pref_house_land,pref_townhouse,pref_apartment,feat_parking,feat_pet_friendly,feat_green_spaces,feat_proximity_to_public_transport,feat_security,feat_low_maintenance_options,feat_swimming_pool,feat_balcony,feat_gym
+$500K-$750K,"Apartment
+Townhouse
+House",Studio,1.0,"Pet-friendly
+Green spaces
+Proximity to public transport","Mixed-use (balanced)
+Close to work/schools
+Nature-focused",NO,1–2 years,Home to Live In,Stability & security,YES,500000.0,750000.0,625000.0,0.0,1.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$500K-$750K,"House
+House & Land",2,1.0,,"Quiet & residential
+Urban & vibrant
+Mixed-use (balanced)
+Close to work/schools
+Family-friendly
+Luxury/High-end
+Nature-focused",NO,Not sure,Home to Live In,"Stability & security
+Building wealth
+Family needs",YES,500000.0,750000.0,625000.0,2.0,1.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$500K-$750K,House & Land,3,2.0,"Swimming Pool
+Gym
+Low-maintenance options",Nature-focused,NO,1–2 years,Home to Live In,"Stability & security
+Building wealth
+Family needs
+Retirement planning",YES,500000.0,750000.0,625000.0,3.0,2.0,0.0,1,0,1,0,0,0,0,0,0,0,0,0,0,0
+$750K-$900K,"House
+House & Land",3,2.0,"Parking
+Pet-friendly
+Low-maintenance options","Quiet & residential
+Mixed-use (balanced)
+Close to work/schools
+Family-friendly",NO,Not sure,Home to Live In,"Stability & security
+Family needs",YES,750000.0,900000.0,825000.0,3.0,2.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$500K-$750K,"House
+House & Land",5+,1.0,Pet-friendly,"Urban & vibrant
+Family-friendly",NO,Not sure,Home to Live In,Stability & security,YES,500000.0,750000.0,625000.0,5.0,1.0,0.0,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+$500K-$750K,House & Land,4,2.0,"Parking
+Pet-friendly
+Balcony
+Green spaces","Quiet & residential
+Mixed-use (balanced)
+Family-friendly",NO,6–12 months,Home to Live In,"Stability & security
+Family needs",YES,500000.0,750000.0,625000.0,4.0,2.0,0.0,1,0,1,0,0,0,0,0,0,0,0,0,0,0
+$750K-$900K,"Apartment
+Townhouse
+House
+House & Land",4,2.0,"Parking
+Swimming Pool
+Balcony
+Green spaces
+Proximity to public transport
+High rental ROI potential","Quiet & residential
+Urban & vibrant
+Mixed-use (balanced)
+Close to work/schools
+Family-friendly",NO,1–2 years,Either/Both,"Stability & security
+Building wealth
+Investment opportunity",YES,750000.0,900000.0,825000.0,4.0,2.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$500K-$750K,"House
+House & Land",4,2.0,Parking,"Quiet & residential
+Close to work/schools
+Family-friendly",NO,1–2 years,Home to Live In,"Stability & security
+Building wealth
+Family needs",YES,500000.0,750000.0,625000.0,4.0,2.0,0.0,1,0,0,0,0,1,0,0,0,0,0,0,0,0
+$750K-$900K,Townhouse,2,2.0,"Pet-friendly
+Green spaces",Mixed-use (balanced),NO,1–2 years,Home to Live In,"Stability & security
+Building wealth
+Investment opportunity",YES,750000.0,900000.0,825000.0,2.0,2.0,0.0,1,0,0,1,0,0,0,0,0,0,0,0,0,0
+$500K-$750K,House,2,2.0,"Parking
+Security",Quiet & residential,NO,Not sure,Home to Live In,Stability & security,YES,500000.0,750000.0,625000.0,2.0,2.0,0.0,1,1,0,0,0,0,0,0,0,0,0,0,0,0
+$500K-$750K,"Apartment
+Townhouse
+House
+House & Land",3,2.0,"Parking
+Security
+Balcony
+Proximity to public transport
+Low-maintenance options",Quiet & residential,NO,Not sure,Home to Live In,"Stability & security
+Retirement planning",NO,500000.0,750000.0,625000.0,3.0,2.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$750K-$900K,"House
+House & Land",5+,2.0,"Security
+Pet-friendly
+Low-maintenance options","Quiet & residential
+Mixed-use (balanced)
+Close to work/schools
+Family-friendly",NO,1–6 months,Home to Live In,"Stability & security
+Family needs",YES,750000.0,900000.0,825000.0,5.0,2.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$500K-$750K,"Apartment
+Townhouse",2,2.0,,,NO,Not sure,Home to Live In,Family needs,YES,500000.0,750000.0,625000.0,2.0,2.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$500K-$750K,"House
+House & Land",3,2.0,Parking,Quiet & residential,NO,Not sure,Home to Live In,"Stability & security
+Building wealth",YES,500000.0,750000.0,625000.0,3.0,2.0,0.0,1,0,0,0,0,1,0,0,0,0,0,0,0,0
+$500K-$750K,"Townhouse
+House
+House & Land",3,1.0,"Parking
+Proximity to public transport",Mixed-use (balanced),NO,Not sure,Either/Both,Family needs,YES,500000.0,750000.0,625000.0,3.0,1.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$500K-$750K,"Townhouse
+House",2,1.0,"Parking
+Security
+Pet-friendly
+Proximity to public transport
+Low-maintenance options","Quiet & residential
+Urban & vibrant
+Family-friendly
+Nature-focused",NO,1–2 years,Home to Live In,Stability & security,YES,500000.0,750000.0,625000.0,2.0,1.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$500K-$750K,"Townhouse
+House
+House & Land",4,2.0,"Parking
+Pet-friendly
+Balcony
+Green spaces
+Proximity to public transport
+Low-maintenance options","Quiet & residential
+Mixed-use (balanced)
+Family-friendly",NO,6–12 months,Home to Live In,"Family needs
+Retirement planning",YES,500000.0,750000.0,625000.0,4.0,2.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$500K-$750K,Apartment,2,2.0,"Parking
+Pet-friendly",Quiet & residential,NO,6–12 months,Home to Live In,Stability & security,YES,500000.0,750000.0,625000.0,2.0,2.0,0.0,1,0,0,0,1,0,0,0,0,0,0,0,0,0
+$500K-$750K,"Apartment
+House & Land",3,2.0,"Proximity to public transport
+High rental ROI potential","Quiet & residential
+Close to work/schools
+Family-friendly",NO,1–2 years,Home to Live In,Family needs,YES,500000.0,750000.0,625000.0,3.0,2.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$500K-$750K,House & Land,4,2.0,"Parking
+Security
+Pet-friendly
+Green spaces
+Proximity to public transport","Quiet & residential
+Family-friendly
+Nature-focused",NO,Not sure,Home to Live In,"Stability & security
+Family needs
+Retirement planning",YES,500000.0,750000.0,625000.0,4.0,2.0,0.0,1,0,1,0,0,0,0,0,0,0,0,0,0,0
+$750K-$900K,House & Land,3,2.0,"Parking
+Pet-friendly
+Proximity to public transport
+High rental ROI potential","Quiet & residential
+Mixed-use (balanced)
+Family-friendly
+Nature-focused",NO,6–12 months,Either/Both,"Stability & security
+Building wealth
+Family needs",YES,750000.0,900000.0,825000.0,3.0,2.0,0.0,1,0,1,0,0,0,0,0,0,0,0,0,0,0
+$900K-$1.1M,"Apartment
+Townhouse
+House
+House & Land",2,2.0,"Parking
+Pet-friendly
+Balcony
+Green spaces
+Proximity to public transport",Mixed-use (balanced),NO,Not sure,Home to Live In,"Stability & security
+Building wealth
+Family needs",YES,900000.0,1.0,450000.5,2.0,2.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$500K-$750K,House,3,2.0,"Parking
+Pet-friendly
+Green spaces","Quiet & residential
+Mixed-use (balanced)
+Close to work/schools
+Family-friendly",NO,1–2 years,Home to Live In,Family needs,YES,500000.0,750000.0,625000.0,3.0,2.0,0.0,1,1,0,0,0,0,0,0,0,0,0,0,0,0
+$500K-$750K,House & Land,5+,2.0,"Parking
+Security
+Swimming Pool
+Pet-friendly
+Green spaces","Quiet & residential
+Urban & vibrant
+Mixed-use (balanced)
+Close to work/schools
+Family-friendly
+Luxury/High-end
+Nature-focused",NO,Not sure,Home to Live In,"Stability & security
+Family needs",YES,500000.0,750000.0,625000.0,5.0,2.0,0.0,1,0,1,0,0,0,0,0,0,0,0,0,0,0
+$500K-$750K,House,4,2.0,"Parking
+Pet-friendly
+Low-maintenance options",Close to work/schools,NO,6–12 months,Home to Live In,Stability & security,YES,500000.0,750000.0,625000.0,4.0,2.0,0.0,1,1,0,0,0,0,0,0,0,0,0,0,0,0
+$750K-$900K,"House
+House & Land",3,2.0,"Parking
+Pet-friendly","Quiet & residential
+Urban & vibrant",NO,6–12 months,Home to Live In,"Stability & security
+Family needs",YES,750000.0,900000.0,825000.0,3.0,2.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$500K-$750K,House,4,2.0,"Parking
+Swimming Pool","Quiet & residential
+Mixed-use (balanced)",NO,Not sure,Home to Live In,"Stability & security
+Building wealth
+Family needs",NO,500000.0,750000.0,625000.0,4.0,2.0,0.0,1,1,0,0,0,0,0,0,0,0,0,0,0,0
+$750K-$900K,House,4,2.0,"Security
+Pet-friendly
+Green spaces
+Proximity to public transport","Quiet & residential
+Family-friendly",NO,6–12 months,Home to Live In,Family needs,YES,750000.0,900000.0,825000.0,4.0,2.0,0.0,1,1,0,0,0,0,0,0,0,0,0,0,0,0
+$500K-$750K,"Apartment
+Townhouse
+House",2,2.0,Low-maintenance options,"Quiet & residential
+Mixed-use (balanced)",NO,Immediately/Soon,Home to Live In,"Stability & security
+Family needs",YES,500000.0,750000.0,625000.0,2.0,2.0,0.0,5,0,0,0,0,0,0,0,0,0,1,0,0,0
+$750K-$900K,"House
+House & Land",4,2.0,"Parking
+Pet-friendly
+Green spaces
+Proximity to public transport
+Low-maintenance options","Quiet & residential
+Mixed-use (balanced)
+Close to work/schools
+Family-friendly
+Nature-focused",NO,6–12 months,Home to Live In,"Stability & security
+Family needs",YES,750000.0,900000.0,825000.0,4.0,2.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$500K-$750K,"Apartment
+Townhouse
+House",3,2.0,"Parking
+Low-maintenance options","Quiet & residential
+Family-friendly",NO,Not sure,Home to Live In,Stability & security,YES,500000.0,750000.0,625000.0,3.0,2.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$1.1M+,"Townhouse
+House
+House & Land",4,3.0,"Parking
+Security
+Swimming Pool
+Low-maintenance options","Quiet & residential
+Family-friendly",NO,Not sure,Home to Live In,"Stability & security
+Family needs",NO,1.0,1.0,1.0,4.0,3.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$500K-$750K,"House
+House & Land",4,2.0,"Parking
+Proximity to public transport
+Low-maintenance options","Quiet & residential
+Urban & vibrant
+Mixed-use (balanced)
+Close to work/schools
+Family-friendly",NO,Not sure,Home to Live In,"Stability & security
+Family needs",NO,500000.0,750000.0,625000.0,4.0,2.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$500K-$750K,"Townhouse
+House
+House & Land",3,1.0,Pet-friendly,"Quiet & residential
+Mixed-use (balanced)
+Family-friendly
+Nature-focused",NO,Not sure,Home to Live In,"Stability & security
+Family needs",YES,500000.0,750000.0,625000.0,3.0,1.0,0.0,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+$500K-$750K,"Apartment
+House",4,2.0,"Parking
+Proximity to public transport
+High rental ROI potential","Quiet & residential
+Urban & vibrant
+Mixed-use (balanced)
+Close to work/schools
+Family-friendly",NO,Not sure,Either/Both,"Stability & security
+Building wealth",YES,500000.0,750000.0,625000.0,4.0,2.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$750K-$900K,"House
+House & Land",4,2.0,"Parking
+Pet-friendly
+Green spaces","Mixed-use (balanced)
+Close to work/schools
+Family-friendly",NO,1–2 years,Home to Live In,"Stability & security
+Family needs",YES,750000.0,900000.0,825000.0,4.0,2.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$500K-$750K,House & Land,5+,3.0,"Parking
+Swimming Pool
+Pet-friendly",Nature-focused,NO,Not sure,Home to Live In,"Stability & security
+Family needs
+Retirement planning",YES,500000.0,750000.0,625000.0,5.0,3.0,0.0,1,0,1,0,0,0,0,0,0,0,0,0,0,0
+$500K-$750K,"Townhouse
+House & Land",3,2.0,"Parking
+Proximity to public transport
+Low-maintenance options","Mixed-use (balanced)
+Close to work/schools
+Family-friendly
+Nature-focused",NO,1–2 years,Home to Live In,"Stability & security
+Family needs",YES,500000.0,750000.0,625000.0,3.0,2.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$750K-$900K,"House
+House & Land",3,2.0,Pet-friendly,Family-friendly,NO,Not sure,Home to Live In,"Stability & security
+Family needs",YES,750000.0,900000.0,825000.0,3.0,2.0,0.0,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+$500K-$750K,"House
+House & Land",5+,1.0,"Parking
+Swimming Pool
+Pet-friendly","Quiet & residential
+Family-friendly
+Nature-focused",NO,Not sure,Home to Live In,Stability & security,,500000.0,750000.0,625000.0,5.0,1.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$750K-$900K,"House
+House & Land",4,2.0,"Parking
+Pet-friendly
+Green spaces","Quiet & residential
+Family-friendly
+Nature-focused",NO,1–2 years,Home to Live In,"Stability & security
+Family needs
+Retirement planning",YES,750000.0,900000.0,825000.0,4.0,2.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$750K-$900K,"House
+House & Land",5+,2.0,"Parking
+Swimming Pool
+Pet-friendly","Quiet & residential
+Family-friendly
+Nature-focused",NO,1–6 months,Home to Live In,Stability & security,YES,750000.0,900000.0,825000.0,5.0,2.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$900K-$1.1M,House,5+,2.0,"Parking
+Green spaces",Family-friendly,NO,Not sure,Home to Live In,"Stability & security
+Family needs",YES,900000.0,1.0,450000.5,5.0,2.0,0.0,1,1,0,0,0,0,0,0,0,0,0,0,0,0
+$1.1M+,"Townhouse
+House",3,2.0,"Parking
+Green spaces","Quiet & residential
+Close to work/schools
+Family-friendly",NO,1–6 months,Home to Live In,"Stability & security
+Building wealth
+Family needs",YES,1.0,1.0,1.0,3.0,2.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$750K-$900K,House,4,2.0,Parking,"Quiet & residential
+Family-friendly",NO,6–12 months,Home to Live In,"Stability & security
+Family needs",YES,750000.0,900000.0,825000.0,4.0,2.0,0.0,1,1,0,0,0,1,0,0,0,0,0,0,0,0
+$900K-$1.1M,"House
+House & Land",4,2.0,"Parking
+Security
+Pet-friendly
+Green spaces
+Proximity to public transport
+Low-maintenance options","Mixed-use (balanced)
+Family-friendly",NO,1–2 years,Home to Live In,Stability & security,YES,900000.0,1.0,450000.5,4.0,2.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$750K-$900K,"House
+House & Land",3,2.0,"Parking
+Pet-friendly","Quiet & residential
+Mixed-use (balanced)",NO,1–6 months,Home to Live In,Stability & security,YES,750000.0,900000.0,825000.0,3.0,2.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$500K-$750K,"Townhouse
+House
+House & Land",,,,,NO,Not sure,Investment,"Stability & security
+Building wealth
+Family needs
+Investment opportunity",YES,500000.0,750000.0,625000.0,,,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$500K-$750K,House & Land,4,2.0,"Parking
+Swimming Pool
+Pet-friendly","Mixed-use (balanced)
+Close to work/schools",NO,Not sure,Home to Live In,"Stability & security
+Family needs",YES,500000.0,750000.0,625000.0,4.0,2.0,0.0,1,0,1,0,0,0,0,0,0,0,0,0,0,0
+$750K-$900K,"House
+House & Land",5+,3.0,"Parking
+Security
+Swimming Pool
+Pet-friendly
+Balcony","Family-friendly
+Nature-focused",NO,1–6 months,Home to Live In,"Stability & security
+Family needs
+Retirement planning",YES,750000.0,900000.0,825000.0,5.0,3.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$500K-$750K,"House
+House & Land",4,2.0,"Parking
+Pet-friendly",Mixed-use (balanced),NO,1–2 years,Home to Live In,"Stability & security
+Building wealth
+Family needs",YES,500000.0,750000.0,625000.0,4.0,2.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$900K-$1.1M,"House
+House & Land",5+,2.0,"Parking
+Proximity to public transport","Mixed-use (balanced)
+Close to work/schools
+Family-friendly",NO,Not sure,Home to Live In,Stability & security,YES,900000.0,1.0,450000.5,5.0,2.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$500K-$750K,"Townhouse
+House
+House & Land",2,2.0,"Parking
+Security
+Pet-friendly
+Green spaces
+Proximity to public transport","Quiet & residential
+Mixed-use (balanced)
+Close to work/schools
+Family-friendly",NO,1–2 years,Home to Live In,Stability & security,NO,500000.0,750000.0,625000.0,2.0,2.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$500K-$750K,"Apartment
+Townhouse
+House
+House & Land",3,1.0,"Parking
+Pet-friendly
+Balcony
+Green spaces
+Proximity to public transport
+High rental ROI potential
+Low-maintenance options","Quiet & residential
+Urban & vibrant
+Mixed-use (balanced)
+Close to work/schools
+Family-friendly
+Nature-focused",NO,Not sure,Either/Both,"Stability & security
+Building wealth
+Family needs
+Investment opportunity",YES,500000.0,750000.0,625000.0,3.0,1.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$500K-$750K,"Apartment
+House
+House & Land",2,2.0,"Parking
+Proximity to public transport
+High rental ROI potential
+Low-maintenance options","Urban & vibrant
+Close to work/schools",NO,Not sure,Home to Live In,"Stability & security
+Building wealth",YES,500000.0,750000.0,625000.0,2.0,2.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$500K-$750K,"House
+House & Land",3,2.0,Parking,"Close to work/schools
+Family-friendly",NO,1–6 months,Home to Live In,"Stability & security
+Family needs",YES,500000.0,750000.0,625000.0,3.0,2.0,0.0,1,0,0,0,0,1,0,0,0,0,0,0,0,0
+$500K-$750K,House & Land,4,2.0,"Parking
+Security
+Pet-friendly
+Green spaces
+Low-maintenance options","Quiet & residential
+Close to work/schools
+Family-friendly
+Nature-focused",NO,Not sure,Home to Live In,"Stability & security
+Family needs",YES,500000.0,750000.0,625000.0,4.0,2.0,0.0,1,0,1,0,0,0,0,0,0,0,0,0,0,0
+$750K-$900K,"House
+House & Land",4,2.0,Parking,Mixed-use (balanced),NO,6–12 months,Home to Live In,"Stability & security
+Family needs",YES,750000.0,900000.0,825000.0,4.0,2.0,0.0,1,0,0,0,0,1,0,0,0,0,0,0,0,0
+$900K-$1.1M,"Apartment
+Townhouse
+House & Land",3,2.0,"Parking
+Security
+Green spaces
+Proximity to public transport
+High rental ROI potential
+Low-maintenance options","Quiet & residential
+Urban & vibrant
+Mixed-use (balanced)
+Close to work/schools
+Family-friendly",NO,1–2 years,Home to Live In,"Stability & security
+Building wealth
+Family needs
+Retirement planning
+Investment opportunity",YES,900000.0,1.0,450000.5,3.0,2.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$500K-$750K,"House
+House & Land",5+,3.0,"Parking
+Security
+Pet-friendly
+Balcony
+Proximity to public transport
+High rental ROI potential
+Low-maintenance options","Quiet & residential
+Urban & vibrant
+Mixed-use (balanced)
+Close to work/schools
+Family-friendly",NO,1–2 years,Home to Live In,"Stability & security
+Building wealth
+Family needs
+Investment opportunity",YES,500000.0,750000.0,625000.0,5.0,3.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$500K-$750K,"House
+House & Land",2,2.0,"Parking
+Security
+Swimming Pool
+Pet-friendly","Quiet & residential
+Close to work/schools
+Family-friendly
+Nature-focused",,1–6 months,Home to Live In,Stability & security,YES,500000.0,750000.0,625000.0,2.0,2.0,,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$750K-$900K,House,4,2.0,"Parking
+Proximity to public transport","Quiet & residential
+Close to work/schools
+Family-friendly",NO,1–2 years,Home to Live In,Family needs,YES,750000.0,900000.0,825000.0,4.0,2.0,0.0,1,1,0,0,0,0,0,0,0,0,0,0,0,0
+$900K-$1.1M,"House
+House & Land",4,2.0,,Mixed-use (balanced),NO,1–2 years,Home to Live In,"Stability & security
+Building wealth
+Family needs",YES,900000.0,1.0,450000.5,4.0,2.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$1.1M+,"House
+House & Land",4,3.0,"Parking
+Swimming Pool
+Pet-friendly
+Green spaces","Mixed-use (balanced)
+Family-friendly
+Luxury/High-end
+Nature-focused",NO,6–12 months,Either/Both,"Stability & security
+Building wealth
+Family needs
+Investment opportunity",YES,1.0,1.0,1.0,4.0,3.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$900K-$1.1M,"House
+House & Land",4,3.0,,"Quiet & residential
+Urban & vibrant
+Mixed-use (balanced)
+Family-friendly
+Luxury/High-end",NO,1–2 years,Home to Live In,"Stability & security
+Building wealth
+Family needs
+Retirement planning
+Investment opportunity",YES,900000.0,1.0,450000.5,4.0,3.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$900K-$1.1M,"House
+House & Land",4,2.0,"Parking
+Security
+Swimming Pool
+Pet-friendly","Quiet & residential
+Urban & vibrant
+Mixed-use (balanced)
+Family-friendly
+Nature-focused",NO,Immediately/Soon,Home to Live In,Stability & security,YES,900000.0,1.0,450000.5,4.0,2.0,0.0,5,0,0,0,0,0,0,0,0,0,0,0,0,0
+$900K-$1.1M,House & Land,2,2.0,"Parking
+Pet-friendly
+Green spaces",Nature-focused,NO,Not sure,Home to Live In,"Stability & security
+Family needs
+Retirement planning",YES,900000.0,1.0,450000.5,2.0,2.0,0.0,1,0,1,0,0,0,0,0,0,0,0,0,0,0
+$500K-$750K,"House
+House & Land",2,2.0,"Parking
+Pet-friendly
+Green spaces","Quiet & residential
+Family-friendly
+Nature-focused",NO,6–12 months,Home to Live In,"Stability & security
+Family needs",YES,500000.0,750000.0,625000.0,2.0,2.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$900K-$1.1M,"Apartment
+Townhouse
+House
+House & Land",3,2.0,"Balcony
+Green spaces
+Proximity to public transport",Quiet & residential,NO,Not sure,Home to Live In,Stability & security,YES,900000.0,1.0,450000.5,3.0,2.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$500K-$750K,"House
+House & Land",4,2.0,,"Quiet & residential
+Close to work/schools
+Family-friendly",NO,Not sure,Home to Live In,Family needs,NO,500000.0,750000.0,625000.0,4.0,2.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$500K-$750K,"Townhouse
+House
+House & Land",4,2.0,"Parking
+Security
+Low-maintenance options","Mixed-use (balanced)
+Close to work/schools
+Family-friendly",NO,Not sure,Home to Live In,Stability & security,YES,500000.0,750000.0,625000.0,4.0,2.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$750K-$900K,"House
+House & Land",4,2.0,Pet-friendly,"Mixed-use (balanced)
+Family-friendly",NO,Not sure,Home to Live In,Family needs,NO,750000.0,900000.0,825000.0,4.0,2.0,0.0,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+$500K-$750K,"House
+House & Land",4,2.0,"Swimming Pool
+Pet-friendly
+Low-maintenance options","Quiet & residential
+Mixed-use (balanced)
+Family-friendly
+Nature-focused",NO,Not sure,Home to Live In,"Stability & security
+Family needs",YES,500000.0,750000.0,625000.0,4.0,2.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$500K-$750K,"Townhouse
+House
+House & Land",2,1.0,"Parking
+Pet-friendly",Quiet & residential,NO,Not sure,Home to Live In,"Stability & security
+Family needs
+Retirement planning",YES,500000.0,750000.0,625000.0,2.0,1.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$500K-$750K,House,4,2.0,"Security
+Green spaces
+Proximity to public transport
+High rental ROI potential
+Low-maintenance options","Quiet & residential
+Urban & vibrant
+Close to work/schools
+Family-friendly",NO,Immediately/Soon,Home to Live In,Stability & security,YES,500000.0,750000.0,625000.0,4.0,2.0,0.0,5,1,0,0,0,0,0,0,0,0,0,0,0,0
+$500K-$750K,"Apartment
+Townhouse",2,2.0,"Parking
+Security
+Swimming Pool
+Gym
+Balcony
+Proximity to public transport
+Low-maintenance options",Mixed-use (balanced),NO,6–12 months,Home to Live In,Stability & security,YES,500000.0,750000.0,625000.0,2.0,2.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$1.1M+,"House
+House & Land",5+,3.0,Swimming Pool,Nature-focused,NO,1–2 years,Home to Live In,"Stability & security
+Building wealth
+Family needs",YES,1.0,1.0,1.0,5.0,3.0,0.0,1,0,0,0,0,0,0,0,0,0,0,1,0,0
+$900K-$1.1M,"House
+House & Land",5+,2.0,"Parking
+Security
+Swimming Pool
+Pet-friendly
+Green spaces
+Proximity to public transport
+Low-maintenance options","Quiet & residential
+Mixed-use (balanced)
+Close to work/schools
+Family-friendly",NO,Not sure,Home to Live In,"Stability & security
+Family needs
+Retirement planning",YES,900000.0,1.0,450000.5,5.0,2.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$900K-$1.1M,House & Land,4,2.0,"Parking
+Security
+Swimming Pool
+Pet-friendly
+Low-maintenance options","Quiet & residential
+Nature-focused",NO,Not sure,Home to Live In,"Stability & security
+Retirement planning",YES,900000.0,1.0,450000.5,4.0,2.0,0.0,1,0,1,0,0,0,0,0,0,0,0,0,0,0
+$500K-$750K,House & Land,3,2.0,Low-maintenance options,Nature-focused,NO,Not sure,Home to Live In,Family needs,YES,500000.0,750000.0,625000.0,3.0,2.0,0.0,1,0,1,0,0,0,0,0,0,0,1,0,0,0
+$900K-$1.1M,House & Land,3,2.0,Green spaces,Mixed-use (balanced),NO,6–12 months,Home to Live In,"Family needs
+Investment opportunity",YES,900000.0,1.0,450000.5,3.0,2.0,0.0,1,0,1,0,0,0,0,1,0,0,0,0,0,0
+$750K-$900K,"Townhouse
+House
+House & Land",3,2.0,Parking,"Quiet & residential
+Mixed-use (balanced)
+Close to work/schools",NO,6–12 months,Home to Live In,Stability & security,YES,750000.0,900000.0,825000.0,3.0,2.0,0.0,1,0,0,0,0,1,0,0,0,0,0,0,0,0
+$500K-$750K,"Apartment
+House
+House & Land",3,2.0,"Parking
+Pet-friendly
+Green spaces","Urban & vibrant
+Mixed-use (balanced)
+Family-friendly
+Nature-focused",NO,Not sure,Home to Live In,"Stability & security
+Family needs",YES,500000.0,750000.0,625000.0,3.0,2.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$500K-$750K,"House
+House & Land
+",3,1.0,"Parking
+Swimming Pool
+Pet-friendly
+Balcony",Nature-focused,NO,Immediately/Soon,Home to Live In,Stability & security,YES,500000.0,750000.0,625000.0,3.0,1.0,0.0,5,0,0,0,0,0,0,0,0,0,0,0,0,0
+$750K-$900K,House & Land,5+,3.0,"Parking
+Green spaces
+Low-maintenance options","Close to work/schools
+Family-friendly
+Nature-focused",NO,Not sure,Home to Live In,"Family needs
+Retirement planning",YES,750000.0,900000.0,825000.0,5.0,3.0,0.0,1,0,1,0,0,0,0,0,0,0,0,0,0,0
+$750K-$900K,"Townhouse
+House",3,2.0,"Parking
+Swimming Pool
+Proximity to public transport","Quiet & residential
+Mixed-use (balanced)
+Family-friendly",NO,Not sure,Home to Live In,Stability & security,YES,750000.0,900000.0,825000.0,3.0,2.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$500K-$750K,"House
+House & Land",2,2.0,"Parking
+Security
+Pet-friendly","Quiet & residential
+Close to work/schools
+Family-friendly
+Nature-focused",NO,Immediately/Soon,Home to Live In,"Stability & security
+Family needs",YES,500000.0,750000.0,625000.0,2.0,2.0,0.0,5,0,0,0,0,0,0,0,0,0,0,0,0,0
+$750K-$900K,House & Land,4,2.0,"Parking
+Security
+Pet-friendly
+Proximity to public transport
+Low-maintenance options","Quiet & residential
+Close to work/schools
+Family-friendly
+Nature-focused",NO,Not sure,Home to Live In,"Stability & security
+Family needs",YES,750000.0,900000.0,825000.0,4.0,2.0,0.0,1,0,1,0,0,0,0,0,0,0,0,0,0,0
+$900K-$1.1M,"House
+House & Land",4,3.0,"Parking
+Security
+Pet-friendly
+Balcony
+Green spaces
+Proximity to public transport
+Low-maintenance options","Quiet & residential
+Mixed-use (balanced)
+Family-friendly
+Nature-focused",NO,6–12 months,Home to Live In,"Stability & security
+Family needs",YES,900000.0,1.0,450000.5,4.0,3.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$500K-$750K,"House
+House & Land",4,2.0,"Parking
+Pet-friendly
+Low-maintenance options","Quiet & residential
+Mixed-use (balanced)
+Close to work/schools
+Family-friendly",NO,6–12 months,Home to Live In,"Stability & security
+Building wealth
+Family needs",YES,500000.0,750000.0,625000.0,4.0,2.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$750K-$900K,House,4,2.0,,,NO,1–2 years,Home to Live In,Family needs,YES,750000.0,900000.0,825000.0,4.0,2.0,0.0,1,1,0,0,0,0,0,0,0,0,0,0,0,0
+$750K-$900K,"House
+House & Land",5+,2.0,,,NO,Not sure,Home to Live In,"Building wealth
+Family needs",YES,750000.0,900000.0,825000.0,5.0,2.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$750K-$900K,"House
+House & Land",5+,2.0,,,NO,Not sure,Home to Live In,"Building wealth
+Family needs",YES,750000.0,900000.0,825000.0,5.0,2.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$750K-$900K,"House
+House & Land",4,2.0,"Parking
+Pet-friendly","Urban & vibrant
+Family-friendly
+Nature-focused",NO,Not sure,Home to Live In,"Stability & security
+Family needs
+",YES,750000.0,900000.0,825000.0,4.0,2.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$500K-$750K,House & Land,4,2.0,,Family-friendly,NO,1–2 years,Home to Live In,,YES,500000.0,750000.0,625000.0,4.0,2.0,0.0,1,0,1,0,0,0,0,0,0,0,0,0,0,0
+$500K-$750K,"House
+House & Land",3,2.0,"Parking
+Security
+Pet-friendly
+Green spaces","Quiet & residential
+Mixed-use (balanced)
+Family-friendly
+Nature-focused",NO,6–12 months,Home to Live In,"Stability & security
+Family needs
+Investment opportunity",NO,500000.0,750000.0,625000.0,3.0,2.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$900K-$1.1M,"House
+House & Land",5+,2.0,"Parking
+Security
+Pet-friendly
+Green spaces
+Low-maintenance options","Quiet & residential
+Nature-focused",NO,1–2 years,Home to Live In,"Stability & security
+Building wealth
+Family needs",YES,900000.0,1.0,450000.5,5.0,2.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$500K-$750K,"House
+House & Land",4,1.0,"Parking
+Pet-friendly
+Green spaces",Mixed-use (balanced),NO,6–12 months,Home to Live In,"Stability & security
+Family needs",YES,500000.0,750000.0,625000.0,4.0,1.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$500K-$750K,"Townhouse
+House",3,2.0,"Parking
+Security
+Pet-friendly",Quiet & residential,NO,Not sure,Home to Live In,Stability & security,YES,500000.0,750000.0,625000.0,3.0,2.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$750K-$900K,"Apartment
+Townhouse
+House
+House & Land",3,2.0,"Parking
+Proximity to public transport
+High rental ROI potential
+Low-maintenance options","Quiet & residential
+Close to work/schools",NO,1–2 years,Either/Both,"Stability & security
+Building wealth",YES,750000.0,900000.0,825000.0,3.0,2.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$500K-$750K,House,3,2.0,"Parking
+Security
+Swimming Pool
+Green spaces",Quiet & residential,NO,Not sure,Home to Live In,Retirement planning,YES,500000.0,750000.0,625000.0,3.0,2.0,0.0,1,1,0,0,0,0,0,0,0,0,0,0,0,0
+$500K-$750K,"House
+House & Land",4,2.0,,"Quiet & residential
+Family-friendly",NO,6–12 months,Home to Live In,Stability & security,YES,500000.0,750000.0,625000.0,4.0,2.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$500K-$750K,"House
+House & Land",3,2.0,"Parking
+Security
+Swimming Pool
+Pet-friendly
+Balcony","Quiet & residential
+Urban & vibrant
+Mixed-use (balanced)
+Close to work/schools
+Family-friendly
+Nature-focused",NO,Not sure,Home to Live In,"Stability & security
+Building wealth
+Family needs
+To stop paying rent",YES,500000.0,750000.0,625000.0,3.0,2.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$500K-$750K,"House & Land
+Other",5+,2.0,"Security
+Pet-friendly
+Green spaces","Quiet & residential
+Family-friendly
+Nature-focused",NO,1–2 years,Home to Live In,"Stability & security
+Family needs
+Other",YES,500000.0,750000.0,625000.0,5.0,2.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$500K-$750K,"House
+House & Land",4,2.0,"Parking
+Security
+Swimming Pool",Mixed-use (balanced),NO,6–12 months,Home to Live In,"Stability & security
+Family needs",NO,500000.0,750000.0,625000.0,4.0,2.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$500K-$750K,House,3,1.0,Parking,Family-friendly,NO,1–6 months,Home to Live In,Family needs,NO,500000.0,750000.0,625000.0,3.0,1.0,0.0,1,1,0,0,0,1,0,0,0,0,0,0,0,0
+$750K-$900K,"House
+House & Land",4,2.0,"Parking
+Security
+Pet-friendly
+Balcony
+Green spaces","Quiet & residential
+Urban & vibrant",NO,1–2 years,Home to Live In,"Stability & security
+Family needs",YES,750000.0,900000.0,825000.0,4.0,2.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$500K-$750K,Apartment,2,2.0,"Parking
+Security
+Balcony
+Green spaces
+Proximity to public transport
+High rental ROI potential",Urban & vibrant,NO,1–2 years,Either/Both,Retirement planning,YES,500000.0,750000.0,625000.0,2.0,2.0,0.0,1,0,0,0,1,0,0,0,0,0,0,0,0,0
+$500K-$750K,"Townhouse
+House",2,2.0,"Parking
+Swimming Pool
+Pet-friendly
+Balcony",Quiet & residential,NO,6–12 months,Home to Live In,"Stability & security
+Family needs
+Retirement planning",YES,500000.0,750000.0,625000.0,2.0,2.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$500K-$750K,"Townhouse
+House
+House & Land",2,1.0,"Parking
+Green spaces","Quiet & residential
+Urban & vibrant
+Mixed-use (balanced)
+Close to work/schools
+Family-friendly
+Nature-focused",NO,6–12 months,Home to Live In,"Stability & security
+Family needs",YES,500000.0,750000.0,625000.0,2.0,1.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$900K-$1.1M,"Apartment
+Townhouse
+House
+House & Land",2,2.0,"Parking
+Balcony
+Green spaces
+Proximity to public transport","Quiet & residential
+Urban & vibrant
+Mixed-use (balanced)
+Close to work/schools
+Family-friendly
+Luxury/High-end
+Nature-focused",NO,6–12 months,Home to Live In,"Building wealth
+Family needs",NO,900000.0,1.0,450000.5,2.0,2.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$500K-$750K,"House
+House & Land",5+,3.0,"Parking
+Security
+Balcony
+Green spaces
+Proximity to public transport
+Low-maintenance options","Quiet & residential
+Urban & vibrant
+Close to work/schools
+Family-friendly",NO,1–2 years,Either/Both,"Stability & security
+Family needs
+Investment opportunity",YES,500000.0,750000.0,625000.0,5.0,3.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$500K-$750K,"House
+House & Land",3,2.0,"Parking
+Green spaces
+Proximity to public transport
+Low-maintenance options","Quiet & residential
+Close to work/schools
+Family-friendly
+Nature-focused",NO,1–2 years,Home to Live In,"Stability & security
+Building wealth
+Family needs
+Retirement planning
+Investment opportunity",YES,500000.0,750000.0,625000.0,3.0,2.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$500K-$750K,"Apartment
+Townhouse
+House",2,2.0,"Pet-friendly
+Balcony
+Proximity to public transport
+Low-maintenance options",Quiet & residential,NO,Not sure,Home to Live In,Stability & security,YES,500000.0,750000.0,625000.0,2.0,2.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$500K-$750K,Apartment,,,,,NO,1–6 months,Investment,Building wealth,,500000.0,750000.0,625000.0,,,0.0,1,0,0,0,1,0,0,0,0,0,0,0,0,0
+$500K-$750K,House,3,2.0,Pet-friendly,"Quiet & residential
+Family-friendly",NO,Immediately/Soon,Home to Live In,"Stability & security
+Family needs",YES,500000.0,750000.0,625000.0,3.0,2.0,0.0,5,1,0,0,0,0,1,0,0,0,0,0,0,0
+$900K-$1.1M,"House
+House & Land",4,2.0,"Parking
+Pet-friendly
+Low-maintenance options",Close to work/schools,NO,Not sure,Home to Live In,"Stability & security
+Building wealth
+Family needs
+Retirement planning",YES,900000.0,1.0,450000.5,4.0,2.0,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$750K-$900K,"Townhouse
+House",2,2.0,"Security
+Swimming Pool
+Gym
+Balcony","Urban & vibrant
+Close to work/schools
+Family-friendly",YES,Immediately/Soon,Home to Live In,"Family needs
+Retirement planning
+Other",NO,750000.0,900000.0,825000.0,2.0,2.0,1.0,5,0,0,0,0,0,0,0,0,0,0,0,0,0
+$900K-$1.1M,"Townhouse
+House
+House & Land",4,2.0,Parking,"Quiet & residential
+Close to work/schools",YES,Immediately/Soon,Either/Both,Family needs,NO,900000.0,1.0,450000.5,4.0,2.0,1.0,5,0,0,0,0,1,0,0,0,0,0,0,0,0
+$750K-$900K,"Apartment
+Townhouse",2,3.0,"Parking
+Security
+Gym
+Balcony","Quiet & residential
+Urban & vibrant
+Family-friendly",YES,6–12 months,Home to Live In,"Stability & security
+Investment opportunity",YES,750000.0,900000.0,825000.0,2.0,3.0,1.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$750K-$900K,"Apartment
+House",2,3.0,"Parking
+Gym
+Green spaces
+High rental ROI potential","Quiet & residential
+Close to work/schools
+Nature-focused",YES,6–12 months,Home to Live In,"Building wealth
+Retirement planning",YES,750000.0,900000.0,825000.0,2.0,3.0,1.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$750K-$900K,"Apartment
+House",3,1.0,"Parking
+Swimming Pool
+Gym","Mixed-use (balanced)
+Family-friendly",YES,6–12 months,Home to Live In,"Stability & security
+Family needs
+Retirement planning
+Other (text field)",YES,750000.0,900000.0,825000.0,3.0,1.0,1.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$750K-$900K,"Townhouse
+House & Land",3,3.0,"Swimming Pool
+Gym
+Balcony","Urban & vibrant
+Close to work/schools
+Luxury/High-end",YES,1–2 years,Home to Live In,"Stability & security
+Building wealth
+Family needs
+Investment opportunity",YES,750000.0,900000.0,825000.0,3.0,3.0,1.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$750K-$900K,"Apartment
+Townhouse",2,2.0,"Parking
+Gym
+Pet-friendly
+Balcony
+Green spaces
+High rental ROI potential","Quiet & residential
+Mixed-use (balanced)
+Close to work/schools
+Luxury/High-end",YES,1–6 months,Home to Live In,"Stability & security
+Retirement planning
+Investment opportunity",YES,750000.0,900000.0,825000.0,2.0,2.0,1.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$750K-$900K,"Apartment
+Townhouse",3,1.0,"Security
+Swimming Pool
+Gym
+Green spaces
+High rental ROI potential","Quiet & residential
+Close to work/schools
+Luxury/High-end",YES,6–12 months,Home to Live In,"Building wealth
+Investment opportunity",YES,750000.0,900000.0,825000.0,3.0,1.0,1.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$750K-$900K,"Apartment
+House",2,2.0,"Parking
+Gym
+Proximity to public transport
+Low-maintenance options","Quiet & residential
+Mixed-use (balanced)
+Close to work/schools",YES,6–12 months,Home to Live In,"Stability & security
+Family needs",YES,750000.0,900000.0,825000.0,2.0,2.0,1.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$750K-$900K,"Apartment
+House",3,2.0,"Security
+Gym
+Green spaces","Quiet & residential
+Mixed-use (balanced)
+Luxury/High-end",YES,1–6 months,Home to Live In,"Building wealth
+Retirement planning
+Investment opportunity",YES,750000.0,900000.0,825000.0,3.0,2.0,1.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+$750K-$900K,"Apartment
+House",3,3.0,"Parking
+Gym
+Balcony
+Proximity to public transport
+High rental ROI potential","Quiet & residential
+Close to work/schools
+Family-friendly",YES,1–6 months,Home to Live In,"Stability & security
+Building wealth
+Family needs",YES,750000.0,900000.0,825000.0,3.0,3.0,1.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
