@@ -141,7 +141,7 @@ Rules:
 - After 6–8 meaningful exchanges where you have a clear picture, end your message with the exact token: [MATCH_READY]"""
 
 
-def layer2_prompt(prop: Dict, profile: Dict, affordability: Dict, scenarios: Dict) -> str:
+def layer2_prompt(prop: Dict, profile: Dict, affordability: Dict, scenarios: Dict, alternative: Dict = None) -> str:
     name = profile.get("name", "there")
     first = name.split()[0]
     price = prop.get("price", 0)
@@ -207,6 +207,16 @@ IF EMERGING: Present the deposit timeline honestly using the scenario table. Dis
 
 IF NOT YET: Be compassionate and direct. Show {first} the gap with the exact numbers. Discuss what levers they can pull — save more (show the scenarios), consider a lower price point, co-buying, government schemes, income growth. Give them a real roadmap they can act on.
 
+{"" if readiness != "Not Yet" or not alternative else f"""
+ALTERNATIVE PROPERTY WITHIN THEIR BUDGET:
+Since {first} isn't ready for the dream home yet, you have a more affordable alternative to suggest:
+- {alternative.get('ideal_buyer_archetype', 'Property')} in {alternative.get('suburb', 'Unknown')}, {alternative.get('state', '')}
+- Price: ${alternative.get('price', 0):,.0f} (vs ${price:,.0f} for the dream home)
+- Lifestyle: {alternative.get('lifestyle_supported', 'N/A')}
+- Match summary: {alternative.get('match_summary', 'N/A')}
+
+After presenting {first}'s financial position honestly, naturally suggest this as a smart stepping stone — not giving up on the dream, but a property they could own NOW that still fits their lifestyle. Frame it positively and practically.
+"""}
 Rules:
 - ONE topic per response — guide the conversation, don't dump everything at once
 - Use {first}'s name naturally (once every few exchanges, not every message)
@@ -230,6 +240,7 @@ def init():
         "affordability": None,
         "profile": None,
         "scenarios": None,
+        "alternative_property": None,
     }
     for k, v in defaults.items():
         if k not in st.session_state:
@@ -308,7 +319,7 @@ def handle_layer1(user_input: str, client, rag_retriever, matching_engine, name:
     return out
 
 
-def select_property(idx: int, client, financial_engine) -> List[Dict]:
+def select_property(idx: int, client, financial_engine, matching_engine) -> List[Dict]:
     prop = st.session_state.properties[idx]
     st.session_state.selected = prop
 
@@ -319,12 +330,31 @@ def select_property(idx: int, client, financial_engine) -> List[Dict]:
     scenarios = financial_engine.compute_scenarios(
         st.session_state.user_id, prop.get("price", 0)
     )
+    # Find affordable alternative if user is Not Yet ready
+    alternative = None
+    if affordability.get("readiness_status") == "Not Yet":
+        dream_price = prop.get("price", 0)
+        alt_ceiling = dream_price * 0.80  # at least 20% cheaper to be meaningful
+        lifestyle_keywords = " ".join(
+            h["text"] for h in st.session_state.l1_history if h["role"] == "user"
+        )
+        alt_props = matching_engine.match_properties_by_lifestyle(
+            lifestyle_keywords, budget_range=(0, alt_ceiling), top_k=1
+        )
+        if not alt_props:
+            # Fallback: cheapest available property that isn't the same one
+            alt_props = matching_engine.find_affordable_properties(dream_price * 0.99, top_k=3)
+            alt_props = [p for p in alt_props if p.get("price", 0) < dream_price][:1]
+        if alt_props:
+            alternative = alt_props[0]
+
     st.session_state.affordability = affordability
     st.session_state.profile = profile
     st.session_state.scenarios = scenarios
+    st.session_state.alternative_property = alternative
     st.session_state.stage = "layer2"
 
-    system = layer2_prompt(prop, profile, affordability, scenarios)
+    system = layer2_prompt(prop, profile, affordability, scenarios, alternative)
     first = profile.get("name", "there").split()[0]
     opening = ai_chat(
         client, system, [],
@@ -334,7 +364,12 @@ def select_property(idx: int, client, financial_engine) -> List[Dict]:
             f"Open by warmly acknowledging {first}'s choice (1 sentence), then immediately present "
             f"their financial position using their real numbers — tell them where they stand clearly "
             f"and empathetically. Based on their readiness status, set the direction of the conversation. "
-            f"Keep it to 4–5 sentences. Do not ask a question you already know the answer to."
+            + (
+                f"Since they are Not Yet ready, after presenting their position, naturally introduce "
+                f"the alternative property as a smart stepping stone they could pursue now. "
+                if alternative else ""
+            )
+            + f"Keep it to 4–5 sentences. Do not ask a question you already know the answer to."
         ),
     )
     st.session_state.l2_history = [
@@ -342,7 +377,7 @@ def select_property(idx: int, client, financial_engine) -> List[Dict]:
         {"role": "assistant", "text": opening},
     ]
 
-    return [
+    msgs = [
         {
             "role": "user",
             "type": "text",
@@ -351,6 +386,22 @@ def select_property(idx: int, client, financial_engine) -> List[Dict]:
         {"role": "assistant", "type": "text", "content": opening},
     ]
 
+    # Show the alternative property card if one was found
+    if alternative:
+        alt_exp = f"At ${alternative.get('price', 0):,.0f}, this is within your current reach and matches your lifestyle."
+        msgs.append({
+            "role": "assistant",
+            "type": "properties",
+            "content": {
+                "intro": "💡 **A property within your reach right now:**",
+                "props": [alternative],
+                "explanations": [alt_exp],
+                "prompt": "",
+            },
+        })
+
+    return msgs
+
 
 def handle_layer2(user_input: str, client) -> List[Dict]:
     system = layer2_prompt(
@@ -358,6 +409,7 @@ def handle_layer2(user_input: str, client) -> List[Dict]:
         st.session_state.profile,
         st.session_state.affordability,
         st.session_state.scenarios,
+        st.session_state.alternative_property,
     )
     response = ai_chat(client, system, st.session_state.l2_history, user_input)
     st.session_state.l2_history.append({"role": "user", "text": user_input})
@@ -450,7 +502,7 @@ def main():
                     use_container_width=True,
                 ):
                     with st.spinner("Pulling up your financial picture..."):
-                        new_msgs = select_property(i, client, financial_engine)
+                        new_msgs = select_property(i, client, financial_engine, matching_engine)
                     for m in new_msgs:
                         st.session_state.messages.append(m)
                     st.rerun()

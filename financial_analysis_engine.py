@@ -221,3 +221,21 @@ class FinancialAnalysisEngine:
             "base_monthly_savings": base_savings,
             "affordability": affordability,
         }
+
+    def calculate_affordable_max_price(self, user_id: int) -> float:
+        """Max property price this user can realistically afford right now."""
+        profile = self.get_user_financial_profile(user_id)
+        if not profile:
+            return 400000
+
+        monthly_income = profile.get('average_monthly_income', 0)
+        monthly_savings = profile.get('average_monthly_savings', 0)
+        current_savings = profile.get('total_savings_transfers', 0)
+
+        # Price where monthly repayment = 30% of income (6% interest, 80% LVR)
+        max_by_repayment = (monthly_income * 0.30 * 12 / 0.06) / 0.80
+
+        # Price where 10% deposit is reachable within 18 months
+        max_by_deposit = (current_savings + monthly_savings * 18) / 0.10
+
+        return max(100000, min(max_by_repayment, max_by_deposit))
