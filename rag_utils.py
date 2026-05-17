@@ -1,11 +1,16 @@
 import pandas as pd
 import json
 import pickle
-import faiss
 from pathlib import Path
 from typing import List, Dict, Tuple
 from sklearn.feature_extraction.text import TfidfVectorizer
 import numpy as np
+
+try:
+    import faiss
+    FAISS_AVAILABLE = True
+except ImportError:
+    FAISS_AVAILABLE = False
 
 DATA_DIR = Path(__file__).parent / "data"
 
@@ -29,7 +34,7 @@ class RAGRetriever:
             index_path = self.vector_db_path / "occubuy_faiss.index"
             docs_path = self.vector_db_path / "occubuy_documents.pkl"
 
-            if config_path.exists() and index_path.exists() and docs_path.exists():
+            if FAISS_AVAILABLE and config_path.exists() and index_path.exists() and docs_path.exists():
                 with open(config_path, 'r') as f:
                     self.vector_config = json.load(f)
                 self.faiss_index = faiss.read_index(str(index_path))
