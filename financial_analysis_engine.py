@@ -177,3 +177,47 @@ class FinancialAnalysisEngine:
 
     def get_all_users(self) -> List[int]:
         return sorted(self.user_profiles.keys())
+
+    def get_user_name(self, user_id: int) -> str:
+        return self.user_profiles.get(user_id, {}).get('name', f'User {user_id}')
+
+    def get_all_user_names(self) -> Dict[int, str]:
+        return {uid: p.get('name', f'User {uid}') for uid, p in self.user_profiles.items()}
+
+    def compute_scenarios(self, user_id: int, property_price: float) -> Dict:
+        """Pre-compute all deposit savings scenarios with accurate maths."""
+        profile = self.get_user_financial_profile(user_id)
+        affordability = self.calculate_affordability(user_id, property_price)
+
+        if "error" in affordability:
+            return affordability
+
+        deposit_10 = property_price * 0.10
+        deposit_20 = property_price * 0.20
+        current_savings = profile.get('total_savings_transfers', 0)
+        base_savings = profile.get('average_monthly_savings', 0)
+
+        def months_to(target, monthly):
+            gap = max(0, target - current_savings)
+            if monthly <= 0:
+                return None
+            return round(gap / monthly)
+
+        scenarios = []
+        for boost, label in [(0, "Current pace"), (300, "+$300/month"), (500, "+$500/month"), (1000, "+$1,000/month")]:
+            monthly = base_savings + boost
+            scenarios.append({
+                "label": label,
+                "monthly_savings": monthly,
+                "months_to_10pct": months_to(deposit_10, monthly),
+                "months_to_20pct": months_to(deposit_20, monthly),
+            })
+
+        return {
+            "scenarios": scenarios,
+            "deposit_10pct": deposit_10,
+            "deposit_20pct": deposit_20,
+            "current_savings": current_savings,
+            "base_monthly_savings": base_savings,
+            "affordability": affordability,
+        }
