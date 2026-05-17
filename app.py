@@ -1,797 +1,431 @@
 import streamlit as st
 import pandas as pd
-import numpy as np
-import json
+from typing import Dict, List
 import os
-import re
 
-# Gemini
-from google import genai
-
-
-# ============================================================
-# PAGE CONFIG
-# ============================================================
+from financial_analysis_engine import FinancialAnalysisEngine
+from rag_utils import RAGRetriever
+from matching_engine import PropertyMatchingEngine
+from roadmap_generator import RoadmapGenerator
 
 st.set_page_config(
-    page_title="Occubuy AI Property Matching Demo",
-    layout="wide"
+    page_title="Occubuy - Home Buying Assistant",
+    page_icon="🏠",
+    layout="wide",
+    initial_sidebar_state="expanded"
 )
-
-st.title("🏠 Occubuy AI Property Matching Demo")
-st.markdown(
-    "Personalized property recommendations, buyer readiness scoring, and AI-generated explanations."
-)
-
-
-# ============================================================
-# GEMINI CLIENT
-# ============================================================
 
 @st.cache_resource
-def get_gemini_client():
-    api_key = None
-
-    try:
-        api_key = st.secrets["GEMINI_API_KEY"]
-    except Exception:
-        api_key = os.getenv("GEMINI_API_KEY")
-
-    if not api_key:
-        return None
-
-    return genai.Client(api_key=api_key)
-
-
-client = get_gemini_client()
-
-if client is None:
-    st.warning("Gemini client not loaded. Add GEMINI_API_KEY to Streamlit secrets to enable AI explanations.")
-
-
-# ============================================================
-# SESSION STATE
-# ============================================================
-
-if "top_matches" not in st.session_state:
-    st.session_state.top_matches = None
-
-if "user_profile" not in st.session_state:
-    st.session_state.user_profile = None
-
-if "gemini_explanation" not in st.session_state:
-    st.session_state.gemini_explanation = None
-
-
-# ============================================================
-# LOAD DATA
-# ============================================================
-
-@st.cache_data
-def load_data():
-    users_df = pd.read_csv("occubuy_users_engineered.csv")
-    properties_df = pd.read_csv("occubuy_properties_demo.csv")
-    return users_df, properties_df
-
-
-users_df, properties_df = load_data()
-
-
-# ============================================================
-# HELPER FUNCTIONS
-# ============================================================
-
-def split_multiselect(value):
-    if pd.isna(value):
-        return []
-    return [item.strip().lower() for item in str(value).split(",") if item.strip()]
-
-
-def parse_budget_range(value):
-    if pd.isna(value):
-        return np.nan, np.nan, np.nan
-
-    text = str(value).replace(",", "").replace(" ", "").upper()
-    text = text.replace("K", "000").replace("M", "000000")
-    nums = re.findall(r"\d+", text)
-
-    if "+" in text and len(nums) >= 1:
-        val = int(nums[0])
-        return val, val, val
-
-    if len(nums) >= 2:
-        low = int(nums[0])
-        high = int(nums[1])
-        mid = (low + high) / 2
-        return low, high, mid
-
-    if len(nums) == 1:
-        val = int(nums[0])
-        return val, val, val
-
-    return np.nan, np.nan, np.nan
-
-
-def parse_bedrooms(value):
-    if pd.isna(value):
-        return np.nan
-    text = str(value).strip().lower()
-    if "studio" in text:
-        return 0
-    match = re.search(r"\d+", text)
-    if match:
-        return int(match.group())
-    return np.nan
-
-
-def parse_bathrooms(value):
-    if pd.isna(value):
-        return np.nan
-    match = re.search(r"\d+", str(value))
-    if match:
-        return int(match.group())
-    return np.nan
-
-
-def yes_no_to_binary(value):
-    if pd.isna(value):
-        return np.nan
-    text = str(value).strip().lower()
-    if text in ["yes", "y", "true"]:
-        return 1
-    if text in ["no", "n", "false"]:
-        return 0
-    return np.nan
-
-
-def timeline_to_score(value):
-    if pd.isna(value):
-        return 0
-
-    text = str(value).strip().lower()
-
-    if "immediately" in text or "soon" in text:
-        return 5
-    elif "1-6 months" in text or "1 to 6 months" in text or "16 months" in text:
-        return 4
-    elif "6-12 months" in text or "6 to 12 months" in text or "612 months" in text:
-        return 3
-    elif "1-2 years" in text or "1 to 2 years" in text or "12 years" in text:
-        return 2
-    elif "not sure" in text:
-        return 1
-    else:
-        return 1
-
-
-def make_json_safe(obj):
-    if isinstance(obj, dict):
-        return {k: make_json_safe(v) for k, v in obj.items()}
-    elif isinstance(obj, list):
-        return [make_json_safe(v) for v in obj]
-    elif isinstance(obj, tuple):
-        return tuple(make_json_safe(v) for v in obj)
-    elif isinstance(obj, np.integer):
-        return int(obj)
-    elif isinstance(obj, np.floating):
-        return float(obj)
-    elif isinstance(obj, np.ndarray):
-        return obj.tolist()
-    elif pd.isna(obj):
-        return None
-    else:
-        return obj
-
-
-# ============================================================
-# FEATURE ENGINEERING FOR MANUAL USER INPUT
-# ============================================================
-
-def build_user_profile(
-    budget_range,
-    property_type,
-    bedrooms,
-    bathrooms,
-    features,
-    neighborhood,
-    pre_approval,
-    timeline,
-    purpose,
-    motivation,
-    points_interest
-):
-    user = {
-        "budget_range": budget_range,
-        "property_type": ", ".join(property_type) if property_type else "",
-        "bedrooms": str(bedrooms),
-        "bathrooms": str(bathrooms),
-        "features": ", ".join(features) if features else "",
-        "neighborhood": ", ".join(neighborhood) if neighborhood else "",
-        "pre_approval": pre_approval,
-        "timeline": timeline,
-        "purpose": purpose,
-        "motivation": ", ".join(motivation) if motivation else "",
-        "points_interest": points_interest
-    }
-
-    budget_min, budget_max, budget_mid = parse_budget_range(budget_range)
-    user["budget_min"] = budget_min
-    user["budget_max"] = budget_max
-    user["budget_mid"] = budget_mid
-    user["bedrooms_num"] = parse_bedrooms(str(bedrooms))
-    user["bathrooms_num"] = parse_bathrooms(str(bathrooms))
-    user["pre_approval_bin"] = yes_no_to_binary(pre_approval)
-    user["timeline_score"] = timeline_to_score(timeline)
-
-    # Property type flags
-    for ptype in ["house", "house & land", "townhouse", "apartment"]:
-        col_name = f"pref_{ptype.replace(' & ', '_').replace(' ', '_')}"
-        user[col_name] = 1 if ptype in [x.lower() for x in property_type] else 0
-
-    # Feature flags
-    feature_keywords = [
-        "parking",
-        "pet-friendly",
-        "green spaces",
-        "proximity to public transport",
-        "security",
-        "low-maintenance options",
-        "swimming pool",
-        "balcony",
-        "gym"
-    ]
-
-    selected_features_lower = [x.lower() for x in features]
-
-    for feat in feature_keywords:
-        col_name = "feat_" + feat.replace("-", "_").replace(" ", "_")
-        user[col_name] = 1 if feat in selected_features_lower else 0
-
-    return pd.Series(user)
-
-
-# ============================================================
-# MATCHING ENGINE
-# ============================================================
-
-def budget_fit_score(user, prop):
-    if pd.isna(user["budget_max"]):
-        return 50
-    if prop["price"] <= user["budget_max"]:
-        return 100
-    elif prop["price"] <= user["budget_max"] * 1.10:
-        return 60
-    else:
-        return 0
-
-
-def property_type_fit_score(user, prop):
-    preferred_types = split_multiselect(user["property_type"])
-    if prop["property_type"].lower() in preferred_types:
-        return 100
-    return 0
-
-
-def bedroom_bathroom_fit_score(user, prop):
-    score = 0
-
-    if not pd.isna(user["bedrooms_num"]):
-        if prop["bedrooms"] == user["bedrooms_num"]:
-            score += 50
-        elif abs(prop["bedrooms"] - user["bedrooms_num"]) == 1:
-            score += 30
-
-    if not pd.isna(user["bathrooms_num"]):
-        if prop["bathrooms"] == user["bathrooms_num"]:
-            score += 50
-        elif abs(prop["bathrooms"] - user["bathrooms_num"]) == 1:
-            score += 30
-
-    return score
-
-
-def neighborhood_fit_score(user, prop):
-    if pd.isna(user["neighborhood"]):
-        return 50
-
-    user_neighborhoods = split_multiselect(user["neighborhood"])
-
-    if prop["neighborhood"].lower() in user_neighborhoods:
-        return 100
-
-    for pref in user_neighborhoods:
-        if pref in prop["neighborhood"].lower() or prop["neighborhood"].lower() in pref:
-            return 70
-
-    return 20
-
-
-def feature_fit_score(user, prop):
-    score = 0
-    total_requested = 0
-
-    feature_map = {
-        "feat_parking": "parking",
-        "feat_pet_friendly": "pet_friendly",
-        "feat_green_spaces": "green_spaces",
-        "feat_proximity_to_public_transport": "public_transport",
-        "feat_security": "security",
-        "feat_low_maintenance_options": "low_maintenance"
-    }
-
-    for user_col, prop_col in feature_map.items():
-        if user_col in user.index and user[user_col] == 1:
-            total_requested += 1
-            if prop[prop_col] == 1:
-                score += 1
-
-    if total_requested == 0:
-        return 50
-
-    return (score / total_requested) * 100
-
-
-def calculate_match_score(user, prop):
-    budget_score = budget_fit_score(user, prop)
-    property_type_score = property_type_fit_score(user, prop)
-    bed_bath_score = bedroom_bathroom_fit_score(user, prop)
-    neighborhood_score = neighborhood_fit_score(user, prop)
-    feature_score = feature_fit_score(user, prop)
-
-    total_score = (
-        0.30 * budget_score +
-        0.20 * property_type_score +
-        0.20 * bed_bath_score +
-        0.15 * neighborhood_score +
-        0.15 * feature_score
-    )
-
-    return {
-        "budget_fit": round(budget_score, 1),
-        "property_type_fit": round(property_type_score, 1),
-        "bed_bath_fit": round(bed_bath_score, 1),
-        "neighborhood_fit": round(neighborhood_score, 1),
-        "feature_fit": round(feature_score, 1),
-        "total_match_score": round(total_score, 1)
-    }
-
-
-# ============================================================
-# READINESS ENGINE
-# ============================================================
-
-def calculate_readiness_score(user):
-    score = 0
-    reasons = []
-
-    if user["pre_approval_bin"] == 1:
-        score += 40
-        reasons.append("User already has mortgage pre-approval.")
-    else:
-        reasons.append("User does not yet have mortgage pre-approval.")
-
-    timeline_score = user["timeline_score"]
-    score += timeline_score * 8
-
-    if timeline_score >= 4:
-        reasons.append("Purchase timeline suggests strong near-term buying intent.")
-    elif timeline_score >= 2:
-        reasons.append("Purchase timeline suggests moderate intent.")
-    else:
-        reasons.append("Purchase timeline is uncertain or longer-term.")
-
-    purpose_text = str(user["purpose"]).lower()
-    if "home to live in" in purpose_text:
-        score += 15
-        reasons.append("Owner-occupier intent is clear.")
-    elif "both" in purpose_text or "either" in purpose_text:
-        score += 10
-        reasons.append("Buying purpose is somewhat flexible.")
-    else:
-        score += 5
-        reasons.append("Pure investment intent may require a different decision path.")
-
-    points_text = str(user["points_interest"]).strip().lower()
-    if points_text == "yes":
-        score += 10
-        reasons.append("User is actively interested in affordability support.")
-    else:
-        score += 5
-        reasons.append("User shows less interest in cost-reduction pathways.")
-
-    score = min(score, 100)
-
-    if user["pre_approval_bin"] != 1:
-        main_blocker = "No mortgage pre-approval yet."
-    elif timeline_score <= 1:
-        main_blocker = "Unclear purchase timeline."
-    else:
-        main_blocker = "No major blocker identified."
-
-    return {
-        "readiness_score": score,
-        "main_blocker": main_blocker,
-        "readiness_reasons": reasons
-    }
-
-
-# ============================================================
-# STRUCTURED EXPLANATION
-# ============================================================
-
-def build_structured_explanation(user, prop, score_components, readiness_output):
-    reasons = []
-    cautions = []
-
-    if score_components["budget_fit"] >= 90:
-        reasons.append("The property is within your preferred budget range.")
-    elif score_components["budget_fit"] >= 50:
-        reasons.append("The property is slightly above your preferred budget but still close.")
-    else:
-        cautions.append("The property is above your preferred budget range.")
-
-    if score_components["property_type_fit"] == 100:
-        reasons.append("The property type matches your stated preference.")
-    else:
-        cautions.append("The property type does not fully match your stated preference.")
-
-    if score_components["bed_bath_fit"] >= 80:
-        reasons.append("The bedroom and bathroom configuration strongly fits your needs.")
-    elif score_components["bed_bath_fit"] >= 40:
-        reasons.append("The bedroom and bathroom configuration is reasonably close to your needs.")
-    else:
-        cautions.append("The bedroom and bathroom configuration is not an ideal fit.")
-
-    if score_components["neighborhood_fit"] >= 70:
-        reasons.append("The neighborhood style aligns well with your preferred lifestyle.")
-    elif score_components["neighborhood_fit"] >= 40:
-        reasons.append("The neighborhood style is somewhat aligned with your preference.")
-    else:
-        cautions.append("The neighborhood style is not strongly aligned with your preference.")
-
-    if score_components["feature_fit"] >= 70:
-        reasons.append("The property includes several features you value.")
-    elif score_components["feature_fit"] >= 40:
-        reasons.append("The property includes some of your requested features.")
-    else:
-        cautions.append("The property misses several important requested features.")
-
-    return {
-        "match_reasons": reasons,
-        "cautions": cautions,
-        "main_blocker": readiness_output["main_blocker"],
-        "readiness_reasons": readiness_output["readiness_reasons"]
-    }
-
-
-# ============================================================
-# GEMINI EXPLANATION
-# ============================================================
-
-def generate_gemini_explanation(user, prop, score_components, readiness_output, structured_explanation):
-    if client is None:
-        return "Gemini API key not found. Add GEMINI_API_KEY in Streamlit secrets to enable AI explanations."
-
-    user_safe = make_json_safe(dict(user))
-    prop_safe = make_json_safe(prop)
-    score_components_safe = make_json_safe(score_components)
-    readiness_output_safe = make_json_safe(readiness_output)
-    structured_explanation_safe = make_json_safe(structured_explanation)
-
-    prompt = f"""
-You are an AI property advisor for Occubuy.
-
-Write a concise explanation in 2 short paragraphs:
-1. Explain why the property is a match
-2. Briefly explain the buyer's readiness and the next best step
-
-BUYER PROFILE:
-{json.dumps(user_safe, indent=2)}
-
-RECOMMENDED PROPERTY:
-{json.dumps(prop_safe, indent=2)}
-
-MATCH SCORES:
-{json.dumps(score_components_safe, indent=2)}
-
-READINESS OUTPUT:
-{json.dumps(readiness_output_safe, indent=2)}
-
-STRUCTURED EXPLANATION INPUT:
-{json.dumps(structured_explanation_safe, indent=2)}
-
-Rules:
-- Be specific
-- Be natural and human
-- Do not invent facts
-- Do not mention internal scoring weights
-- End with one practical next step
-"""
-
-    try:
-        response = client.models.generate_content(
-            model="gemini-2.5-flash",
-            contents=prompt
+def load_engines():
+    financial_engine = FinancialAnalysisEngine()
+    rag_retriever = RAGRetriever()
+    matching_engine = PropertyMatchingEngine()
+    roadmap_gen = RoadmapGenerator()
+    return financial_engine, rag_retriever, matching_engine, roadmap_gen
+
+def initialize_session():
+    if 'current_layer' not in st.session_state:
+        st.session_state.current_layer = 1
+    if 'selected_property' not in st.session_state:
+        st.session_state.selected_property = None
+    if 'user_id' not in st.session_state:
+        st.session_state.user_id = 1
+
+def render_layer1(financial_engine, rag_retriever, matching_engine, roadmap_gen):
+    st.header("🏠 Layer 1: Dream Home Discovery")
+    st.write("Tell me about your ideal home. What matters to you?")
+
+    col1, col2 = st.columns([2, 1])
+
+    with col1:
+        lifestyle_query = st.text_input(
+            "What's your ideal lifestyle?",
+            placeholder="e.g., Family-friendly, peaceful, urban, creative, investment-focused"
         )
 
-        if hasattr(response, "text") and response.text:
-            return response.text
-
-        return f"Gemini returned no text. Raw response: {response}"
-
-    except Exception as e:
-        return f"Gemini error: {str(e)}"
-
-
-# ============================================================
-# RECOMMENDATION PIPELINE
-# ============================================================
-
-def recommend_properties_for_user(user_row, properties_df, top_n=3):
-    results = []
-    readiness_output = calculate_readiness_score(user_row)
-
-    for _, prop in properties_df.iterrows():
-        score_components = calculate_match_score(user_row, prop)
-
-        structured_explanation = build_structured_explanation(
-            user=user_row,
-            prop=prop,
-            score_components=score_components,
-            readiness_output=readiness_output
+    with col2:
+        budget = st.number_input(
+            "Budget ($)",
+            min_value=100000,
+            max_value=5000000,
+            value=1000000,
+            step=50000
         )
 
-        results.append({
-            "property_id": prop["property_id"],
-            "suburb": prop["suburb"],
-            "price": prop["price"],
-            "property_type": prop["property_type"],
-            "bedrooms": prop["bedrooms"],
-            "bathrooms": prop["bathrooms"],
-            "neighborhood": prop["neighborhood"],
-            "match_score": score_components["total_match_score"],
-            "score_components": score_components,
-            "property_row": prop.to_dict(),
-            "readiness_output": readiness_output,
-            "structured_explanation": structured_explanation
-        })
-
-    results = sorted(results, key=lambda x: x["match_score"], reverse=True)
-    return results[:top_n]
-
-
-# ============================================================
-# SIDEBAR INPUTS
-# ============================================================
-
-st.sidebar.header("Buyer Profile")
-
-budget_range = st.sidebar.selectbox(
-    "Estimated Budget Range",
-    [
-        "$500K-$750K",
-        "$750K-$900K",
-        "$900K-$1.1M",
-        "$1.1M+"
-    ]
-)
-
-property_type = st.sidebar.multiselect(
-    "Preferred Property Type",
-    ["House", "House & Land", "Townhouse", "Apartment"],
-    default=["House"]
-)
-
-bedrooms = st.sidebar.selectbox("Preferred Bedrooms", [1, 2, 3, 4, 5])
-bathrooms = st.sidebar.selectbox("Preferred Bathrooms", [1, 2, 3])
-
-features = st.sidebar.multiselect(
-    "Important Features",
-    [
-        "Parking",
-        "Pet-friendly",
-        "Green spaces",
-        "Proximity to public transport",
-        "Security",
-        "Low-maintenance options",
-        "Swimming pool",
-        "Balcony",
-        "Gym"
-    ],
-    default=["Parking", "Security"]
-)
-
-neighborhood = st.sidebar.multiselect(
-    "Preferred Neighborhood Type",
-    [
-        "Quiet & residential",
-        "Family-friendly",
-        "Urban & vibrant",
-        "Nature-focused"
-    ],
-    default=["Family-friendly"]
-)
-
-pre_approval = st.sidebar.radio("Mortgage Pre-Approval", ["Yes", "No"])
-timeline = st.sidebar.selectbox(
-    "When do you intend to purchase?",
-    [
-        "Immediately / Soon",
-        "1-6 months",
-        "6-12 months",
-        "1-2 years",
-        "Not sure"
-    ]
-)
-
-purpose = st.sidebar.selectbox(
-    "Primary Buying Purpose",
-    [
-        "A home to live in",
-        "Investment property",
-        "Either / Both"
-    ]
-)
-
-motivation = st.sidebar.multiselect(
-    "Main Motivations",
-    [
-        "Stability & security",
-        "Family needs",
-        "Building wealth",
-        "Retirement planning",
-        "Investment opportunity"
-    ],
-    default=["Stability & security"]
-)
-
-points_interest = st.sidebar.radio(
-    "Interested in points to reduce property cost?",
-    ["Yes", "No"]
-)
-
-run_match = st.sidebar.button("Find My Matches")
-
-
-# ============================================================
-# RUN MATCH + SAVE TO SESSION STATE
-# ============================================================
-
-if run_match:
-    user_profile = build_user_profile(
-        budget_range=budget_range,
-        property_type=property_type,
-        bedrooms=bedrooms,
-        bathrooms=bathrooms,
-        features=features,
-        neighborhood=neighborhood,
-        pre_approval=pre_approval,
-        timeline=timeline,
-        purpose=purpose,
-        motivation=motivation,
-        points_interest=points_interest
-    )
-
-    top_matches = recommend_properties_for_user(user_profile, properties_df, top_n=3)
-
-    st.session_state.user_profile = user_profile
-    st.session_state.top_matches = top_matches
-    st.session_state.gemini_explanation = None
-
-
-# ============================================================
-# MAIN APP DISPLAY
-# ============================================================
-
-if st.session_state.top_matches is not None:
-    top_matches = st.session_state.top_matches
-    user_profile = st.session_state.user_profile
-    top_match = top_matches[0]
-
-    tab1, tab2, tab3, tab4 = st.tabs([
-        "Top Matches",
-        "Why It Matches",
-        "Buyer Readiness",
-        "Dataset View"
-    ])
-
-    # --------------------------------------------------------
-    # TAB 1: TOP MATCHES
-    # --------------------------------------------------------
-    with tab1:
-        st.subheader("Top Recommended Properties")
-
-        for i, match in enumerate(top_matches, 1):
-            with st.container():
-                st.markdown(f"### Recommendation #{i}")
-                col1, col2, col3 = st.columns(3)
-
-                with col1:
-                    st.metric("Suburb", match["suburb"])
-                    st.metric("Property Type", match["property_type"].title())
-
-                with col2:
-                    st.metric("Price", f"${match['price']:,}")
-                    st.metric("Bedrooms", match["bedrooms"])
-
-                with col3:
-                    st.metric("Bathrooms", match["bathrooms"])
-                    st.metric("Match Score", f"{match['match_score']} / 100")
-
-                st.markdown(f"**Neighborhood:** {match['neighborhood']}")
-                st.divider()
-
-    # --------------------------------------------------------
-    # TAB 2: WHY IT MATCHES
-    # --------------------------------------------------------
-    with tab2:
-        st.subheader("Why the Top Match Fits")
-
-        st.markdown("### Structured Match Reasons")
-        for reason in top_match["structured_explanation"]["match_reasons"]:
-            st.success(reason)
-
-        st.markdown("### Cautions")
-        if top_match["structured_explanation"]["cautions"]:
-            for caution in top_match["structured_explanation"]["cautions"]:
-                st.warning(caution)
-        else:
-            st.info("No major concerns identified.")
-
-        st.markdown("### Score Breakdown")
-        score_df = pd.DataFrame(
-            list(top_match["score_components"].items()),
-            columns=["Component", "Score"]
-        )
-        st.dataframe(score_df, use_container_width=True)
-
-        st.markdown("### AI Explanation")
-        if st.button("Generate Gemini Explanation"):
-            with st.spinner("Generating AI explanation..."):
-                st.session_state.gemini_explanation = generate_gemini_explanation(
-                    user=user_profile,
-                    prop=top_match["property_row"],
-                    score_components=top_match["score_components"],
-                    readiness_output=top_match["readiness_output"],
-                    structured_explanation=top_match["structured_explanation"]
+    if st.button("Find My Dream Home", key="find_home"):
+        if lifestyle_query:
+            with st.spinner("Searching for your perfect match..."):
+                matches = rag_retriever.retrieve_properties_by_lifestyle(
+                    lifestyle_query,
+                    top_k=5
                 )
 
-        if st.session_state.gemini_explanation:
-            st.write(st.session_state.gemini_explanation)
+                if not matches:
+                    matches = matching_engine.match_properties_by_lifestyle(
+                        lifestyle_query,
+                        budget_range=(0, budget),
+                        top_k=5
+                    )
 
-    # --------------------------------------------------------
-    # TAB 3: BUYER READINESS
-    # --------------------------------------------------------
-    with tab3:
-        st.subheader("Buyer Readiness")
+                if matches:
+                    st.success(f"Found {len(matches)} properties that match your preferences!")
 
-        readiness_score = top_match["readiness_output"]["readiness_score"]
-        main_blocker = top_match["readiness_output"]["main_blocker"]
+                    for idx, prop in enumerate(matches, 1):
+                        with st.expander(
+                            f"#{idx} {prop.get('ideal_buyer_archetype', 'Property')} in {prop.get('suburb', 'Unknown')} - ${prop.get('price', 0):,.0f}",
+                            expanded=(idx == 1)
+                        ):
+                            col1, col2 = st.columns(2)
 
-        st.metric("Readiness Score", f"{readiness_score} / 100")
-        st.progress(min(readiness_score / 100, 1.0))
+                            with col1:
+                                st.subheader("Property Details")
+                                details = {
+                                    "Bedrooms": prop.get('bedrooms'),
+                                    "Bathrooms": prop.get('bathrooms'),
+                                    "Parking": prop.get('parking'),
+                                    "Internal Size": f"{prop.get('internal_size_sqm', 0):.0f} sqm",
+                                    "Land Size": f"{prop.get('land_size_sqm', 0):.0f} sqm",
+                                    "Year Built": prop.get('year_built'),
+                                    "Days on Market": prop.get('days_on_market'),
+                                }
+                                for key, val in details.items():
+                                    st.write(f"**{key}:** {val}")
 
-        st.markdown("### Main Blocker")
-        st.warning(main_blocker)
+                            with col2:
+                                st.subheader("Investment & Lifestyle")
+                                investment = {
+                                    "Capital Growth": f"{prop.get('capital_growth_score', 0)}/100",
+                                    "Rental Yield": f"{prop.get('estimated_rental_yield_percent', 0):.2f}%",
+                                    "Investment Quality": f"{prop.get('investment_quality_score', 0)}/100",
+                                    "Lifestyle Match": f"{prop.get('lifestyle_match_score', 0)}/100",
+                                }
+                                for key, val in investment.items():
+                                    st.write(f"**{key}:** {val}")
 
-        st.markdown("### Readiness Insights")
-        for reason in top_match["readiness_output"]["readiness_reasons"]:
-            st.write(f"- {reason}")
+                            st.write(f"**Why this matches you:** {prop.get('match_summary', 'N/A')}")
+                            st.write(f"**Emotional feel:** {prop.get('desired_home_feeling', 'N/A')}")
 
-        st.markdown("### Suggested Next Step")
-        if "pre-approval" in main_blocker.lower():
-            st.info("A strong next step is getting mortgage pre-approval or borrowing clarity.")
-        elif "timeline" in main_blocker.lower():
-            st.info("A strong next step is clarifying your purchase timeframe and narrowing your search.")
+                            if st.button(f"Explore Affordability for Property #{idx}", key=f"explore_{idx}"):
+                                st.session_state.selected_property = prop
+                                st.session_state.current_layer = 2
+                                st.rerun()
+                else:
+                    st.warning("No properties found matching your criteria. Try different keywords!")
         else:
-            st.info("A strong next step is reviewing top matches and shortlisting the most suitable options.")
+            st.info("Please describe your ideal lifestyle to get started!")
 
-    # --------------------------------------------------------
-    # TAB 4: DATASET VIEW
-    # --------------------------------------------------------
+def render_layer2(financial_engine, rag_retriever, matching_engine, roadmap_gen):
+    st.header("💰 Layer 2: Financial Feasibility & Roadmap")
+
+    if not st.session_state.selected_property:
+        st.warning("Please select a property from Layer 1 first.")
+        if st.button("← Back to Layer 1"):
+            st.session_state.current_layer = 1
+            st.rerun()
+        return
+
+    property_data = st.session_state.selected_property
+    property_name = f"{property_data.get('ideal_buyer_archetype', 'Property')} in {property_data.get('suburb', 'Unknown')}"
+    property_price = property_data.get('price', 0)
+
+    st.subheader(f"📍 {property_name}")
+    st.write(f"**Listed at: ${property_price:,.0f}**")
+
+    affordability = financial_engine.calculate_affordability(st.session_state.user_id, property_price)
+    roadmap = financial_engine.generate_financial_roadmap(st.session_state.user_id, property_price)
+
+    if "error" not in affordability:
+        readiness = affordability['readiness_status']
+
+        col1, col2, col3 = st.columns(3)
+
+        with col1:
+            if readiness == "Ready":
+                st.success(f"### ✅ {readiness}")
+            elif readiness == "Emerging":
+                st.warning(f"### ⏳ {readiness}")
+            else:
+                st.error(f"### ⏸️ {readiness}")
+
+        with col2:
+            st.metric("Monthly Surplus", f"${affordability['monthly_surplus']:,.0f}")
+
+        with col3:
+            st.metric("Est. Monthly Repayment", f"${affordability['estimated_monthly_repayment']:,.0f}")
+
+        st.subheader("Your Financial Position")
+        tab1, tab2, tab3 = st.tabs(["Overview", "Deposit Timeline", "Budget Scenarios"])
+
+        with tab1:
+            col1, col2 = st.columns(2)
+
+            with col1:
+                st.write("**Income & Savings**")
+                income_metrics = {
+                    "Monthly Income": f"${affordability['monthly_income']:,.0f}",
+                    "Monthly Surplus": f"${affordability['monthly_surplus']:,.0f}",
+                    "Savings Rate": f"{affordability['savings_rate']*100:.1f}%",
+                }
+                for key, val in income_metrics.items():
+                    st.write(f"- {key}: **{val}**")
+
+            with col2:
+                st.write("**Deposit Needs**")
+                deposit_metrics = {
+                    "20% Deposit Target": f"${affordability['deposit_20pct']:,.0f}",
+                    "10% Deposit Target": f"${affordability['deposit_10pct']:,.0f}",
+                    "Est. Months to 20%": f"{affordability['months_to_20pct_deposit']:.0f}",
+                }
+                for key, val in deposit_metrics.items():
+                    st.write(f"- {key}: **{val}**")
+
+        with tab2:
+            st.write(f"**Timeline to {affordability.get('deposit_20pct', 0):,.0f} deposit:**")
+            for step in roadmap['roadmap_steps']:
+                st.write(f"- {step}")
+
+        with tab3:
+            st.write("**What if you saved more?**")
+            for scenario in roadmap['budget_scenarios']:
+                col1, col2, col3 = st.columns(3)
+                with col1:
+                    st.write(f"**{scenario['name']}**")
+                with col2:
+                    months = scenario['months_to_deposit']
+                    months_display = f"{months:.0f} months" if months != float('inf') else "∞"
+                    st.write(f"{months_display}")
+                with col3:
+                    st.write(f"_{scenario['feasibility']}_")
+
+        st.divider()
+        st.subheader("What happens next?")
+
+        if readiness == "Ready":
+            st.success("""
+            ### You're in a strong position! 🎉
+
+            **Next Steps:**
+            1. Get pre-mortgage approval from 2-3 lenders (locks rates, shows you're serious)
+            2. Arrange building/pest inspections
+            3. Make an offer
+            4. Complete formal mortgage application
+            """)
+
+        elif readiness == "Emerging":
+            months_away = affordability['months_to_20pct_deposit']
+            st.warning(f"""
+            ### You're on track! ⏳
+
+            **Target timeline:** {months_away:.0f} months
+
+            **To accelerate:**
+            - Boost savings by $500-1000/month (review dining/entertainment)
+            - Redirect investment funds toward deposit
+            - Explore co-ownership options
+
+            **Next Steps:**
+            1. Get pre-approval 3 months before your target date
+            2. Focus on savings discipline
+            3. Monitor market for properties in this range
+            """)
+
+        else:
+            st.error("""
+            ### Let's reframe this 📊
+
+            This property is a stretch at current savings. But you have options!
+
+            **Next Steps:**
+            1. Explore properties in a more affordable range
+            2. Review budget: can you redirect $500-1000/month?
+            3. Consider 12-month savings sprint
+            4. Explore co-buying with partner/family
+            """)
+
+        st.divider()
+        st.subheader("Ask me anything about affordability")
+
+        user_input = st.text_input(
+            "Your question:",
+            placeholder="e.g., Can I afford this? What if I save more? Show me cheaper options...",
+            key="layer2_input"
+        )
+
+        if user_input:
+            response = roadmap_gen.generate_conversational_response(user_input, affordability, layer=2)
+            st.info(f"**Assistant:** {response}")
+
+        col1, col2 = st.columns(2)
+        with col1:
+            if st.button("← Back to Layer 1"):
+                st.session_state.current_layer = 1
+                st.rerun()
+
+        with col2:
+            if st.button("Proceed to Layer 3 (Action Plan) →"):
+                st.session_state.current_layer = 3
+                st.rerun()
+
+    else:
+        st.error(f"Error: {affordability['error']}")
+
+def render_layer3(financial_engine, rag_retriever, matching_engine, roadmap_gen):
+    st.header("📋 Layer 3: Action Plan")
+
+    if not st.session_state.selected_property:
+        st.warning("Please select a property from Layer 1 first.")
+        if st.button("← Back to Layer 1"):
+            st.session_state.current_layer = 1
+            st.rerun()
+        return
+
+    property_data = st.session_state.selected_property
+    property_name = f"{property_data.get('ideal_buyer_archetype', 'Property')} in {property_data.get('suburb', 'Unknown')}"
+    property_price = property_data.get('price', 0)
+
+    st.subheader(f"📍 {property_name}")
+
+    action_plan = roadmap_gen.generate_layer_3_action_plan(st.session_state.user_id, property_price)
+    readiness = action_plan['readiness_status']
+
+    st.subheader(f"Your Timeline ({readiness})")
+
+    timeline = action_plan['timeline']
+    for phase, actions in timeline.items():
+        with st.expander(phase, expanded=True):
+            for action in actions:
+                st.write(f"✓ {action}")
+
+    st.subheader("Documents You'll Need")
+    for doc in action_plan['documents_needed']:
+        st.write(f"- {doc}")
+
+    st.subheader("Pre-Purchase Checklist")
+    checklist_items = [
+        "Get pre-mortgage approval",
+        "Arrange property inspection",
+        "Review inspection results",
+        "Finalize financing terms",
+        "Get home and contents insurance quotes",
+        "Arrange pest/building report",
+        "Exchange contracts",
+        "Final settlement preparations",
+        "Settlement day!",
+    ]
+
+    cols = st.columns(2)
+    for idx, item in enumerate(checklist_items):
+        with cols[idx % 2]:
+            st.checkbox(item)
+
+    st.divider()
+    st.subheader("Your Immediate Next Actions")
+
+    if readiness == "Ready":
+        st.success("""
+        1. **Today:** Research 2-3 mortgage lenders
+        2. **This week:** Get pre-approval (have documents ready)
+        3. **Next week:** Schedule property inspection
+        4. **Within 2 weeks:** Make an offer
+        """)
+    elif readiness == "Emerging":
+        st.warning("""
+        1. **This month:** Review budget for savings optimization
+        2. **Next month:** Start conversations with lenders (even if not ready yet)
+        3. **In 2-3 months:** Get formal pre-approval
+        4. **In months:** Begin property hunting
+        """)
+    else:
+        st.error("""
+        1. **This week:** Review your full budget
+        2. **Next week:** Identify $500-1000/month to redirect to savings
+        3. **This month:** Research first-home buyer schemes in your state
+        4. **Month 3+:** Get pre-approval conversations started
+        """)
+
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        if st.button("← Back to Layer 2"):
+            st.session_state.current_layer = 2
+            st.rerun()
+
+    with col3:
+        if st.button("← Start Over (Layer 1)"):
+            st.session_state.selected_property = None
+            st.session_state.current_layer = 1
+            st.rerun()
+
+def render_debug_tab(financial_engine, rag_retriever, matching_engine, roadmap_gen):
+    st.header("🔧 Debug & Data")
+
+    tab1, tab2, tab3, tab4 = st.tabs(["User Data", "Properties", "Transactions", "Logs"])
+
+    with tab1:
+        st.subheader("User Financial Profiles")
+        users = financial_engine.get_all_users()
+        selected_user = st.selectbox("Select user:", users)
+
+        if selected_user:
+            profile = financial_engine.get_user_financial_profile(selected_user)
+            st.json({k: v for k, v in profile.items() if not isinstance(v, (list, dict))})
+
+    with tab2:
+        st.subheader("Property Knowledge Base")
+        properties = rag_retriever.property_kb
+        st.write(f"Total properties: {len(properties)}")
+        st.dataframe(
+            properties[['property_id', 'suburb', 'price', 'bedrooms', 'investment_quality_score']],
+            use_container_width=True
+        )
+
+    with tab3:
+        st.subheader("Transaction Data")
+        transactions = rag_retriever.financial_kb
+        st.write(f"Total financial profiles: {len(transactions)}")
+        st.dataframe(transactions[['user_id', 'financial_archetype', 'annual_income', 'savings_rate']], use_container_width=True)
+
     with tab4:
-        st.subheader("Demo Property Dataset")
-        st.dataframe(properties_df, use_container_width=True)
+        st.subheader("System Status")
+        st.write("✅ Financial Analysis Engine: Ready")
+        st.write("✅ RAG Retriever: Ready")
+        st.write("✅ Property Matching: Ready")
+        st.write("✅ Roadmap Generator: Ready")
+        if rag_retriever.faiss_index:
+            st.write("✅ Vector DB (FAISS): Loaded")
+        else:
+            st.write("⚠️ Vector DB: Using TF-IDF fallback")
 
-else:
-    st.info("Complete the buyer profile in the sidebar, then click **Find My Matches**.")
+def main():
+    initialize_session()
+
+    financial_engine, rag_retriever, matching_engine, roadmap_gen = load_engines()
+
+    st.sidebar.title("🏠 Occubuy")
+    st.sidebar.write("Your AI home buying assistant")
+
+    page = st.sidebar.radio(
+        "Choose your path:",
+        ["🏠 Layers 1-3 (Home Buying Flow)", "🔧 Debug & Data"]
+    )
+
+    if page == "🏠 Layers 1-3 (Home Buying Flow)":
+        st.sidebar.markdown("---")
+        st.sidebar.write(f"**Current Layer:** {st.session_state.current_layer}/3")
+        progress = st.session_state.current_layer / 3
+        st.sidebar.progress(progress)
+
+        if st.session_state.current_layer == 1:
+            render_layer1(financial_engine, rag_retriever, matching_engine, roadmap_gen)
+        elif st.session_state.current_layer == 2:
+            render_layer2(financial_engine, rag_retriever, matching_engine, roadmap_gen)
+        else:
+            render_layer3(financial_engine, rag_retriever, matching_engine, roadmap_gen)
+
+    else:
+        render_debug_tab(financial_engine, rag_retriever, matching_engine, roadmap_gen)
+
+    st.sidebar.markdown("---")
+    st.sidebar.write("Built with ❤️ for home buyers")
+
+if __name__ == "__main__":
+    main()

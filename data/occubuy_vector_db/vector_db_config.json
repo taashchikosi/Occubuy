@@ -1,0 +1,10 @@
+{
+    "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "embedding_dimension": 384,
+    "total_documents": 150,
+    "sources": {
+        "property_knowledge_base": 50,
+        "financial_knowledge_base": 50,
+        "user_transaction_history": 50
+    }
+}
