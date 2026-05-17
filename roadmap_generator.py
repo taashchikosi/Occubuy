@@ -240,9 +240,11 @@ class RoadmapGenerator:
                 if readiness == "Ready":
                     return "You're ready now! You could move forward within weeks if you find the right property."
                 elif readiness == "Emerging":
-                    return f"At your current pace, you'll be ready in {context.get('months_to_deposit', '6-12')} months."
+                    months = context.get('months_to_10pct_deposit', context.get('months_to_deposit', 18))
+                    return f"At your current savings pace, you'll reach your 10% deposit in ~{months:.0f} months."
                 else:
-                    return "With some budget optimization, 12 months is realistic for reaching your deposit goal."
+                    months = context.get('months_to_10pct_deposit', context.get('months_to_deposit', '24+'))
+                    return f"This property is a stretch — the 10% deposit is ~{months:.0f} months away. Consider more affordable options or boost savings."
 
             elif any(word in message_lower for word in ['budget', 'cut', 'save', 'money', 'increase']):
                 return "Smart thinking! Let me show you some budget scenarios and where to redirect funds."

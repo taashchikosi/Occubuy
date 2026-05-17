@@ -131,13 +131,32 @@ def render_layer2(financial_engine, rag_retriever, matching_engine, roadmap_gen)
     st.subheader(f"📍 {property_name}")
     st.write(f"**Listed at: ${property_price:,.0f}**")
 
+    # Key situational question — shapes the roadmap
+    st.markdown("---")
+    has_preapproval = st.radio(
+        "Do you have pre-mortgage approval?",
+        ["No, not yet", "Yes, I have it", "I'm not sure what that is"],
+        horizontal=True,
+        key="preapproval_status"
+    )
+
     affordability = financial_engine.calculate_affordability(st.session_state.user_id, property_price)
     roadmap = financial_engine.generate_financial_roadmap(st.session_state.user_id, property_price)
 
+    if has_preapproval == "I'm not sure what that is":
+        st.info(
+            "**Pre-mortgage approval** (also called conditional approval) means a lender has reviewed "
+            "your finances and confirmed they'd lend you up to a certain amount. It doesn't commit you "
+            "to buying — but it shows sellers you're serious and lets you move fast when you find the right property."
+        )
+
     if "error" not in affordability:
         readiness = affordability['readiness_status']
+        months_10pct = affordability['months_to_10pct_deposit']
+        months_20pct = affordability['months_to_20pct_deposit']
 
-        col1, col2, col3 = st.columns(3)
+        st.markdown("---")
+        col1, col2, col3, col4 = st.columns(4)
 
         with col1:
             if readiness == "Ready":
@@ -148,10 +167,15 @@ def render_layer2(financial_engine, rag_retriever, matching_engine, roadmap_gen)
                 st.error(f"### ⏸️ {readiness}")
 
         with col2:
-            st.metric("Monthly Surplus", f"${affordability['monthly_surplus']:,.0f}")
+            st.metric("Monthly Savings", f"${affordability['monthly_savings']:,.0f}")
 
         with col3:
             st.metric("Est. Monthly Repayment", f"${affordability['estimated_monthly_repayment']:,.0f}")
+
+        with col4:
+            repay_pct = affordability['repayment_to_income_ratio'] * 100
+            color = "normal" if repay_pct <= 30 else "inverse"
+            st.metric("Repayment/Income", f"{repay_pct:.1f}%", delta=f"{'✓ healthy' if repay_pct <= 30 else '↑ high'}")
 
         st.subheader("Your Financial Position")
         tab1, tab2, tab3 = st.tabs(["Overview", "Deposit Timeline", "Budget Scenarios"])
@@ -164,7 +188,9 @@ def render_layer2(financial_engine, rag_retriever, matching_engine, roadmap_gen)
                 income_metrics = {
                     "Monthly Income": f"${affordability['monthly_income']:,.0f}",
                     "Monthly Surplus": f"${affordability['monthly_surplus']:,.0f}",
+                    "Monthly Savings": f"${affordability['monthly_savings']:,.0f}",
                     "Savings Rate": f"{affordability['savings_rate']*100:.1f}%",
+                    "Current Savings Balance": f"${affordability['current_savings']:,.0f}",
                 }
                 for key, val in income_metrics.items():
                     st.write(f"- {key}: **{val}**")
@@ -172,28 +198,36 @@ def render_layer2(financial_engine, rag_retriever, matching_engine, roadmap_gen)
             with col2:
                 st.write("**Deposit Needs**")
                 deposit_metrics = {
-                    "20% Deposit Target": f"${affordability['deposit_20pct']:,.0f}",
-                    "10% Deposit Target": f"${affordability['deposit_10pct']:,.0f}",
-                    "Est. Months to 20%": f"{affordability['months_to_20pct_deposit']:.0f}",
+                    "10% Deposit (+ LMI path)": f"${affordability['deposit_10pct']:,.0f}",
+                    "Months to 10% deposit": f"{months_10pct:.0f} months",
+                    "20% Deposit (no LMI)": f"${affordability['deposit_20pct']:,.0f}",
+                    "Months to 20% deposit": f"{months_20pct:.0f} months",
+                    "Debt-to-Income Ratio": f"{affordability['debt_to_income']*100:.1f}%",
                 }
                 for key, val in deposit_metrics.items():
                     st.write(f"- {key}: **{val}**")
 
         with tab2:
-            st.write(f"**Timeline to {affordability.get('deposit_20pct', 0):,.0f} deposit:**")
+            st.write("**Your deposit savings progress:**")
             for step in roadmap['roadmap_steps']:
                 st.write(f"- {step}")
 
         with tab3:
-            st.write("**What if you saved more?**")
+            st.write("**What if you saved more each month?**")
+            col1, col2, col3 = st.columns(3)
+            with col1:
+                st.write("**Scenario**")
+            with col2:
+                st.write("**Months to 10% deposit**")
+            with col3:
+                st.write("**Notes**")
             for scenario in roadmap['budget_scenarios']:
                 col1, col2, col3 = st.columns(3)
                 with col1:
-                    st.write(f"**{scenario['name']}**")
+                    st.write(f"{scenario['name']}")
                 with col2:
                     months = scenario['months_to_deposit']
-                    months_display = f"{months:.0f} months" if months != float('inf') else "∞"
-                    st.write(f"{months_display}")
+                    st.write(f"{months:.0f} months" if months != float('inf') else "∞")
                 with col3:
                     st.write(f"_{scenario['feasibility']}_")
 
@@ -201,45 +235,63 @@ def render_layer2(financial_engine, rag_retriever, matching_engine, roadmap_gen)
         st.subheader("What happens next?")
 
         if readiness == "Ready":
-            st.success("""
-            ### You're in a strong position! 🎉
+            pre_note = (
+                "You already have pre-approval — great! You can move fast."
+                if has_preapproval == "Yes, I have it"
+                else "**First step:** Get pre-mortgage approval before making an offer."
+            )
+            st.success(f"""
+            ### You're in a strong position! ✅
 
-            **Next Steps:**
-            1. Get pre-mortgage approval from 2-3 lenders (locks rates, shows you're serious)
-            2. Arrange building/pest inspections
-            3. Make an offer
-            4. Complete formal mortgage application
+            {pre_note}
+
+            **Your Next Steps (in order):**
+            1. {'Make an offer — your pre-approval is ready' if has_preapproval == "Yes, I have it" else 'Get pre-mortgage approval from 2–3 lenders (takes ~1–2 weeks)'}
+            2. Arrange building & pest inspections
+            3. Review the contract with a conveyancer/solicitor
+            4. Exchange contracts & pay deposit
+            5. Settlement — you own it!
             """)
 
         elif readiness == "Emerging":
-            months_away = affordability['months_to_20pct_deposit']
+            pre_timing = max(1, int(months_10pct) - 3)
+            pre_note = (
+                "You have pre-approval — keep it current (it usually expires in 90 days)."
+                if has_preapproval == "Yes, I have it"
+                else f"Get pre-approval around month {pre_timing} (3 months before your deposit target)."
+            )
             st.warning(f"""
             ### You're on track! ⏳
 
-            **Target timeline:** {months_away:.0f} months
+            **10% deposit path:** ~{months_10pct:.0f} months away (you can use LMI to enter with 10%)
+            **20% deposit path:** ~{months_20pct:.0f} months away (no LMI needed)
 
-            **To accelerate:**
-            - Boost savings by $500-1000/month (review dining/entertainment)
-            - Redirect investment funds toward deposit
-            - Explore co-ownership options
+            **Pre-approval:** {pre_note}
 
-            **Next Steps:**
-            1. Get pre-approval 3 months before your target date
-            2. Focus on savings discipline
-            3. Monitor market for properties in this range
+            **Your Next Steps:**
+            1. Maintain or boost monthly savings (currently ${affordability['monthly_savings']:,.0f}/mo)
+            2. Can you redirect $500–1,000/month more? Check the Budget Scenarios tab
+            3. {f'Keep pre-approval current — reapply if it expires' if has_preapproval == "Yes, I have it" else f'Plan to get pre-approval in ~{pre_timing} months'}
+            4. Keep watching this property or similar ones in this suburb
+            5. Once deposit is ready — move quickly, don't wait for "perfect" timing
             """)
 
         else:
-            st.error("""
-            ### Let's reframe this 📊
+            st.error(f"""
+            ### Let's reframe this ⏸️
 
-            This property is a stretch at current savings. But you have options!
+            This property is a stretch right now:
+            - 10% deposit is **{months_10pct:.0f} months away** at current savings rate
+            - Monthly repayments would be **{affordability['repayment_to_income_ratio']*100:.1f}% of income** (aim for ≤30%)
 
-            **Next Steps:**
-            1. Explore properties in a more affordable range
-            2. Review budget: can you redirect $500-1000/month?
-            3. Consider 12-month savings sprint
-            4. Explore co-buying with partner/family
+            **What you can do:**
+            1. Look at properties in the **${property_price*0.5:,.0f}–${property_price*0.7:,.0f}** range first
+            2. Boost monthly savings — review your top spending categories
+            3. Set a 12-month savings sprint target
+            4. Explore co-buying with a partner or family member
+            {'5. **Pre-approval:** Hold off — apply when you are 2–3 months from your deposit goal' if has_preapproval != 'Yes, I have it' else '5. Pre-approval noted — but focus on deposit savings first'}
+
+            **Ask below** for more affordable alternatives or budget help.
             """)
 
         st.divider()

@@ -37,11 +37,16 @@ class FinancialAnalysisEngine:
         monthly_repayment_estimate = estimated_annual_repayment / 12
         repayment_to_income = monthly_repayment_estimate / monthly_income if monthly_income > 0 else 0
 
-        months_to_10pct = deposit_10pct / (monthly_surplus * savings_rate) if monthly_surplus * savings_rate > 0 else float('inf')
-        months_to_20pct = deposit_20pct / (monthly_surplus * savings_rate) if monthly_surplus * savings_rate > 0 else float('inf')
+        monthly_savings = profile.get('average_monthly_savings', 0)
+        current_savings = profile.get('total_savings_transfers', 0)
+        deposit_10_gap = max(0, deposit_10pct - current_savings)
+        deposit_20_gap = max(0, deposit_20pct - current_savings)
+        months_to_10pct = deposit_10_gap / monthly_savings if monthly_savings > 0 else float('inf')
+        months_to_20pct = deposit_20_gap / monthly_savings if monthly_savings > 0 else float('inf')
 
         readiness = self._determine_readiness(
-            monthly_surplus, repayment_to_income, months_to_20pct,
+            monthly_surplus, repayment_to_income,
+            months_to_10pct, months_to_20pct,
             profile['estimated_emergency_buffer_months']
         )
 
@@ -51,6 +56,8 @@ class FinancialAnalysisEngine:
             "deposit_20pct": deposit_20pct,
             "monthly_income": monthly_income,
             "monthly_surplus": monthly_surplus,
+            "monthly_savings": monthly_savings,
+            "current_savings": current_savings,
             "estimated_monthly_repayment": monthly_repayment_estimate,
             "repayment_to_income_ratio": repayment_to_income,
             "months_to_10pct_deposit": max(0, months_to_10pct),
@@ -63,10 +70,13 @@ class FinancialAnalysisEngine:
         }
 
     def _determine_readiness(self, monthly_surplus: float, repayment_ratio: float,
-                             months_to_deposit: float, emergency_buffer: float) -> str:
-        if months_to_deposit <= 3 and repayment_ratio <= 0.30 and emergency_buffer >= 3:
+                             months_to_10pct: float, months_to_20pct: float,
+                             emergency_buffer: float) -> str:
+        # Ready: 10% deposit reachable within 6 months, repayments manageable
+        if months_to_10pct <= 6 and repayment_ratio <= 0.30 and emergency_buffer >= 3:
             return "Ready"
-        elif months_to_deposit <= 12 and repayment_ratio <= 0.35 and emergency_buffer >= 2:
+        # Emerging: 10% deposit within 24 months, repayments not crushing
+        elif months_to_10pct <= 24 and repayment_ratio <= 0.40 and emergency_buffer >= 1.5:
             return "Emerging"
         else:
             return "Not Yet"
