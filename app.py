@@ -42,10 +42,9 @@ def get_openai_client():
         return None
 
 
-# ── OpenAI calls ───────────────────────────────────────────────────────────────
+# ── AI calls ───────────────────────────────────────────────────────────────────
 
 def ai_chat(client, system_prompt: str, history: List[Dict], user_message: str) -> str:
-    """Call OpenAI with conversation history. History is list of {role, text} dicts."""
     if not client:
         return "_OpenAI unavailable — please set OPENAI_API_KEY._"
     try:
@@ -53,7 +52,6 @@ def ai_chat(client, system_prompt: str, history: List[Dict], user_message: str) 
         for h in history:
             messages.append({"role": h["role"], "content": h["text"]})
         messages.append({"role": "user", "content": user_message})
-
         resp = client.chat.completions.create(
             model="gpt-4o-mini",
             messages=messages,
@@ -66,10 +64,9 @@ def ai_chat(client, system_prompt: str, history: List[Dict], user_message: str) 
 
 
 def ai_extract_keywords(client, history: List[Dict]) -> str:
-    """Ask the model to distil lifestyle search keywords from the Layer 1 conversation."""
     transcript = "\n".join(f"{h['role'].upper()}: {h['text']}" for h in history)
     prompt = (
-        "From this home buyer conversation extract 6–10 comma-separated keywords that describe "
+        "From this home buyer conversation extract 6–10 comma-separated keywords describing "
         "their ideal property lifestyle (e.g. family, peaceful, garden, suburban, near schools, "
         "urban, spacious, character home). Return ONLY the keywords, nothing else.\n\n"
         f"Conversation:\n{transcript}"
@@ -89,7 +86,6 @@ def ai_extract_keywords(client, history: List[Dict]) -> str:
 
 
 def ai_match_explanation(client, prop: Dict, history: List[Dict], rank: int) -> str:
-    """Generate a personalised reason why this property suits this person."""
     transcript = "\n".join(f"{h['role'].upper()}: {h['text']}" for h in history[-8:])
     rank_word = ["best", "second", "third"][rank]
     prop_desc = (
@@ -120,7 +116,11 @@ def ai_match_explanation(client, prop: Dict, history: List[Dict], rank: int) -> 
 
 # ── System prompts ─────────────────────────────────────────────────────────────
 
-LAYER1_PROMPT = """You are Occubuy, a warm and empathetic home advisor. Your only job right now is to help this person emotionally and conversationally discover the kind of home and lifestyle that genuinely fits the life they want to build.
+def layer1_prompt(name: str) -> str:
+    first = name.split()[0]
+    return f"""You are Occubuy, a warm and empathetic home advisor. You are speaking with {first}.
+
+Your only job right now is to help {first} emotionally and conversationally discover the kind of home and lifestyle that genuinely fits the life they want to build.
 
 Through natural conversation, gently explore:
 - Their current living situation and what they want to change
@@ -134,78 +134,102 @@ Through natural conversation, gently explore:
 Rules:
 - Ask ONE question at a time
 - Keep responses SHORT: 1–2 warm sentences, then your question
+- Use {first}'s name naturally but sparingly (once every few exchanges)
 - Be genuinely curious — make them feel deeply heard, not like they're filling in a form
 - Reference what they've said in your follow-up to show you're truly listening
 - NEVER mention prices, budgets, mortgages, deposits, finance, or money in any form
 - After 6–8 meaningful exchanges where you have a clear picture, end your message with the exact token: [MATCH_READY]"""
 
 
-def layer2_prompt(prop: Dict, profile: Dict, affordability: Dict) -> str:
+def layer2_prompt(prop: Dict, profile: Dict, affordability: Dict, scenarios: Dict) -> str:
+    name = profile.get("name", "there")
+    first = name.split()[0]
     price = prop.get("price", 0)
-    name = f"{prop.get('ideal_buyer_archetype', 'Property')} in {prop.get('suburb', 'Unknown')}"
+    prop_name = f"{prop.get('ideal_buyer_archetype', 'Property')} in {prop.get('suburb', 'Unknown')}"
     readiness = affordability.get("readiness_status", "Unknown")
-    m10 = affordability.get("months_to_10pct_deposit", 0)
-    m20 = affordability.get("months_to_20pct_deposit", 0)
     monthly_income = affordability.get("monthly_income", 0)
-    monthly_savings = affordability.get("monthly_savings", 0)
     current_savings = affordability.get("current_savings", 0)
+    base_savings = affordability.get("monthly_savings", 0)
     repayment = affordability.get("estimated_monthly_repayment", 0)
-    repayment_ratio = affordability.get("repayment_to_income_ratio", 0)
-    dti = profile.get("debt_to_income_ratio", 0)
+    repayment_pct = affordability.get("repayment_to_income_ratio", 0) * 100
+    dti = profile.get("debt_to_income_ratio", 0) * 100
     buffer = profile.get("estimated_emergency_buffer_months", 0)
+    deposit_10 = affordability.get("deposit_10pct", 0)
+    deposit_20 = affordability.get("deposit_20pct", 0)
 
-    return f"""You are Occubuy, a knowledgeable and empathetic home buying advisor. The user has chosen their dream home and you are now helping them understand their financial readiness.
+    # Build scenario table from pre-computed accurate figures
+    rows = []
+    for s in scenarios.get("scenarios", []):
+        m10 = f"{s['months_to_10pct']} months" if s["months_to_10pct"] else "N/A"
+        m20 = f"{s['months_to_20pct']} months" if s["months_to_20pct"] else "N/A"
+        rows.append(f"  {s['label']:<22} | ${s['monthly_savings']:>7,.0f}/mo | {m10:>12} | {m20:>12}")
+    scenario_table = "\n".join(rows)
 
-THEIR CHOSEN HOME:
-- {name}
+    return f"""You are Occubuy, a knowledgeable and empathetic home buying advisor speaking with {first}.
+
+CHOSEN HOME:
+- {prop_name}
 - Price: ${price:,.0f}
-- Estimated monthly repayment: ${repayment:,.0f}/mo
+- Estimated monthly repayment: ${repayment:,.0f}/mo ({repayment_pct:.1f}% of {first}'s income)
 
-THEIR FINANCIAL PROFILE (from their real data):
-- Financial archetype: {profile.get('financial_archetype', 'Unknown')}
+{first.upper()}'S VERIFIED FINANCIAL PROFILE:
 - Monthly income: ${monthly_income:,.0f}
-- Monthly savings rate: ${monthly_savings:,.0f}/mo
 - Current savings balance: ${current_savings:,.0f}
-- 10% deposit target: ${affordability.get('deposit_10pct', 0):,.0f} — approx {m10:.0f} months away at current pace
-- 20% deposit target: ${affordability.get('deposit_20pct', 0):,.0f} — approx {m20:.0f} months away
-- Repayment as % of income: {repayment_ratio * 100:.1f}%
-- Debt-to-income ratio: {dti * 100:.1f}%
+- Monthly savings rate: ${base_savings:,.0f}/mo
+- Debt-to-income ratio: {dti:.1f}%
 - Emergency buffer: {buffer:.1f} months
+- Financial archetype: {profile.get('financial_archetype', 'Unknown')}
 - Readiness status: {readiness}
 
-YOUR ROLE — conduct a genuine financial readiness conversation:
-1. Ask about their income, savings, debts, job security, partner income, upcoming expenses — one question at a time
-2. Use the real data above to give specific, accurate, personalised guidance
-3. Build toward an honest picture of their readiness
+DEPOSIT SAVINGS SCENARIOS — pre-computed, mathematically accurate. Use ONLY these figures:
 
-IF READY: Congratulate them warmly. Walk them step by step through the purchase process — pre-approval, inspections, making an offer, exchange, settlement. Explain what pre-mortgage approval is and why to get it first.
+  Scenario               | Monthly Savings | To 10% deposit | To 20% deposit
+  -----------------------|-----------------|----------------|----------------
+{scenario_table}
 
-IF EMERGING ({m10:.0f} months to 10% deposit): Be encouraging — they're on track. Explain the 10% deposit path (with LMI) vs the 20% path (no LMI). Give a real timeline. Suggest specific ways to accelerate savings.
+  10% deposit = ${deposit_10:,.0f} → enter sooner with LMI (Lenders Mortgage Insurance)
+  20% deposit = ${deposit_20:,.0f} → no LMI required, longer wait
 
-IF NOT YET: Be compassionate and direct. Explain specifically what needs to change with real numbers. Give a realistic roadmap — what to save, over how long. Consider whether a more affordable property makes sense. Talk about government schemes, co-buying, income growth.
+YOUR APPROACH:
+You already know {first}'s complete financial picture from their verified data. Do NOT ask questions you already have the answers to — don't ask about their income, savings rate, or how much they save. You know this.
+
+Instead, have a real financial discussion:
+1. Open by presenting their position clearly and warmly — reference their name and specific numbers
+2. Explain what it means for this specific property and price point
+3. Discuss their options using the pre-computed scenario table above
+4. Respond to their questions, explore concerns, discuss trade-offs conversationally
+
+BASED ON READINESS ({readiness}):
+
+IF READY: Congratulate {first} genuinely. Walk through the purchase process step by step in a conversational way — what pre-mortgage approval is and why to get it first, building and pest inspections, making an offer, exchanging contracts, settlement. Make it feel exciting and achievable.
+
+IF EMERGING: Present the deposit timeline honestly using the scenario table. Discuss the 10% LMI path vs waiting for 20% — help {first} decide which suits their life. Mention first home buyer schemes if applicable. Be encouraging — they're on track.
+
+IF NOT YET: Be compassionate and direct. Show {first} the gap with the exact numbers. Discuss what levers they can pull — save more (show the scenarios), consider a lower price point, co-buying, government schemes, income growth. Give them a real roadmap they can act on.
 
 Rules:
-- ONE question at a time — this is still a conversation, not a report
-- Use real numbers from the financial data — be specific
-- Stay empathetic — buying a home is emotional and stressful
-- Reveal the picture gradually through conversation, don't dump everything at once"""
+- ONE topic per response — guide the conversation, don't dump everything at once
+- Use {first}'s name naturally (once every few exchanges, not every message)
+- Use ONLY the pre-computed figures above — never invent or recalculate numbers yourself
+- Stay empathetic throughout — this is one of the biggest decisions of their life"""
 
 
 # ── Session state ──────────────────────────────────────────────────────────────
 
 def init():
     defaults = {
-        "messages": [],        # Chat display history [{role, type, content}]
-        "stage": "layer1",     # layer1 | selecting | layer2
-        "l1_history": [],      # AI Layer 1 exchange history
-        "l2_history": [],      # AI Layer 2 exchange history
-        "exchanges": 0,        # Layer 1 exchange count
-        "properties": [],      # Top 3 matched properties
-        "explanations": [],    # Personalised match explanations
-        "selected": None,      # Chosen property
+        "messages": [],
+        "stage": "layer1",
+        "l1_history": [],
+        "l2_history": [],
+        "exchanges": 0,
+        "properties": [],
+        "explanations": [],
+        "selected": None,
         "user_id": 1,
         "affordability": None,
         "profile": None,
+        "scenarios": None,
     }
     for k, v in defaults.items():
         if k not in st.session_state:
@@ -225,9 +249,7 @@ def render_property_card(prop: Dict, explanation: str, rank: int):
                 f"💰 ${prop.get('price', 0):,.0f}"
             )
         with col2:
-            st.markdown(
-                f"🛏 {prop.get('bedrooms', '?')} &nbsp; 🚿 {prop.get('bathrooms', '?')}"
-            )
+            st.markdown(f"🛏 {prop.get('bedrooms', '?')} &nbsp; 🚿 {prop.get('bathrooms', '?')}")
         if explanation:
             st.caption(explanation)
 
@@ -246,22 +268,19 @@ def render_msg(msg: Dict):
 
 # ── Layer handlers ─────────────────────────────────────────────────────────────
 
-def handle_layer1(user_input: str, client, rag_retriever, matching_engine) -> List[Dict]:
+def handle_layer1(user_input: str, client, rag_retriever, matching_engine, name: str) -> List[Dict]:
     st.session_state.exchanges += 1
-
-    response = ai_chat(client, LAYER1_PROMPT, st.session_state.l1_history, user_input)
+    response = ai_chat(client, layer1_prompt(name), st.session_state.l1_history, user_input)
 
     st.session_state.l1_history.append({"role": "user", "text": user_input})
     st.session_state.l1_history.append({"role": "assistant", "text": response})
 
     ready = "[MATCH_READY]" in response or st.session_state.exchanges >= 9
     clean = response.replace("[MATCH_READY]", "").strip()
-
     out = [{"role": "assistant", "type": "text", "content": clean}]
 
     if ready:
         keywords = ai_extract_keywords(client, st.session_state.l1_history)
-
         matches = rag_retriever.retrieve_properties_by_lifestyle(keywords, top_k=5)
         if not matches:
             matches = matching_engine.match_properties_by_lifestyle(keywords, top_k=5)
@@ -271,7 +290,6 @@ def handle_layer1(user_input: str, client, rag_retriever, matching_engine) -> Li
             ai_match_explanation(client, p, st.session_state.l1_history, i)
             for i, p in enumerate(top3)
         ]
-
         st.session_state.properties = top3
         st.session_state.explanations = explanations
         st.session_state.stage = "selecting"
@@ -298,23 +316,27 @@ def select_property(idx: int, client, financial_engine) -> List[Dict]:
         st.session_state.user_id, prop.get("price", 0)
     )
     profile = financial_engine.get_user_financial_profile(st.session_state.user_id)
+    scenarios = financial_engine.compute_scenarios(
+        st.session_state.user_id, prop.get("price", 0)
+    )
     st.session_state.affordability = affordability
     st.session_state.profile = profile
+    st.session_state.scenarios = scenarios
     st.session_state.stage = "layer2"
 
-    system = layer2_prompt(prop, profile, affordability)
+    system = layer2_prompt(prop, profile, affordability, scenarios)
+    first = profile.get("name", "there").split()[0]
     opening = ai_chat(
-        client,
-        system,
-        [],
+        client, system, [],
         (
             f"The user has just chosen their dream home: {prop.get('ideal_buyer_archetype', 'property')} "
             f"in {prop.get('suburb', 'Unknown')} at ${prop.get('price', 0):,.0f}. "
-            "Acknowledge their exciting choice warmly (1–2 sentences), then ask your first question "
-            "to begin understanding their financial situation. Keep it to 3–4 sentences total."
+            f"Open by warmly acknowledging {first}'s choice (1 sentence), then immediately present "
+            f"their financial position using their real numbers — tell them where they stand clearly "
+            f"and empathetically. Based on their readiness status, set the direction of the conversation. "
+            f"Keep it to 4–5 sentences. Do not ask a question you already know the answer to."
         ),
     )
-
     st.session_state.l2_history = [
         {"role": "user", "text": "[property selected]"},
         {"role": "assistant", "text": opening},
@@ -330,17 +352,16 @@ def select_property(idx: int, client, financial_engine) -> List[Dict]:
     ]
 
 
-def handle_layer2(user_input: str, client, financial_engine) -> List[Dict]:
+def handle_layer2(user_input: str, client) -> List[Dict]:
     system = layer2_prompt(
         st.session_state.selected,
         st.session_state.profile,
         st.session_state.affordability,
+        st.session_state.scenarios,
     )
     response = ai_chat(client, system, st.session_state.l2_history, user_input)
-
     st.session_state.l2_history.append({"role": "user", "text": user_input})
     st.session_state.l2_history.append({"role": "assistant", "text": response})
-
     return [{"role": "assistant", "type": "text", "content": response}]
 
 
@@ -351,16 +372,29 @@ def main():
     financial_engine, rag_retriever, matching_engine = load_engines()
     client = get_openai_client()
 
+    user_names = financial_engine.get_all_user_names()
+    uid_list = sorted(user_names.keys())
+    name_list = [user_names[uid] for uid in uid_list]
+
     # Sidebar
     with st.sidebar:
         st.title("🏠 Occubuy")
         st.caption("AI home buying assistant")
         st.divider()
 
-        users = financial_engine.get_all_users()
-        uid = st.selectbox("Demo profile:", users, index=0)
-        if uid != st.session_state.user_id:
-            st.session_state.user_id = uid
+        current_idx = uid_list.index(st.session_state.user_id) if st.session_state.user_id in uid_list else 0
+        selected_idx = st.selectbox(
+            "Demo persona:",
+            range(len(name_list)),
+            format_func=lambda i: name_list[i],
+            index=current_idx,
+        )
+        new_uid = uid_list[selected_idx]
+        if new_uid != st.session_state.user_id:
+            for k in list(st.session_state.keys()):
+                del st.session_state[k]
+            st.session_state.user_id = new_uid
+            st.rerun()
 
         st.divider()
         stage_labels = {
@@ -372,24 +406,28 @@ def main():
 
         st.divider()
         if st.button("🔄 Start Over", use_container_width=True):
+            uid = st.session_state.user_id
             for k in list(st.session_state.keys()):
                 del st.session_state[k]
+            st.session_state.user_id = uid
             st.rerun()
 
         if not client:
             st.error("⚠️ OPENAI_API_KEY not set")
 
-    # Seed welcome message
+    # Seed welcome message using the user's name
     if not st.session_state.messages:
+        name = financial_engine.get_user_name(st.session_state.user_id)
+        first = name.split()[0]
         st.session_state.messages.append({
             "role": "assistant",
             "type": "text",
             "content": (
-                "👋 Hi! I'm **Occubuy** — your home buying assistant.\n\n"
-                "Before we look at anything, I want to get to know *you* a little. "
+                f"👋 Hi {first}! I'm **Occubuy** — your home buying assistant.\n\n"
+                "Before we look at anything, I want to get to know you a little. "
                 "The best home isn't just about rooms and price — it's about the life you want to live.\n\n"
-                "**So let's start simply: what does your life look like right now, "
-                "and what are you hoping to change or create with a new home?**"
+                f"**So let's start simply: what does your life look like right now, "
+                f"and what are you hoping to change or create with a new home?**"
             ),
         })
 
@@ -398,7 +436,7 @@ def main():
         with st.chat_message(msg["role"]):
             render_msg(msg)
 
-    # Property selection buttons — shown below the chat when in selecting stage
+    # Property selection buttons
     if st.session_state.stage == "selecting" and st.session_state.properties:
         st.divider()
         st.markdown("**Choose the one that feels right:**")
@@ -411,28 +449,28 @@ def main():
                     key=f"pick_{i}",
                     use_container_width=True,
                 ):
-                    with st.spinner("Getting your financial picture ready..."):
+                    with st.spinner("Pulling up your financial picture..."):
                         new_msgs = select_property(i, client, financial_engine)
                     for m in new_msgs:
                         st.session_state.messages.append(m)
                     st.rerun()
 
-    # Chat input — hidden only during property selection
+    # Chat input
     if st.session_state.stage != "selecting":
         if prompt := st.chat_input("Type your message..."):
             st.session_state.messages.append({"role": "user", "type": "text", "content": prompt})
+            name = financial_engine.get_user_name(st.session_state.user_id)
 
             with st.spinner("..."):
                 if st.session_state.stage == "layer1":
-                    new_msgs = handle_layer1(prompt, client, rag_retriever, matching_engine)
+                    new_msgs = handle_layer1(prompt, client, rag_retriever, matching_engine, name)
                 elif st.session_state.stage == "layer2":
-                    new_msgs = handle_layer2(prompt, client, financial_engine)
+                    new_msgs = handle_layer2(prompt, client)
                 else:
                     new_msgs = []
 
             for m in new_msgs:
                 st.session_state.messages.append(m)
-
             st.rerun()
 
 
