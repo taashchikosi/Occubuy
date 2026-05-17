@@ -1,0 +1,1401 @@
+user_id,financial_archetype,annual_income,annual_expenses,average_monthly_income,average_monthly_expenses,average_monthly_surplus,total_savings_transfers,average_monthly_savings,total_investment_transfers,savings_rate,essential_spending_total,discretionary_spending_total,discretionary_spending_share,rent_to_income_ratio,debt_repayment_total,debt_to_income_ratio,spending_volatility,income_volatility,estimated_emergency_buffer_months,target_property_price_used_for_projection,target_10_percent_deposit,target_20_percent_deposit,estimated_months_to_10_percent_deposit,estimated_months_to_20_percent_deposit,top_spending_categories,financial_strengths,financial_opportunities,financial_alignment_status,home_buying_roadmap,plain_english_financial_summary,full_financial_profile_text
+1,Disciplined saver,99471.51,95329.56,8289.29,7944.13,345.16,25083.14,2090.26,6000.31,0.2522,48807.64,14330.45,0.1503,0.2962,1767.43,0.0178,2498.59,2301.48,3.16,1136945,113694.5,227389.0,42.4,96.8,"Rent, Savings Transfer, Groceries, Investment Transfer, Transport",strong savings consistency; rent is reasonably controlled relative to income; low debt repayment pressure; discretionary spending is relatively controlled,reduce month-to-month spending volatility,Emerging Alignment,"Recommended roadmap:
+    1. Maintain income stability and preserve positive monthly surplus.
+    2. Increase monthly deposit transfers where possible.
+    3. Review top spending categories: Rent, Savings Transfer, Groceries, Investment Transfer, Transport.
+    4. Reduce avoidable discretionary spending before increasing property budget.
+    5. Strengthen deposit position before pursuing higher-priced properties.
+    6. Speak with a broker or lender for formal borrowing guidance.","This user is best described as a Disciplined saver. Over the last 12 months, they earned approximately $99,472
+    and spent approximately $95,330. Their average monthly surplus is approximately $345.
+    Their savings rate is 25.2%, rent-to-income ratio is 29.6%, and debt-to-income ratio is 1.8%.
+    Current home buying alignment status: Emerging Alignment.","User 1 financial profile:
+    Archetype: Disciplined saver.
+    Annual income: $99,472.
+    Annual expenses: $95,330.
+    Average monthly income: $8,289.
+    Average monthly expenses: $7,944.
+    Average monthly surplus: $345.
+    Average monthly savings: $2,090.
+    Total savings transfers: $25,083.
+    Total investment transfers: $6,000.
+    Savings rate: 25.2%.
+    Rent-to-income ratio: 29.6%.
+    Debt-to-income ratio: 1.8%.
+    Emergency buffer estimate: 3.2 months.
+    Spending volatility: $2,499.
+    Top spending categories: Rent, Savings Transfer, Groceries, Investment Transfer, Transport.
+    Strengths: strong savings consistency, rent is reasonably controlled relative to income, low debt repayment pressure, discretionary spending is relatively controlled.
+    Opportunities: reduce month-to-month spending volatility.
+    Financial alignment status: Emerging Alignment."
+2,High income / high spending,175458.7,170717.77,14621.56,14226.48,395.08,18902.71,1575.23,10846.53,0.1077,84758.84,54487.0,0.3192,0.2904,9586.58,0.0546,3962.58,313.65,1.33,1077949,107794.9,215589.8,56.4,124.9,"Rent, Savings Transfer, Groceries, Dining Out, Investment Transfer",rent is reasonably controlled relative to income; low debt repayment pressure,"increase monthly savings rate; review dining, shopping, entertainment, and lifestyle spending; reduce month-to-month spending volatility",Emerging Alignment,"Recommended roadmap:
+    1. Maintain income stability and preserve positive monthly surplus.
+    2. Increase monthly deposit transfers where possible.
+    3. Review top spending categories: Rent, Savings Transfer, Groceries, Dining Out, Investment Transfer.
+    4. Reduce avoidable discretionary spending before increasing property budget.
+    5. Strengthen deposit position before pursuing higher-priced properties.
+    6. Speak with a broker or lender for formal borrowing guidance.","This user is best described as a High income / high spending. Over the last 12 months, they earned approximately $175,459
+    and spent approximately $170,718. Their average monthly surplus is approximately $395.
+    Their savings rate is 10.8%, rent-to-income ratio is 29.0%, and debt-to-income ratio is 5.5%.
+    Current home buying alignment status: Emerging Alignment.","User 2 financial profile:
+    Archetype: High income / high spending.
+    Annual income: $175,459.
+    Annual expenses: $170,718.
+    Average monthly income: $14,622.
+    Average monthly expenses: $14,226.
+    Average monthly surplus: $395.
+    Average monthly savings: $1,575.
+    Total savings transfers: $18,903.
+    Total investment transfers: $10,847.
+    Savings rate: 10.8%.
+    Rent-to-income ratio: 29.0%.
+    Debt-to-income ratio: 5.5%.
+    Emergency buffer estimate: 1.3 months.
+    Spending volatility: $3,963.
+    Top spending categories: Rent, Savings Transfer, Groceries, Dining Out, Investment Transfer.
+    Strengths: rent is reasonably controlled relative to income, low debt repayment pressure.
+    Opportunities: increase monthly savings rate, review dining, shopping, entertainment, and lifestyle spending, reduce month-to-month spending volatility.
+    Financial alignment status: Emerging Alignment."
+3,Young professional building deposit,79417.23,80381.43,6618.1,6698.45,-80.35,14303.49,1191.96,1774.49,0.1801,45803.74,16848.78,0.2096,0.3114,2997.64,0.0377,1895.05,369.71,2.14,764338,76433.8,152867.6,52.1,116.2,"Rent, Savings Transfer, Groceries, Transport, Insurance",strong savings consistency; rent is reasonably controlled relative to income; low debt repayment pressure; discretionary spending is relatively controlled,reduce month-to-month spending volatility,Long-Term Alignment,"Recommended roadmap:
+    1. Maintain income stability and preserve positive monthly surplus.
+    2. Increase monthly deposit transfers where possible.
+    3. Review top spending categories: Rent, Savings Transfer, Groceries, Transport, Insurance.
+    4. Reduce avoidable discretionary spending before increasing property budget.
+    5. Strengthen deposit position before pursuing higher-priced properties.
+    6. Speak with a broker or lender for formal borrowing guidance.","This user is best described as a Young professional building deposit. Over the last 12 months, they earned approximately $79,417
+    and spent approximately $80,381. Their average monthly surplus is approximately $-80.
+    Their savings rate is 18.0%, rent-to-income ratio is 31.1%, and debt-to-income ratio is 3.8%.
+    Current home buying alignment status: Long-Term Alignment.","User 3 financial profile:
+    Archetype: Young professional building deposit.
+    Annual income: $79,417.
+    Annual expenses: $80,381.
+    Average monthly income: $6,618.
+    Average monthly expenses: $6,698.
+    Average monthly surplus: $-80.
+    Average monthly savings: $1,192.
+    Total savings transfers: $14,303.
+    Total investment transfers: $1,774.
+    Savings rate: 18.0%.
+    Rent-to-income ratio: 31.1%.
+    Debt-to-income ratio: 3.8%.
+    Emergency buffer estimate: 2.1 months.
+    Spending volatility: $1,895.
+    Top spending categories: Rent, Savings Transfer, Groceries, Transport, Insurance.
+    Strengths: strong savings consistency, rent is reasonably controlled relative to income, low debt repayment pressure, discretionary spending is relatively controlled.
+    Opportunities: reduce month-to-month spending volatility.
+    Financial alignment status: Long-Term Alignment."
+4,Family under financial pressure,113947.69,115622.15,9495.64,9635.18,-139.54,3573.18,297.76,0.0,0.0314,86803.83,22468.36,0.1943,0.3873,15625.0,0.1371,2667.97,293.83,0.37,1281699,128169.9,256339.8,418.4,848.9,"Rent, Groceries, Credit Card Repayment, Personal Loan Repayment, Cafes",discretionary spending is relatively controlled,increase monthly savings rate; rent pressure may be slowing deposit growth; reduce debt repayment pressure before purchase; reduce month-to-month spending volatility,Long-Term Alignment,"Recommended roadmap:
+    1. Maintain income stability and preserve positive monthly surplus.
+    2. Increase monthly deposit transfers where possible.
+    3. Review top spending categories: Rent, Groceries, Credit Card Repayment, Personal Loan Repayment, Cafes.
+    4. Reduce avoidable discretionary spending before increasing property budget.
+    5. Strengthen deposit position before pursuing higher-priced properties.
+    6. Speak with a broker or lender for formal borrowing guidance.","This user is best described as a Family under financial pressure. Over the last 12 months, they earned approximately $113,948
+    and spent approximately $115,622. Their average monthly surplus is approximately $-140.
+    Their savings rate is 3.1%, rent-to-income ratio is 38.7%, and debt-to-income ratio is 13.7%.
+    Current home buying alignment status: Long-Term Alignment.","User 4 financial profile:
+    Archetype: Family under financial pressure.
+    Annual income: $113,948.
+    Annual expenses: $115,622.
+    Average monthly income: $9,496.
+    Average monthly expenses: $9,635.
+    Average monthly surplus: $-140.
+    Average monthly savings: $298.
+    Total savings transfers: $3,573.
+    Total investment transfers: $0.
+    Savings rate: 3.1%.
+    Rent-to-income ratio: 38.7%.
+    Debt-to-income ratio: 13.7%.
+    Emergency buffer estimate: 0.4 months.
+    Spending volatility: $2,668.
+    Top spending categories: Rent, Groceries, Credit Card Repayment, Personal Loan Repayment, Cafes.
+    Strengths: discretionary spending is relatively controlled.
+    Opportunities: increase monthly savings rate, rent pressure may be slowing deposit growth, reduce debt repayment pressure before purchase, reduce month-to-month spending volatility.
+    Financial alignment status: Long-Term Alignment."
+5,Investor-oriented buyer,134477.13,127352.72,11206.43,10612.73,593.7,26546.44,2212.2,16723.45,0.1974,61009.34,21279.8,0.1671,0.2489,7116.92,0.0529,2773.21,321.15,2.5,832353,83235.3,166470.6,25.6,63.3,"Rent, Savings Transfer, Investment Transfer, Groceries, Transport",strong savings consistency; rent is reasonably controlled relative to income; low debt repayment pressure; discretionary spending is relatively controlled,reduce month-to-month spending volatility,Emerging Alignment,"Recommended roadmap:
+    1. Maintain income stability and preserve positive monthly surplus.
+    2. Increase monthly deposit transfers where possible.
+    3. Review top spending categories: Rent, Savings Transfer, Investment Transfer, Groceries, Transport.
+    4. Reduce avoidable discretionary spending before increasing property budget.
+    5. Strengthen deposit position before pursuing higher-priced properties.
+    6. Speak with a broker or lender for formal borrowing guidance.","This user is best described as a Investor-oriented buyer. Over the last 12 months, they earned approximately $134,477
+    and spent approximately $127,353. Their average monthly surplus is approximately $594.
+    Their savings rate is 19.7%, rent-to-income ratio is 24.9%, and debt-to-income ratio is 5.3%.
+    Current home buying alignment status: Emerging Alignment.","User 5 financial profile:
+    Archetype: Investor-oriented buyer.
+    Annual income: $134,477.
+    Annual expenses: $127,353.
+    Average monthly income: $11,206.
+    Average monthly expenses: $10,613.
+    Average monthly surplus: $594.
+    Average monthly savings: $2,212.
+    Total savings transfers: $26,546.
+    Total investment transfers: $16,723.
+    Savings rate: 19.7%.
+    Rent-to-income ratio: 24.9%.
+    Debt-to-income ratio: 5.3%.
+    Emergency buffer estimate: 2.5 months.
+    Spending volatility: $2,773.
+    Top spending categories: Rent, Savings Transfer, Investment Transfer, Groceries, Transport.
+    Strengths: strong savings consistency, rent is reasonably controlled relative to income, low debt repayment pressure, discretionary spending is relatively controlled.
+    Opportunities: reduce month-to-month spending volatility.
+    Financial alignment status: Emerging Alignment."
+6,Emotionally reactive spender,90953.96,104035.63,7579.5,8669.64,-1090.14,2985.04,248.75,0.0,0.0328,61264.25,37659.24,0.362,0.32,12044.21,0.1324,3319.98,391.47,0.34,1482167,148216.7,296433.4,583.8,1179.7,"Rent, Groceries, Dining Out, Shopping, Entertainment",,"increase monthly savings rate; rent pressure may be slowing deposit growth; reduce debt repayment pressure before purchase; review dining, shopping, entertainment, and lifestyle spending; reduce month-to-month spending volatility",Long-Term Alignment,"Recommended roadmap:
+    1. Maintain income stability and preserve positive monthly surplus.
+    2. Increase monthly deposit transfers where possible.
+    3. Review top spending categories: Rent, Groceries, Dining Out, Shopping, Entertainment.
+    4. Reduce avoidable discretionary spending before increasing property budget.
+    5. Strengthen deposit position before pursuing higher-priced properties.
+    6. Speak with a broker or lender for formal borrowing guidance.","This user is best described as a Emotionally reactive spender. Over the last 12 months, they earned approximately $90,954
+    and spent approximately $104,036. Their average monthly surplus is approximately $-1,090.
+    Their savings rate is 3.3%, rent-to-income ratio is 32.0%, and debt-to-income ratio is 13.2%.
+    Current home buying alignment status: Long-Term Alignment.","User 6 financial profile:
+    Archetype: Emotionally reactive spender.
+    Annual income: $90,954.
+    Annual expenses: $104,036.
+    Average monthly income: $7,579.
+    Average monthly expenses: $8,670.
+    Average monthly surplus: $-1,090.
+    Average monthly savings: $249.
+    Total savings transfers: $2,985.
+    Total investment transfers: $0.
+    Savings rate: 3.3%.
+    Rent-to-income ratio: 32.0%.
+    Debt-to-income ratio: 13.2%.
+    Emergency buffer estimate: 0.3 months.
+    Spending volatility: $3,320.
+    Top spending categories: Rent, Groceries, Dining Out, Shopping, Entertainment.
+    Strengths: .
+    Opportunities: increase monthly savings rate, rent pressure may be slowing deposit growth, reduce debt repayment pressure before purchase, review dining, shopping, entertainment, and lifestyle spending, reduce month-to-month spending volatility.
+    Financial alignment status: Long-Term Alignment."
+7,Financially recovering buyer,84594.14,83700.69,7049.51,6975.06,74.45,7792.55,649.38,1188.14,0.0921,55327.13,16165.55,0.1931,0.3152,12417.15,0.1468,1814.08,395.83,1.12,1098862,109886.2,219772.4,157.2,326.4,"Rent, Groceries, Savings Transfer, Credit Card Repayment, Personal Loan Repayment",rent is reasonably controlled relative to income; discretionary spending is relatively controlled,increase monthly savings rate; reduce debt repayment pressure before purchase; reduce month-to-month spending volatility,Long-Term Alignment,"Recommended roadmap:
+    1. Maintain income stability and preserve positive monthly surplus.
+    2. Increase monthly deposit transfers where possible.
+    3. Review top spending categories: Rent, Groceries, Savings Transfer, Credit Card Repayment, Personal Loan Repayment.
+    4. Reduce avoidable discretionary spending before increasing property budget.
+    5. Strengthen deposit position before pursuing higher-priced properties.
+    6. Speak with a broker or lender for formal borrowing guidance.","This user is best described as a Financially recovering buyer. Over the last 12 months, they earned approximately $84,594
+    and spent approximately $83,701. Their average monthly surplus is approximately $74.
+    Their savings rate is 9.2%, rent-to-income ratio is 31.5%, and debt-to-income ratio is 14.7%.
+    Current home buying alignment status: Long-Term Alignment.","User 7 financial profile:
+    Archetype: Financially recovering buyer.
+    Annual income: $84,594.
+    Annual expenses: $83,701.
+    Average monthly income: $7,050.
+    Average monthly expenses: $6,975.
+    Average monthly surplus: $74.
+    Average monthly savings: $649.
+    Total savings transfers: $7,793.
+    Total investment transfers: $1,188.
+    Savings rate: 9.2%.
+    Rent-to-income ratio: 31.5%.
+    Debt-to-income ratio: 14.7%.
+    Emergency buffer estimate: 1.1 months.
+    Spending volatility: $1,814.
+    Top spending categories: Rent, Groceries, Savings Transfer, Credit Card Repayment, Personal Loan Repayment.
+    Strengths: rent is reasonably controlled relative to income, discretionary spending is relatively controlled.
+    Opportunities: increase monthly savings rate, reduce debt repayment pressure before purchase, reduce month-to-month spending volatility.
+    Financial alignment status: Long-Term Alignment."
+8,Highly structured budgeter,98015.39,88249.01,8167.95,7354.08,813.86,22578.77,1881.56,4851.69,0.2304,47634.07,12783.94,0.1449,0.279,2209.03,0.0225,3146.69,346.3,3.07,925534,92553.4,185106.8,37.2,86.4,"Rent, Savings Transfer, Groceries, Investment Transfer, Transport",strong savings consistency; rent is reasonably controlled relative to income; low debt repayment pressure; discretionary spending is relatively controlled,reduce month-to-month spending volatility,Emerging Alignment,"Recommended roadmap:
+    1. Maintain income stability and preserve positive monthly surplus.
+    2. Increase monthly deposit transfers where possible.
+    3. Review top spending categories: Rent, Savings Transfer, Groceries, Investment Transfer, Transport.
+    4. Reduce avoidable discretionary spending before increasing property budget.
+    5. Strengthen deposit position before pursuing higher-priced properties.
+    6. Speak with a broker or lender for formal borrowing guidance.","This user is best described as a Highly structured budgeter. Over the last 12 months, they earned approximately $98,015
+    and spent approximately $88,249. Their average monthly surplus is approximately $814.
+    Their savings rate is 23.0%, rent-to-income ratio is 27.9%, and debt-to-income ratio is 2.3%.
+    Current home buying alignment status: Emerging Alignment.","User 8 financial profile:
+    Archetype: Highly structured budgeter.
+    Annual income: $98,015.
+    Annual expenses: $88,249.
+    Average monthly income: $8,168.
+    Average monthly expenses: $7,354.
+    Average monthly surplus: $814.
+    Average monthly savings: $1,882.
+    Total savings transfers: $22,579.
+    Total investment transfers: $4,852.
+    Savings rate: 23.0%.
+    Rent-to-income ratio: 27.9%.
+    Debt-to-income ratio: 2.3%.
+    Emergency buffer estimate: 3.1 months.
+    Spending volatility: $3,147.
+    Top spending categories: Rent, Savings Transfer, Groceries, Investment Transfer, Transport.
+    Strengths: strong savings consistency, rent is reasonably controlled relative to income, low debt repayment pressure, discretionary spending is relatively controlled.
+    Opportunities: reduce month-to-month spending volatility.
+    Financial alignment status: Emerging Alignment."
+9,Entrepreneur / variable income buyer,105708.03,108766.01,8809.0,9063.83,-254.83,13034.04,1086.17,7038.45,0.1233,59751.25,27466.32,0.2525,0.3277,6002.9,0.0568,2836.02,4622.12,1.44,1077949,107794.9,215589.8,87.2,186.5,"Rent, Savings Transfer, Groceries, Investment Transfer, Personal Care",low debt repayment pressure; discretionary spending is relatively controlled,increase monthly savings rate; rent pressure may be slowing deposit growth; reduce month-to-month spending volatility,Long-Term Alignment,"Recommended roadmap:
+    1. Maintain income stability and preserve positive monthly surplus.
+    2. Increase monthly deposit transfers where possible.
+    3. Review top spending categories: Rent, Savings Transfer, Groceries, Investment Transfer, Personal Care.
+    4. Reduce avoidable discretionary spending before increasing property budget.
+    5. Strengthen deposit position before pursuing higher-priced properties.
+    6. Speak with a broker or lender for formal borrowing guidance.","This user is best described as a Entrepreneur / variable income buyer. Over the last 12 months, they earned approximately $105,708
+    and spent approximately $108,766. Their average monthly surplus is approximately $-255.
+    Their savings rate is 12.3%, rent-to-income ratio is 32.8%, and debt-to-income ratio is 5.7%.
+    Current home buying alignment status: Long-Term Alignment.","User 9 financial profile:
+    Archetype: Entrepreneur / variable income buyer.
+    Annual income: $105,708.
+    Annual expenses: $108,766.
+    Average monthly income: $8,809.
+    Average monthly expenses: $9,064.
+    Average monthly surplus: $-255.
+    Average monthly savings: $1,086.
+    Total savings transfers: $13,034.
+    Total investment transfers: $7,038.
+    Savings rate: 12.3%.
+    Rent-to-income ratio: 32.8%.
+    Debt-to-income ratio: 5.7%.
+    Emergency buffer estimate: 1.4 months.
+    Spending volatility: $2,836.
+    Top spending categories: Rent, Savings Transfer, Groceries, Investment Transfer, Personal Care.
+    Strengths: low debt repayment pressure, discretionary spending is relatively controlled.
+    Opportunities: increase monthly savings rate, rent pressure may be slowing deposit growth, reduce month-to-month spending volatility.
+    Financial alignment status: Long-Term Alignment."
+10,Remote worker lifestyle optimizer,108482.23,101047.98,9040.19,8420.67,619.52,20631.01,1719.25,5954.4,0.1902,55213.48,18341.99,0.1815,0.3007,2931.1,0.027,2815.97,399.11,2.45,1413830,141383.0,282766.0,70.2,152.5,"Rent, Savings Transfer, Groceries, Investment Transfer, Transport",strong savings consistency; rent is reasonably controlled relative to income; low debt repayment pressure; discretionary spending is relatively controlled,reduce month-to-month spending volatility,Emerging Alignment,"Recommended roadmap:
+    1. Maintain income stability and preserve positive monthly surplus.
+    2. Increase monthly deposit transfers where possible.
+    3. Review top spending categories: Rent, Savings Transfer, Groceries, Investment Transfer, Transport.
+    4. Reduce avoidable discretionary spending before increasing property budget.
+    5. Strengthen deposit position before pursuing higher-priced properties.
+    6. Speak with a broker or lender for formal borrowing guidance.","This user is best described as a Remote worker lifestyle optimizer. Over the last 12 months, they earned approximately $108,482
+    and spent approximately $101,048. Their average monthly surplus is approximately $620.
+    Their savings rate is 19.0%, rent-to-income ratio is 30.1%, and debt-to-income ratio is 2.7%.
+    Current home buying alignment status: Emerging Alignment.","User 10 financial profile:
+    Archetype: Remote worker lifestyle optimizer.
+    Annual income: $108,482.
+    Annual expenses: $101,048.
+    Average monthly income: $9,040.
+    Average monthly expenses: $8,421.
+    Average monthly surplus: $620.
+    Average monthly savings: $1,719.
+    Total savings transfers: $20,631.
+    Total investment transfers: $5,954.
+    Savings rate: 19.0%.
+    Rent-to-income ratio: 30.1%.
+    Debt-to-income ratio: 2.7%.
+    Emergency buffer estimate: 2.5 months.
+    Spending volatility: $2,816.
+    Top spending categories: Rent, Savings Transfer, Groceries, Investment Transfer, Transport.
+    Strengths: strong savings consistency, rent is reasonably controlled relative to income, low debt repayment pressure, discretionary spending is relatively controlled.
+    Opportunities: reduce month-to-month spending volatility.
+    Financial alignment status: Emerging Alignment."
+11,Disciplined saver,97215.1,98742.78,8101.26,8228.56,-127.31,24792.11,2066.01,5956.42,0.255,49007.45,17991.82,0.1822,0.2993,1815.16,0.0187,2550.03,386.38,3.01,1260271,126027.1,252054.2,49.0,110.0,"Rent, Savings Transfer, Groceries, Investment Transfer, Travel",strong savings consistency; rent is reasonably controlled relative to income; low debt repayment pressure; discretionary spending is relatively controlled,reduce month-to-month spending volatility,Long-Term Alignment,"Recommended roadmap:
+    1. Maintain income stability and preserve positive monthly surplus.
+    2. Increase monthly deposit transfers where possible.
+    3. Review top spending categories: Rent, Savings Transfer, Groceries, Investment Transfer, Travel.
+    4. Reduce avoidable discretionary spending before increasing property budget.
+    5. Strengthen deposit position before pursuing higher-priced properties.
+    6. Speak with a broker or lender for formal borrowing guidance.","This user is best described as a Disciplined saver. Over the last 12 months, they earned approximately $97,215
+    and spent approximately $98,743. Their average monthly surplus is approximately $-127.
+    Their savings rate is 25.5%, rent-to-income ratio is 29.9%, and debt-to-income ratio is 1.9%.
+    Current home buying alignment status: Long-Term Alignment.","User 11 financial profile:
+    Archetype: Disciplined saver.
+    Annual income: $97,215.
+    Annual expenses: $98,743.
+    Average monthly income: $8,101.
+    Average monthly expenses: $8,229.
+    Average monthly surplus: $-127.
+    Average monthly savings: $2,066.
+    Total savings transfers: $24,792.
+    Total investment transfers: $5,956.
+    Savings rate: 25.5%.
+    Rent-to-income ratio: 29.9%.
+    Debt-to-income ratio: 1.9%.
+    Emergency buffer estimate: 3.0 months.
+    Spending volatility: $2,550.
+    Top spending categories: Rent, Savings Transfer, Groceries, Investment Transfer, Travel.
+    Strengths: strong savings consistency, rent is reasonably controlled relative to income, low debt repayment pressure, discretionary spending is relatively controlled.
+    Opportunities: reduce month-to-month spending volatility.
+    Financial alignment status: Long-Term Alignment."
+12,High income / high spending,173544.91,169580.67,14462.08,14131.72,330.35,18912.93,1576.08,10923.47,0.109,80684.11,56713.0,0.3344,0.2849,9499.52,0.0547,4033.87,408.63,1.34,1378057,137805.7,275611.4,75.4,162.9,"Rent, Savings Transfer, Groceries, Investment Transfer, Personal Care",rent is reasonably controlled relative to income; low debt repayment pressure,"increase monthly savings rate; review dining, shopping, entertainment, and lifestyle spending; reduce month-to-month spending volatility",Emerging Alignment,"Recommended roadmap:
+    1. Maintain income stability and preserve positive monthly surplus.
+    2. Increase monthly deposit transfers where possible.
+    3. Review top spending categories: Rent, Savings Transfer, Groceries, Investment Transfer, Personal Care.
+    4. Reduce avoidable discretionary spending before increasing property budget.
+    5. Strengthen deposit position before pursuing higher-priced properties.
+    6. Speak with a broker or lender for formal borrowing guidance.","This user is best described as a High income / high spending. Over the last 12 months, they earned approximately $173,545
+    and spent approximately $169,581. Their average monthly surplus is approximately $330.
+    Their savings rate is 10.9%, rent-to-income ratio is 28.5%, and debt-to-income ratio is 5.5%.
+    Current home buying alignment status: Emerging Alignment.","User 12 financial profile:
+    Archetype: High income / high spending.
+    Annual income: $173,545.
+    Annual expenses: $169,581.
+    Average monthly income: $14,462.
+    Average monthly expenses: $14,132.
+    Average monthly surplus: $330.
+    Average monthly savings: $1,576.
+    Total savings transfers: $18,913.
+    Total investment transfers: $10,923.
+    Savings rate: 10.9%.
+    Rent-to-income ratio: 28.5%.
+    Debt-to-income ratio: 5.5%.
+    Emergency buffer estimate: 1.3 months.
+    Spending volatility: $4,034.
+    Top spending categories: Rent, Savings Transfer, Groceries, Investment Transfer, Personal Care.
+    Strengths: rent is reasonably controlled relative to income, low debt repayment pressure.
+    Opportunities: increase monthly savings rate, review dining, shopping, entertainment, and lifestyle spending, reduce month-to-month spending volatility.
+    Financial alignment status: Emerging Alignment."
+13,Young professional building deposit,75316.33,79978.82,6276.36,6664.9,-388.54,14505.87,1208.82,1811.28,0.1926,45310.29,17715.13,0.2215,0.3313,3004.58,0.0399,2589.75,1714.69,2.18,1498499,149849.9,299699.8,112.0,235.9,"Rent, Savings Transfer, Groceries, Transport, Insurance",strong savings consistency; low debt repayment pressure; discretionary spending is relatively controlled,rent pressure may be slowing deposit growth; reduce month-to-month spending volatility,Long-Term Alignment,"Recommended roadmap:
+    1. Maintain income stability and preserve positive monthly surplus.
+    2. Increase monthly deposit transfers where possible.
+    3. Review top spending categories: Rent, Savings Transfer, Groceries, Transport, Insurance.
+    4. Reduce avoidable discretionary spending before increasing property budget.
+    5. Strengthen deposit position before pursuing higher-priced properties.
+    6. Speak with a broker or lender for formal borrowing guidance.","This user is best described as a Young professional building deposit. Over the last 12 months, they earned approximately $75,316
+    and spent approximately $79,979. Their average monthly surplus is approximately $-389.
+    Their savings rate is 19.3%, rent-to-income ratio is 33.1%, and debt-to-income ratio is 4.0%.
+    Current home buying alignment status: Long-Term Alignment.","User 13 financial profile:
+    Archetype: Young professional building deposit.
+    Annual income: $75,316.
+    Annual expenses: $79,979.
+    Average monthly income: $6,276.
+    Average monthly expenses: $6,665.
+    Average monthly surplus: $-389.
+    Average monthly savings: $1,209.
+    Total savings transfers: $14,506.
+    Total investment transfers: $1,811.
+    Savings rate: 19.3%.
+    Rent-to-income ratio: 33.1%.
+    Debt-to-income ratio: 4.0%.
+    Emergency buffer estimate: 2.2 months.
+    Spending volatility: $2,590.
+    Top spending categories: Rent, Savings Transfer, Groceries, Transport, Insurance.
+    Strengths: strong savings consistency, low debt repayment pressure, discretionary spending is relatively controlled.
+    Opportunities: rent pressure may be slowing deposit growth, reduce month-to-month spending volatility.
+    Financial alignment status: Long-Term Alignment."
+14,Family under financial pressure,113004.34,114455.57,9417.03,9537.96,-120.94,3570.16,297.51,0.0,0.0316,86056.14,21982.12,0.1921,0.3855,15436.17,0.1366,3245.52,338.16,0.37,1077949,107794.9,215589.8,350.3,712.6,"Rent, Groceries, Credit Card Repayment, Personal Loan Repayment, Cafes",discretionary spending is relatively controlled,increase monthly savings rate; rent pressure may be slowing deposit growth; reduce debt repayment pressure before purchase; reduce month-to-month spending volatility,Long-Term Alignment,"Recommended roadmap:
+    1. Maintain income stability and preserve positive monthly surplus.
+    2. Increase monthly deposit transfers where possible.
+    3. Review top spending categories: Rent, Groceries, Credit Card Repayment, Personal Loan Repayment, Cafes.
+    4. Reduce avoidable discretionary spending before increasing property budget.
+    5. Strengthen deposit position before pursuing higher-priced properties.
+    6. Speak with a broker or lender for formal borrowing guidance.","This user is best described as a Family under financial pressure. Over the last 12 months, they earned approximately $113,004
+    and spent approximately $114,456. Their average monthly surplus is approximately $-121.
+    Their savings rate is 3.2%, rent-to-income ratio is 38.5%, and debt-to-income ratio is 13.7%.
+    Current home buying alignment status: Long-Term Alignment.","User 14 financial profile:
+    Archetype: Family under financial pressure.
+    Annual income: $113,004.
+    Annual expenses: $114,456.
+    Average monthly income: $9,417.
+    Average monthly expenses: $9,538.
+    Average monthly surplus: $-121.
+    Average monthly savings: $298.
+    Total savings transfers: $3,570.
+    Total investment transfers: $0.
+    Savings rate: 3.2%.
+    Rent-to-income ratio: 38.5%.
+    Debt-to-income ratio: 13.7%.
+    Emergency buffer estimate: 0.4 months.
+    Spending volatility: $3,246.
+    Top spending categories: Rent, Groceries, Credit Card Repayment, Personal Loan Repayment, Cafes.
+    Strengths: discretionary spending is relatively controlled.
+    Opportunities: increase monthly savings rate, rent pressure may be slowing deposit growth, reduce debt repayment pressure before purchase, reduce month-to-month spending volatility.
+    Financial alignment status: Long-Term Alignment."
+15,Investor-oriented buyer,133514.32,125246.37,11126.19,10437.2,689.0,26109.9,2175.83,16770.4,0.1956,60894.62,20238.59,0.1616,0.252,7255.67,0.0543,3213.9,413.24,2.5,1002589,100258.9,200517.8,34.1,80.2,"Rent, Savings Transfer, Investment Transfer, Groceries, Transport",strong savings consistency; rent is reasonably controlled relative to income; low debt repayment pressure; discretionary spending is relatively controlled,reduce month-to-month spending volatility,Emerging Alignment,"Recommended roadmap:
+    1. Maintain income stability and preserve positive monthly surplus.
+    2. Increase monthly deposit transfers where possible.
+    3. Review top spending categories: Rent, Savings Transfer, Investment Transfer, Groceries, Transport.
+    4. Reduce avoidable discretionary spending before increasing property budget.
+    5. Strengthen deposit position before pursuing higher-priced properties.
+    6. Speak with a broker or lender for formal borrowing guidance.","This user is best described as a Investor-oriented buyer. Over the last 12 months, they earned approximately $133,514
+    and spent approximately $125,246. Their average monthly surplus is approximately $689.
+    Their savings rate is 19.6%, rent-to-income ratio is 25.2%, and debt-to-income ratio is 5.4%.
+    Current home buying alignment status: Emerging Alignment.","User 15 financial profile:
+    Archetype: Investor-oriented buyer.
+    Annual income: $133,514.
+    Annual expenses: $125,246.
+    Average monthly income: $11,126.
+    Average monthly expenses: $10,437.
+    Average monthly surplus: $689.
+    Average monthly savings: $2,176.
+    Total savings transfers: $26,110.
+    Total investment transfers: $16,770.
+    Savings rate: 19.6%.
+    Rent-to-income ratio: 25.2%.
+    Debt-to-income ratio: 5.4%.
+    Emergency buffer estimate: 2.5 months.
+    Spending volatility: $3,214.
+    Top spending categories: Rent, Savings Transfer, Investment Transfer, Groceries, Transport.
+    Strengths: strong savings consistency, rent is reasonably controlled relative to income, low debt repayment pressure, discretionary spending is relatively controlled.
+    Opportunities: reduce month-to-month spending volatility.
+    Financial alignment status: Emerging Alignment."
+16,Emotionally reactive spender,91870.91,101201.8,7655.91,8433.48,-777.57,2996.37,249.7,0.0,0.0326,58414.71,36738.4,0.363,0.3105,12056.95,0.1312,2192.96,249.16,0.36,1077949,107794.9,215589.8,419.7,851.4,"Rent, Groceries, Entertainment, Dining Out, Personal Care",rent is reasonably controlled relative to income,"increase monthly savings rate; reduce debt repayment pressure before purchase; review dining, shopping, entertainment, and lifestyle spending; reduce month-to-month spending volatility",Long-Term Alignment,"Recommended roadmap:
+    1. Maintain income stability and preserve positive monthly surplus.
+    2. Increase monthly deposit transfers where possible.
+    3. Review top spending categories: Rent, Groceries, Entertainment, Dining Out, Personal Care.
+    4. Reduce avoidable discretionary spending before increasing property budget.
+    5. Strengthen deposit position before pursuing higher-priced properties.
+    6. Speak with a broker or lender for formal borrowing guidance.","This user is best described as a Emotionally reactive spender. Over the last 12 months, they earned approximately $91,871
+    and spent approximately $101,202. Their average monthly surplus is approximately $-778.
+    Their savings rate is 3.3%, rent-to-income ratio is 31.1%, and debt-to-income ratio is 13.1%.
+    Current home buying alignment status: Long-Term Alignment.","User 16 financial profile:
+    Archetype: Emotionally reactive spender.
+    Annual income: $91,871.
+    Annual expenses: $101,202.
+    Average monthly income: $7,656.
+    Average monthly expenses: $8,433.
+    Average monthly surplus: $-778.
+    Average monthly savings: $250.
+    Total savings transfers: $2,996.
+    Total investment transfers: $0.
+    Savings rate: 3.3%.
+    Rent-to-income ratio: 31.1%.
+    Debt-to-income ratio: 13.1%.
+    Emergency buffer estimate: 0.4 months.
+    Spending volatility: $2,193.
+    Top spending categories: Rent, Groceries, Entertainment, Dining Out, Personal Care.
+    Strengths: rent is reasonably controlled relative to income.
+    Opportunities: increase monthly savings rate, reduce debt repayment pressure before purchase, review dining, shopping, entertainment, and lifestyle spending, reduce month-to-month spending volatility.
+    Financial alignment status: Long-Term Alignment."
+17,Financially recovering buyer,83293.54,85025.97,6941.13,7085.5,-144.37,7689.55,640.8,1252.44,0.0923,54429.68,18997.83,0.2234,0.3161,12451.27,0.1495,1890.69,1939.03,1.09,1797861,179786.1,359572.2,268.6,549.1,"Rent, Groceries, Savings Transfer, Credit Card Repayment, Personal Loan Repayment",rent is reasonably controlled relative to income; discretionary spending is relatively controlled,increase monthly savings rate; reduce debt repayment pressure before purchase; reduce month-to-month spending volatility,Long-Term Alignment,"Recommended roadmap:
+    1. Maintain income stability and preserve positive monthly surplus.
+    2. Increase monthly deposit transfers where possible.
+    3. Review top spending categories: Rent, Groceries, Savings Transfer, Credit Card Repayment, Personal Loan Repayment.
+    4. Reduce avoidable discretionary spending before increasing property budget.
+    5. Strengthen deposit position before pursuing higher-priced properties.
+    6. Speak with a broker or lender for formal borrowing guidance.","This user is best described as a Financially recovering buyer. Over the last 12 months, they earned approximately $83,294
+    and spent approximately $85,026. Their average monthly surplus is approximately $-144.
+    Their savings rate is 9.2%, rent-to-income ratio is 31.6%, and debt-to-income ratio is 14.9%.
+    Current home buying alignment status: Long-Term Alignment.","User 17 financial profile:
+    Archetype: Financially recovering buyer.
+    Annual income: $83,294.
+    Annual expenses: $85,026.
+    Average monthly income: $6,941.
+    Average monthly expenses: $7,085.
+    Average monthly surplus: $-144.
+    Average monthly savings: $641.
+    Total savings transfers: $7,690.
+    Total investment transfers: $1,252.
+    Savings rate: 9.2%.
+    Rent-to-income ratio: 31.6%.
+    Debt-to-income ratio: 14.9%.
+    Emergency buffer estimate: 1.1 months.
+    Spending volatility: $1,891.
+    Top spending categories: Rent, Groceries, Savings Transfer, Credit Card Repayment, Personal Loan Repayment.
+    Strengths: rent is reasonably controlled relative to income, discretionary spending is relatively controlled.
+    Opportunities: increase monthly savings rate, reduce debt repayment pressure before purchase, reduce month-to-month spending volatility.
+    Financial alignment status: Long-Term Alignment."
+18,Highly structured budgeter,97606.95,87416.08,8133.91,7284.67,849.24,22941.9,1911.82,4752.93,0.235,47481.9,11562.91,0.1323,0.2792,2059.0,0.0211,2673.7,326.37,3.15,961403,96140.3,192280.6,38.3,88.6,"Rent, Savings Transfer, Groceries, Investment Transfer, Transport",strong savings consistency; rent is reasonably controlled relative to income; low debt repayment pressure; discretionary spending is relatively controlled,reduce month-to-month spending volatility,Emerging Alignment,"Recommended roadmap:
+    1. Maintain income stability and preserve positive monthly surplus.
+    2. Increase monthly deposit transfers where possible.
+    3. Review top spending categories: Rent, Savings Transfer, Groceries, Investment Transfer, Transport.
+    4. Reduce avoidable discretionary spending before increasing property budget.
+    5. Strengthen deposit position before pursuing higher-priced properties.
+    6. Speak with a broker or lender for formal borrowing guidance.","This user is best described as a Highly structured budgeter. Over the last 12 months, they earned approximately $97,607
+    and spent approximately $87,416. Their average monthly surplus is approximately $849.
+    Their savings rate is 23.5%, rent-to-income ratio is 27.9%, and debt-to-income ratio is 2.1%.
+    Current home buying alignment status: Emerging Alignment.","User 18 financial profile:
+    Archetype: Highly structured budgeter.
+    Annual income: $97,607.
+    Annual expenses: $87,416.
+    Average monthly income: $8,134.
+    Average monthly expenses: $7,285.
+    Average monthly surplus: $849.
+    Average monthly savings: $1,912.
+    Total savings transfers: $22,942.
+    Total investment transfers: $4,753.
+    Savings rate: 23.5%.
+    Rent-to-income ratio: 27.9%.
+    Debt-to-income ratio: 2.1%.
+    Emergency buffer estimate: 3.1 months.
+    Spending volatility: $2,674.
+    Top spending categories: Rent, Savings Transfer, Groceries, Investment Transfer, Transport.
+    Strengths: strong savings consistency, rent is reasonably controlled relative to income, low debt repayment pressure, discretionary spending is relatively controlled.
+    Opportunities: reduce month-to-month spending volatility.
+    Financial alignment status: Emerging Alignment."
+19,Entrepreneur / variable income buyer,117286.52,110546.2,9773.88,9212.18,561.69,13430.46,1119.2,7327.53,0.1145,61333.46,27489.63,0.2487,0.2984,6115.25,0.0521,3392.34,5015.6,1.46,1378057,137805.7,275611.4,111.1,234.3,"Rent, Savings Transfer, Groceries, Investment Transfer, Entertainment",rent is reasonably controlled relative to income; low debt repayment pressure; discretionary spending is relatively controlled,increase monthly savings rate; reduce month-to-month spending volatility,Emerging Alignment,"Recommended roadmap:
+    1. Maintain income stability and preserve positive monthly surplus.
+    2. Increase monthly deposit transfers where possible.
+    3. Review top spending categories: Rent, Savings Transfer, Groceries, Investment Transfer, Entertainment.
+    4. Reduce avoidable discretionary spending before increasing property budget.
+    5. Strengthen deposit position before pursuing higher-priced properties.
+    6. Speak with a broker or lender for formal borrowing guidance.","This user is best described as a Entrepreneur / variable income buyer. Over the last 12 months, they earned approximately $117,287
+    and spent approximately $110,546. Their average monthly surplus is approximately $562.
+    Their savings rate is 11.5%, rent-to-income ratio is 29.8%, and debt-to-income ratio is 5.2%.
+    Current home buying alignment status: Emerging Alignment.","User 19 financial profile:
+    Archetype: Entrepreneur / variable income buyer.
+    Annual income: $117,287.
+    Annual expenses: $110,546.
+    Average monthly income: $9,774.
+    Average monthly expenses: $9,212.
+    Average monthly surplus: $562.
+    Average monthly savings: $1,119.
+    Total savings transfers: $13,430.
+    Total investment transfers: $7,328.
+    Savings rate: 11.5%.
+    Rent-to-income ratio: 29.8%.
+    Debt-to-income ratio: 5.2%.
+    Emergency buffer estimate: 1.5 months.
+    Spending volatility: $3,392.
+    Top spending categories: Rent, Savings Transfer, Groceries, Investment Transfer, Entertainment.
+    Strengths: rent is reasonably controlled relative to income, low debt repayment pressure, discretionary spending is relatively controlled.
+    Opportunities: increase monthly savings rate, reduce month-to-month spending volatility.
+    Financial alignment status: Emerging Alignment."
+20,Remote worker lifestyle optimizer,109569.0,101810.58,9130.75,8484.21,646.54,20259.54,1688.3,5997.29,0.1849,55119.78,19774.5,0.1942,0.299,3042.43,0.0278,2466.82,2538.27,2.39,1708603,170860.3,341720.6,89.2,190.4,"Rent, Savings Transfer, Groceries, Investment Transfer, Transport",strong savings consistency; rent is reasonably controlled relative to income; low debt repayment pressure; discretionary spending is relatively controlled,reduce month-to-month spending volatility,Emerging Alignment,"Recommended roadmap:
+    1. Maintain income stability and preserve positive monthly surplus.
+    2. Increase monthly deposit transfers where possible.
+    3. Review top spending categories: Rent, Savings Transfer, Groceries, Investment Transfer, Transport.
+    4. Reduce avoidable discretionary spending before increasing property budget.
+    5. Strengthen deposit position before pursuing higher-priced properties.
+    6. Speak with a broker or lender for formal borrowing guidance.","This user is best described as a Remote worker lifestyle optimizer. Over the last 12 months, they earned approximately $109,569
+    and spent approximately $101,811. Their average monthly surplus is approximately $647.
+    Their savings rate is 18.5%, rent-to-income ratio is 29.9%, and debt-to-income ratio is 2.8%.
+    Current home buying alignment status: Emerging Alignment.","User 20 financial profile:
+    Archetype: Remote worker lifestyle optimizer.
+    Annual income: $109,569.
+    Annual expenses: $101,811.
+    Average monthly income: $9,131.
+    Average monthly expenses: $8,484.
+    Average monthly surplus: $647.
+    Average monthly savings: $1,688.
+    Total savings transfers: $20,260.
+    Total investment transfers: $5,997.
+    Savings rate: 18.5%.
+    Rent-to-income ratio: 29.9%.
+    Debt-to-income ratio: 2.8%.
+    Emergency buffer estimate: 2.4 months.
+    Spending volatility: $2,467.
+    Top spending categories: Rent, Savings Transfer, Groceries, Investment Transfer, Transport.
+    Strengths: strong savings consistency, rent is reasonably controlled relative to income, low debt repayment pressure, discretionary spending is relatively controlled.
+    Opportunities: reduce month-to-month spending volatility.
+    Financial alignment status: Emerging Alignment."
+21,Disciplined saver,101184.17,94013.56,8432.01,7834.46,597.55,24367.47,2030.62,5996.38,0.2408,47843.56,14208.42,0.1511,0.2848,1757.94,0.0174,1690.79,389.01,3.11,1089888,108988.8,217977.6,41.7,95.3,"Rent, Savings Transfer, Groceries, Investment Transfer, Transport",strong savings consistency; rent is reasonably controlled relative to income; low debt repayment pressure; discretionary spending is relatively controlled,reduce month-to-month spending volatility,Emerging Alignment,"Recommended roadmap:
+    1. Maintain income stability and preserve positive monthly surplus.
+    2. Increase monthly deposit transfers where possible.
+    3. Review top spending categories: Rent, Savings Transfer, Groceries, Investment Transfer, Transport.
+    4. Reduce avoidable discretionary spending before increasing property budget.
+    5. Strengthen deposit position before pursuing higher-priced properties.
+    6. Speak with a broker or lender for formal borrowing guidance.","This user is best described as a Disciplined saver. Over the last 12 months, they earned approximately $101,184
+    and spent approximately $94,014. Their average monthly surplus is approximately $598.
+    Their savings rate is 24.1%, rent-to-income ratio is 28.5%, and debt-to-income ratio is 1.7%.
+    Current home buying alignment status: Emerging Alignment.","User 21 financial profile:
+    Archetype: Disciplined saver.
+    Annual income: $101,184.
+    Annual expenses: $94,014.
+    Average monthly income: $8,432.
+    Average monthly expenses: $7,834.
+    Average monthly surplus: $598.
+    Average monthly savings: $2,031.
+    Total savings transfers: $24,367.
+    Total investment transfers: $5,996.
+    Savings rate: 24.1%.
+    Rent-to-income ratio: 28.5%.
+    Debt-to-income ratio: 1.7%.
+    Emergency buffer estimate: 3.1 months.
+    Spending volatility: $1,691.
+    Top spending categories: Rent, Savings Transfer, Groceries, Investment Transfer, Transport.
+    Strengths: strong savings consistency, rent is reasonably controlled relative to income, low debt repayment pressure, discretionary spending is relatively controlled.
+    Opportunities: reduce month-to-month spending volatility.
+    Financial alignment status: Emerging Alignment."
+22,High income / high spending,175670.64,167493.84,14639.22,13957.82,681.4,18915.77,1576.31,10742.85,0.1077,83756.35,52641.08,0.3143,0.292,9722.45,0.0553,5381.2,4017.46,1.36,1488854,148885.4,297770.8,82.5,176.9,"Rent, Savings Transfer, Groceries, Investment Transfer, Entertainment",rent is reasonably controlled relative to income; low debt repayment pressure,"increase monthly savings rate; review dining, shopping, entertainment, and lifestyle spending; reduce month-to-month spending volatility",Emerging Alignment,"Recommended roadmap:
+    1. Maintain income stability and preserve positive monthly surplus.
+    2. Increase monthly deposit transfers where possible.
+    3. Review top spending categories: Rent, Savings Transfer, Groceries, Investment Transfer, Entertainment.
+    4. Reduce avoidable discretionary spending before increasing property budget.
+    5. Strengthen deposit position before pursuing higher-priced properties.
+    6. Speak with a broker or lender for formal borrowing guidance.","This user is best described as a High income / high spending. Over the last 12 months, they earned approximately $175,671
+    and spent approximately $167,494. Their average monthly surplus is approximately $681.
+    Their savings rate is 10.8%, rent-to-income ratio is 29.2%, and debt-to-income ratio is 5.5%.
+    Current home buying alignment status: Emerging Alignment.","User 22 financial profile:
+    Archetype: High income / high spending.
+    Annual income: $175,671.
+    Annual expenses: $167,494.
+    Average monthly income: $14,639.
+    Average monthly expenses: $13,958.
+    Average monthly surplus: $681.
+    Average monthly savings: $1,576.
+    Total savings transfers: $18,916.
+    Total investment transfers: $10,743.
+    Savings rate: 10.8%.
+    Rent-to-income ratio: 29.2%.
+    Debt-to-income ratio: 5.5%.
+    Emergency buffer estimate: 1.4 months.
+    Spending volatility: $5,381.
+    Top spending categories: Rent, Savings Transfer, Groceries, Investment Transfer, Entertainment.
+    Strengths: rent is reasonably controlled relative to income, low debt repayment pressure.
+    Opportunities: increase monthly savings rate, review dining, shopping, entertainment, and lifestyle spending, reduce month-to-month spending volatility.
+    Financial alignment status: Emerging Alignment."
+23,Young professional building deposit,77478.73,79472.92,6456.56,6622.74,-166.18,14371.37,1197.61,1743.77,0.1855,45868.82,16285.75,0.2049,0.3303,2953.76,0.0381,2179.36,320.58,2.17,1306329,130632.9,261265.8,97.1,206.2,"Rent, Savings Transfer, Groceries, Transport, Insurance",strong savings consistency; low debt repayment pressure; discretionary spending is relatively controlled,rent pressure may be slowing deposit growth; reduce month-to-month spending volatility,Long-Term Alignment,"Recommended roadmap:
+    1. Maintain income stability and preserve positive monthly surplus.
+    2. Increase monthly deposit transfers where possible.
+    3. Review top spending categories: Rent, Savings Transfer, Groceries, Transport, Insurance.
+    4. Reduce avoidable discretionary spending before increasing property budget.
+    5. Strengthen deposit position before pursuing higher-priced properties.
+    6. Speak with a broker or lender for formal borrowing guidance.","This user is best described as a Young professional building deposit. Over the last 12 months, they earned approximately $77,479
+    and spent approximately $79,473. Their average monthly surplus is approximately $-166.
+    Their savings rate is 18.5%, rent-to-income ratio is 33.0%, and debt-to-income ratio is 3.8%.
+    Current home buying alignment status: Long-Term Alignment.","User 23 financial profile:
+    Archetype: Young professional building deposit.
+    Annual income: $77,479.
+    Annual expenses: $79,473.
+    Average monthly income: $6,457.
+    Average monthly expenses: $6,623.
+    Average monthly surplus: $-166.
+    Average monthly savings: $1,198.
+    Total savings transfers: $14,371.
+    Total investment transfers: $1,744.
+    Savings rate: 18.5%.
+    Rent-to-income ratio: 33.0%.
+    Debt-to-income ratio: 3.8%.
+    Emergency buffer estimate: 2.2 months.
+    Spending volatility: $2,179.
+    Top spending categories: Rent, Savings Transfer, Groceries, Transport, Insurance.
+    Strengths: strong savings consistency, low debt repayment pressure, discretionary spending is relatively controlled.
+    Opportunities: rent pressure may be slowing deposit growth, reduce month-to-month spending volatility.
+    Financial alignment status: Long-Term Alignment."
+24,Family under financial pressure,112542.28,112898.8,9378.52,9408.23,-29.71,3637.08,303.09,0.0,0.0323,84245.63,21941.68,0.1943,0.382,15509.69,0.1378,3794.38,293.52,0.39,1019448,101944.8,203889.6,324.4,660.7,"Rent, Groceries, Credit Card Repayment, Personal Loan Repayment, Dining Out",discretionary spending is relatively controlled,increase monthly savings rate; rent pressure may be slowing deposit growth; reduce debt repayment pressure before purchase; reduce month-to-month spending volatility,Long-Term Alignment,"Recommended roadmap:
+    1. Maintain income stability and preserve positive monthly surplus.
+    2. Increase monthly deposit transfers where possible.
+    3. Review top spending categories: Rent, Groceries, Credit Card Repayment, Personal Loan Repayment, Dining Out.
+    4. Reduce avoidable discretionary spending before increasing property budget.
+    5. Strengthen deposit position before pursuing higher-priced properties.
+    6. Speak with a broker or lender for formal borrowing guidance.","This user is best described as a Family under financial pressure. Over the last 12 months, they earned approximately $112,542
+    and spent approximately $112,899. Their average monthly surplus is approximately $-30.
+    Their savings rate is 3.2%, rent-to-income ratio is 38.2%, and debt-to-income ratio is 13.8%.
+    Current home buying alignment status: Long-Term Alignment.","User 24 financial profile:
+    Archetype: Family under financial pressure.
+    Annual income: $112,542.
+    Annual expenses: $112,899.
+    Average monthly income: $9,379.
+    Average monthly expenses: $9,408.
+    Average monthly surplus: $-30.
+    Average monthly savings: $303.
+    Total savings transfers: $3,637.
+    Total investment transfers: $0.
+    Savings rate: 3.2%.
+    Rent-to-income ratio: 38.2%.
+    Debt-to-income ratio: 13.8%.
+    Emergency buffer estimate: 0.4 months.
+    Spending volatility: $3,794.
+    Top spending categories: Rent, Groceries, Credit Card Repayment, Personal Loan Repayment, Dining Out.
+    Strengths: discretionary spending is relatively controlled.
+    Opportunities: increase monthly savings rate, rent pressure may be slowing deposit growth, reduce debt repayment pressure before purchase, reduce month-to-month spending volatility.
+    Financial alignment status: Long-Term Alignment."
+25,Investor-oriented buyer,134995.72,124551.37,11249.64,10379.28,870.36,26144.96,2178.75,16798.24,0.1937,59495.28,20741.93,0.1665,0.2474,7141.34,0.0529,3032.87,3110.88,2.52,926851,92685.1,185370.2,30.5,73.1,"Rent, Savings Transfer, Investment Transfer, Groceries, Cafes",strong savings consistency; rent is reasonably controlled relative to income; low debt repayment pressure; discretionary spending is relatively controlled,reduce month-to-month spending volatility,Emerging Alignment,"Recommended roadmap:
+    1. Maintain income stability and preserve positive monthly surplus.
+    2. Increase monthly deposit transfers where possible.
+    3. Review top spending categories: Rent, Savings Transfer, Investment Transfer, Groceries, Cafes.
+    4. Reduce avoidable discretionary spending before increasing property budget.
+    5. Strengthen deposit position before pursuing higher-priced properties.
+    6. Speak with a broker or lender for formal borrowing guidance.","This user is best described as a Investor-oriented buyer. Over the last 12 months, they earned approximately $134,996
+    and spent approximately $124,551. Their average monthly surplus is approximately $870.
+    Their savings rate is 19.4%, rent-to-income ratio is 24.7%, and debt-to-income ratio is 5.3%.
+    Current home buying alignment status: Emerging Alignment.","User 25 financial profile:
+    Archetype: Investor-oriented buyer.
+    Annual income: $134,996.
+    Annual expenses: $124,551.
+    Average monthly income: $11,250.
+    Average monthly expenses: $10,379.
+    Average monthly surplus: $870.
+    Average monthly savings: $2,179.
+    Total savings transfers: $26,145.
+    Total investment transfers: $16,798.
+    Savings rate: 19.4%.
+    Rent-to-income ratio: 24.7%.
+    Debt-to-income ratio: 5.3%.
+    Emergency buffer estimate: 2.5 months.
+    Spending volatility: $3,033.
+    Top spending categories: Rent, Savings Transfer, Investment Transfer, Groceries, Cafes.
+    Strengths: strong savings consistency, rent is reasonably controlled relative to income, low debt repayment pressure, discretionary spending is relatively controlled.
+    Opportunities: reduce month-to-month spending volatility.
+    Financial alignment status: Emerging Alignment."
+26,Emotionally reactive spender,95103.86,100270.95,7925.32,8355.91,-430.59,2999.01,249.92,0.0,0.0315,59850.58,35503.95,0.3541,0.3024,11886.86,0.125,2285.61,427.52,0.36,1089428,108942.8,217885.6,423.9,859.8,"Rent, Groceries, Dining Out, Personal Care, Cafes",rent is reasonably controlled relative to income,"increase monthly savings rate; reduce debt repayment pressure before purchase; review dining, shopping, entertainment, and lifestyle spending; reduce month-to-month spending volatility",Long-Term Alignment,"Recommended roadmap:
+    1. Maintain income stability and preserve positive monthly surplus.
+    2. Increase monthly deposit transfers where possible.
+    3. Review top spending categories: Rent, Groceries, Dining Out, Personal Care, Cafes.
+    4. Reduce avoidable discretionary spending before increasing property budget.
+    5. Strengthen deposit position before pursuing higher-priced properties.
+    6. Speak with a broker or lender for formal borrowing guidance.","This user is best described as a Emotionally reactive spender. Over the last 12 months, they earned approximately $95,104
+    and spent approximately $100,271. Their average monthly surplus is approximately $-431.
+    Their savings rate is 3.2%, rent-to-income ratio is 30.2%, and debt-to-income ratio is 12.5%.
+    Current home buying alignment status: Long-Term Alignment.","User 26 financial profile:
+    Archetype: Emotionally reactive spender.
+    Annual income: $95,104.
+    Annual expenses: $100,271.
+    Average monthly income: $7,925.
+    Average monthly expenses: $8,356.
+    Average monthly surplus: $-431.
+    Average monthly savings: $250.
+    Total savings transfers: $2,999.
+    Total investment transfers: $0.
+    Savings rate: 3.2%.
+    Rent-to-income ratio: 30.2%.
+    Debt-to-income ratio: 12.5%.
+    Emergency buffer estimate: 0.4 months.
+    Spending volatility: $2,286.
+    Top spending categories: Rent, Groceries, Dining Out, Personal Care, Cafes.
+    Strengths: rent is reasonably controlled relative to income.
+    Opportunities: increase monthly savings rate, reduce debt repayment pressure before purchase, review dining, shopping, entertainment, and lifestyle spending, reduce month-to-month spending volatility.
+    Financial alignment status: Long-Term Alignment."
+27,Financially recovering buyer,87486.33,88252.1,7290.53,7354.34,-63.81,7942.61,661.88,1187.78,0.0908,56769.83,19747.99,0.2238,0.301,12487.81,0.1427,2172.9,1979.78,1.08,1135535,113553.5,227107.0,159.6,331.1,"Rent, Groceries, Savings Transfer, Credit Card Repayment, Personal Loan Repayment",rent is reasonably controlled relative to income; discretionary spending is relatively controlled,increase monthly savings rate; reduce debt repayment pressure before purchase; reduce month-to-month spending volatility,Long-Term Alignment,"Recommended roadmap:
+    1. Maintain income stability and preserve positive monthly surplus.
+    2. Increase monthly deposit transfers where possible.
+    3. Review top spending categories: Rent, Groceries, Savings Transfer, Credit Card Repayment, Personal Loan Repayment.
+    4. Reduce avoidable discretionary spending before increasing property budget.
+    5. Strengthen deposit position before pursuing higher-priced properties.
+    6. Speak with a broker or lender for formal borrowing guidance.","This user is best described as a Financially recovering buyer. Over the last 12 months, they earned approximately $87,486
+    and spent approximately $88,252. Their average monthly surplus is approximately $-64.
+    Their savings rate is 9.1%, rent-to-income ratio is 30.1%, and debt-to-income ratio is 14.3%.
+    Current home buying alignment status: Long-Term Alignment.","User 27 financial profile:
+    Archetype: Financially recovering buyer.
+    Annual income: $87,486.
+    Annual expenses: $88,252.
+    Average monthly income: $7,291.
+    Average monthly expenses: $7,354.
+    Average monthly surplus: $-64.
+    Average monthly savings: $662.
+    Total savings transfers: $7,943.
+    Total investment transfers: $1,188.
+    Savings rate: 9.1%.
+    Rent-to-income ratio: 30.1%.
+    Debt-to-income ratio: 14.3%.
+    Emergency buffer estimate: 1.1 months.
+    Spending volatility: $2,173.
+    Top spending categories: Rent, Groceries, Savings Transfer, Credit Card Repayment, Personal Loan Repayment.
+    Strengths: rent is reasonably controlled relative to income, discretionary spending is relatively controlled.
+    Opportunities: increase monthly savings rate, reduce debt repayment pressure before purchase, reduce month-to-month spending volatility.
+    Financial alignment status: Long-Term Alignment."
+28,Highly structured budgeter,96903.69,88234.58,8075.31,7352.88,722.43,23121.9,1926.82,4718.77,0.2386,46539.54,12257.9,0.1389,0.2855,2118.39,0.0219,2338.37,2215.39,3.14,925534,92553.4,185106.8,36.0,84.1,"Rent, Savings Transfer, Groceries, Investment Transfer, Transport",strong savings consistency; rent is reasonably controlled relative to income; low debt repayment pressure; discretionary spending is relatively controlled,reduce month-to-month spending volatility,Emerging Alignment,"Recommended roadmap:
+    1. Maintain income stability and preserve positive monthly surplus.
+    2. Increase monthly deposit transfers where possible.
+    3. Review top spending categories: Rent, Savings Transfer, Groceries, Investment Transfer, Transport.
+    4. Reduce avoidable discretionary spending before increasing property budget.
+    5. Strengthen deposit position before pursuing higher-priced properties.
+    6. Speak with a broker or lender for formal borrowing guidance.","This user is best described as a Highly structured budgeter. Over the last 12 months, they earned approximately $96,904
+    and spent approximately $88,235. Their average monthly surplus is approximately $722.
+    Their savings rate is 23.9%, rent-to-income ratio is 28.5%, and debt-to-income ratio is 2.2%.
+    Current home buying alignment status: Emerging Alignment.","User 28 financial profile:
+    Archetype: Highly structured budgeter.
+    Annual income: $96,904.
+    Annual expenses: $88,235.
+    Average monthly income: $8,075.
+    Average monthly expenses: $7,353.
+    Average monthly surplus: $722.
+    Average monthly savings: $1,927.
+    Total savings transfers: $23,122.
+    Total investment transfers: $4,719.
+    Savings rate: 23.9%.
+    Rent-to-income ratio: 28.5%.
+    Debt-to-income ratio: 2.2%.
+    Emergency buffer estimate: 3.1 months.
+    Spending volatility: $2,338.
+    Top spending categories: Rent, Savings Transfer, Groceries, Investment Transfer, Transport.
+    Strengths: strong savings consistency, rent is reasonably controlled relative to income, low debt repayment pressure, discretionary spending is relatively controlled.
+    Opportunities: reduce month-to-month spending volatility.
+    Financial alignment status: Emerging Alignment."
+29,Entrepreneur / variable income buyer,105459.32,109283.81,8788.28,9106.98,-318.71,13242.72,1103.56,7346.76,0.1256,60068.57,27533.65,0.2519,0.3258,5973.83,0.0566,3248.64,3711.58,1.45,1484499,148449.9,296899.8,122.5,257.0,"Rent, Savings Transfer, Groceries, Investment Transfer, Entertainment",low debt repayment pressure; discretionary spending is relatively controlled,increase monthly savings rate; rent pressure may be slowing deposit growth; reduce month-to-month spending volatility,Long-Term Alignment,"Recommended roadmap:
+    1. Maintain income stability and preserve positive monthly surplus.
+    2. Increase monthly deposit transfers where possible.
+    3. Review top spending categories: Rent, Savings Transfer, Groceries, Investment Transfer, Entertainment.
+    4. Reduce avoidable discretionary spending before increasing property budget.
+    5. Strengthen deposit position before pursuing higher-priced properties.
+    6. Speak with a broker or lender for formal borrowing guidance.","This user is best described as a Entrepreneur / variable income buyer. Over the last 12 months, they earned approximately $105,459
+    and spent approximately $109,284. Their average monthly surplus is approximately $-319.
+    Their savings rate is 12.6%, rent-to-income ratio is 32.6%, and debt-to-income ratio is 5.7%.
+    Current home buying alignment status: Long-Term Alignment.","User 29 financial profile:
+    Archetype: Entrepreneur / variable income buyer.
+    Annual income: $105,459.
+    Annual expenses: $109,284.
+    Average monthly income: $8,788.
+    Average monthly expenses: $9,107.
+    Average monthly surplus: $-319.
+    Average monthly savings: $1,104.
+    Total savings transfers: $13,243.
+    Total investment transfers: $7,347.
+    Savings rate: 12.6%.
+    Rent-to-income ratio: 32.6%.
+    Debt-to-income ratio: 5.7%.
+    Emergency buffer estimate: 1.5 months.
+    Spending volatility: $3,249.
+    Top spending categories: Rent, Savings Transfer, Groceries, Investment Transfer, Entertainment.
+    Strengths: low debt repayment pressure, discretionary spending is relatively controlled.
+    Opportunities: increase monthly savings rate, rent pressure may be slowing deposit growth, reduce month-to-month spending volatility.
+    Financial alignment status: Long-Term Alignment."
+30,Remote worker lifestyle optimizer,107689.19,101770.54,8974.1,8480.88,493.22,19833.56,1652.8,6045.7,0.1842,54455.46,20514.53,0.2016,0.298,3056.76,0.0284,2050.59,2490.87,2.34,2276105,227610.5,455221.0,125.7,263.4,"Rent, Savings Transfer, Groceries, Investment Transfer, Transport",strong savings consistency; rent is reasonably controlled relative to income; low debt repayment pressure; discretionary spending is relatively controlled,reduce month-to-month spending volatility,Emerging Alignment,"Recommended roadmap:
+    1. Maintain income stability and preserve positive monthly surplus.
+    2. Increase monthly deposit transfers where possible.
+    3. Review top spending categories: Rent, Savings Transfer, Groceries, Investment Transfer, Transport.
+    4. Reduce avoidable discretionary spending before increasing property budget.
+    5. Strengthen deposit position before pursuing higher-priced properties.
+    6. Speak with a broker or lender for formal borrowing guidance.","This user is best described as a Remote worker lifestyle optimizer. Over the last 12 months, they earned approximately $107,689
+    and spent approximately $101,771. Their average monthly surplus is approximately $493.
+    Their savings rate is 18.4%, rent-to-income ratio is 29.8%, and debt-to-income ratio is 2.8%.
+    Current home buying alignment status: Emerging Alignment.","User 30 financial profile:
+    Archetype: Remote worker lifestyle optimizer.
+    Annual income: $107,689.
+    Annual expenses: $101,771.
+    Average monthly income: $8,974.
+    Average monthly expenses: $8,481.
+    Average monthly surplus: $493.
+    Average monthly savings: $1,653.
+    Total savings transfers: $19,834.
+    Total investment transfers: $6,046.
+    Savings rate: 18.4%.
+    Rent-to-income ratio: 29.8%.
+    Debt-to-income ratio: 2.8%.
+    Emergency buffer estimate: 2.3 months.
+    Spending volatility: $2,051.
+    Top spending categories: Rent, Savings Transfer, Groceries, Investment Transfer, Transport.
+    Strengths: strong savings consistency, rent is reasonably controlled relative to income, low debt repayment pressure, discretionary spending is relatively controlled.
+    Opportunities: reduce month-to-month spending volatility.
+    Financial alignment status: Emerging Alignment."
+31,Disciplined saver,98223.34,95451.65,8185.28,7954.3,230.97,24807.02,2067.25,5956.56,0.2526,49910.08,13594.43,0.1424,0.2974,1826.45,0.0186,3025.15,2277.89,3.12,1136945,113694.5,227389.0,43.0,98.0,"Rent, Savings Transfer, Groceries, Investment Transfer, Transport",strong savings consistency; rent is reasonably controlled relative to income; low debt repayment pressure; discretionary spending is relatively controlled,reduce month-to-month spending volatility,Long-Term Alignment,"Recommended roadmap:
+    1. Maintain income stability and preserve positive monthly surplus.
+    2. Increase monthly deposit transfers where possible.
+    3. Review top spending categories: Rent, Savings Transfer, Groceries, Investment Transfer, Transport.
+    4. Reduce avoidable discretionary spending before increasing property budget.
+    5. Strengthen deposit position before pursuing higher-priced properties.
+    6. Speak with a broker or lender for formal borrowing guidance.","This user is best described as a Disciplined saver. Over the last 12 months, they earned approximately $98,223
+    and spent approximately $95,452. Their average monthly surplus is approximately $231.
+    Their savings rate is 25.3%, rent-to-income ratio is 29.7%, and debt-to-income ratio is 1.9%.
+    Current home buying alignment status: Long-Term Alignment.","User 31 financial profile:
+    Archetype: Disciplined saver.
+    Annual income: $98,223.
+    Annual expenses: $95,452.
+    Average monthly income: $8,185.
+    Average monthly expenses: $7,954.
+    Average monthly surplus: $231.
+    Average monthly savings: $2,067.
+    Total savings transfers: $24,807.
+    Total investment transfers: $5,957.
+    Savings rate: 25.3%.
+    Rent-to-income ratio: 29.7%.
+    Debt-to-income ratio: 1.9%.
+    Emergency buffer estimate: 3.1 months.
+    Spending volatility: $3,025.
+    Top spending categories: Rent, Savings Transfer, Groceries, Investment Transfer, Transport.
+    Strengths: strong savings consistency, rent is reasonably controlled relative to income, low debt repayment pressure, discretionary spending is relatively controlled.
+    Opportunities: reduce month-to-month spending volatility.
+    Financial alignment status: Long-Term Alignment."
+32,High income / high spending,175395.22,171467.56,14616.27,14288.96,327.31,19110.17,1592.51,10749.52,0.109,83031.44,56986.43,0.3323,0.2831,9497.41,0.0541,3637.25,336.59,1.34,1077949,107794.9,215589.8,55.7,123.4,"Rent, Savings Transfer, Groceries, Cafes, Investment Transfer",rent is reasonably controlled relative to income; low debt repayment pressure,"increase monthly savings rate; review dining, shopping, entertainment, and lifestyle spending; reduce month-to-month spending volatility",Emerging Alignment,"Recommended roadmap:
+    1. Maintain income stability and preserve positive monthly surplus.
+    2. Increase monthly deposit transfers where possible.
+    3. Review top spending categories: Rent, Savings Transfer, Groceries, Cafes, Investment Transfer.
+    4. Reduce avoidable discretionary spending before increasing property budget.
+    5. Strengthen deposit position before pursuing higher-priced properties.
+    6. Speak with a broker or lender for formal borrowing guidance.","This user is best described as a High income / high spending. Over the last 12 months, they earned approximately $175,395
+    and spent approximately $171,468. Their average monthly surplus is approximately $327.
+    Their savings rate is 10.9%, rent-to-income ratio is 28.3%, and debt-to-income ratio is 5.4%.
+    Current home buying alignment status: Emerging Alignment.","User 32 financial profile:
+    Archetype: High income / high spending.
+    Annual income: $175,395.
+    Annual expenses: $171,468.
+    Average monthly income: $14,616.
+    Average monthly expenses: $14,289.
+    Average monthly surplus: $327.
+    Average monthly savings: $1,593.
+    Total savings transfers: $19,110.
+    Total investment transfers: $10,750.
+    Savings rate: 10.9%.
+    Rent-to-income ratio: 28.3%.
+    Debt-to-income ratio: 5.4%.
+    Emergency buffer estimate: 1.3 months.
+    Spending volatility: $3,637.
+    Top spending categories: Rent, Savings Transfer, Groceries, Cafes, Investment Transfer.
+    Strengths: rent is reasonably controlled relative to income, low debt repayment pressure.
+    Opportunities: increase monthly savings rate, review dining, shopping, entertainment, and lifestyle spending, reduce month-to-month spending volatility.
+    Financial alignment status: Emerging Alignment."
+33,Young professional building deposit,78644.0,79867.42,6553.67,6655.62,-101.95,14461.98,1205.16,1748.55,0.1839,44675.69,17673.09,0.2213,0.3212,3050.35,0.0388,2656.47,264.66,2.17,917235,91723.5,183447.0,64.1,140.2,"Rent, Savings Transfer, Groceries, Transport, Dining Out",strong savings consistency; low debt repayment pressure; discretionary spending is relatively controlled,rent pressure may be slowing deposit growth; reduce month-to-month spending volatility,Long-Term Alignment,"Recommended roadmap:
+    1. Maintain income stability and preserve positive monthly surplus.
+    2. Increase monthly deposit transfers where possible.
+    3. Review top spending categories: Rent, Savings Transfer, Groceries, Transport, Dining Out.
+    4. Reduce avoidable discretionary spending before increasing property budget.
+    5. Strengthen deposit position before pursuing higher-priced properties.
+    6. Speak with a broker or lender for formal borrowing guidance.","This user is best described as a Young professional building deposit. Over the last 12 months, they earned approximately $78,644
+    and spent approximately $79,867. Their average monthly surplus is approximately $-102.
+    Their savings rate is 18.4%, rent-to-income ratio is 32.1%, and debt-to-income ratio is 3.9%.
+    Current home buying alignment status: Long-Term Alignment.","User 33 financial profile:
+    Archetype: Young professional building deposit.
+    Annual income: $78,644.
+    Annual expenses: $79,867.
+    Average monthly income: $6,554.
+    Average monthly expenses: $6,656.
+    Average monthly surplus: $-102.
+    Average monthly savings: $1,205.
+    Total savings transfers: $14,462.
+    Total investment transfers: $1,749.
+    Savings rate: 18.4%.
+    Rent-to-income ratio: 32.1%.
+    Debt-to-income ratio: 3.9%.
+    Emergency buffer estimate: 2.2 months.
+    Spending volatility: $2,656.
+    Top spending categories: Rent, Savings Transfer, Groceries, Transport, Dining Out.
+    Strengths: strong savings consistency, low debt repayment pressure, discretionary spending is relatively controlled.
+    Opportunities: rent pressure may be slowing deposit growth, reduce month-to-month spending volatility.
+    Financial alignment status: Long-Term Alignment."
+34,Family under financial pressure,111374.78,114556.81,9281.23,9546.4,-265.17,3526.17,293.85,0.0,0.0317,87213.56,21119.28,0.1844,0.3923,15548.05,0.1396,3310.3,2530.91,0.37,1260271,126027.1,252054.2,416.9,845.8,"Rent, Groceries, Credit Card Repayment, Personal Loan Repayment, Transport",discretionary spending is relatively controlled,increase monthly savings rate; rent pressure may be slowing deposit growth; reduce debt repayment pressure before purchase; reduce month-to-month spending volatility,Long-Term Alignment,"Recommended roadmap:
+    1. Maintain income stability and preserve positive monthly surplus.
+    2. Increase monthly deposit transfers where possible.
+    3. Review top spending categories: Rent, Groceries, Credit Card Repayment, Personal Loan Repayment, Transport.
+    4. Reduce avoidable discretionary spending before increasing property budget.
+    5. Strengthen deposit position before pursuing higher-priced properties.
+    6. Speak with a broker or lender for formal borrowing guidance.","This user is best described as a Family under financial pressure. Over the last 12 months, they earned approximately $111,375
+    and spent approximately $114,557. Their average monthly surplus is approximately $-265.
+    Their savings rate is 3.2%, rent-to-income ratio is 39.2%, and debt-to-income ratio is 14.0%.
+    Current home buying alignment status: Long-Term Alignment.","User 34 financial profile:
+    Archetype: Family under financial pressure.
+    Annual income: $111,375.
+    Annual expenses: $114,557.
+    Average monthly income: $9,281.
+    Average monthly expenses: $9,546.
+    Average monthly surplus: $-265.
+    Average monthly savings: $294.
+    Total savings transfers: $3,526.
+    Total investment transfers: $0.
+    Savings rate: 3.2%.
+    Rent-to-income ratio: 39.2%.
+    Debt-to-income ratio: 14.0%.
+    Emergency buffer estimate: 0.4 months.
+    Spending volatility: $3,310.
+    Top spending categories: Rent, Groceries, Credit Card Repayment, Personal Loan Repayment, Transport.
+    Strengths: discretionary spending is relatively controlled.
+    Opportunities: increase monthly savings rate, rent pressure may be slowing deposit growth, reduce debt repayment pressure before purchase, reduce month-to-month spending volatility.
+    Financial alignment status: Long-Term Alignment."
+35,Investor-oriented buyer,134519.85,128013.97,11209.99,10667.83,542.16,26783.21,2231.93,16646.29,0.1991,61470.73,21019.12,0.1642,0.2572,7120.4,0.0529,3522.41,295.3,2.51,1306329,130632.9,261265.8,46.5,105.1,"Rent, Savings Transfer, Investment Transfer, Groceries, Transport",strong savings consistency; rent is reasonably controlled relative to income; low debt repayment pressure; discretionary spending is relatively controlled,reduce month-to-month spending volatility,Emerging Alignment,"Recommended roadmap:
+    1. Maintain income stability and preserve positive monthly surplus.
+    2. Increase monthly deposit transfers where possible.
+    3. Review top spending categories: Rent, Savings Transfer, Investment Transfer, Groceries, Transport.
+    4. Reduce avoidable discretionary spending before increasing property budget.
+    5. Strengthen deposit position before pursuing higher-priced properties.
+    6. Speak with a broker or lender for formal borrowing guidance.","This user is best described as a Investor-oriented buyer. Over the last 12 months, they earned approximately $134,520
+    and spent approximately $128,014. Their average monthly surplus is approximately $542.
+    Their savings rate is 19.9%, rent-to-income ratio is 25.7%, and debt-to-income ratio is 5.3%.
+    Current home buying alignment status: Emerging Alignment.","User 35 financial profile:
+    Archetype: Investor-oriented buyer.
+    Annual income: $134,520.
+    Annual expenses: $128,014.
+    Average monthly income: $11,210.
+    Average monthly expenses: $10,668.
+    Average monthly surplus: $542.
+    Average monthly savings: $2,232.
+    Total savings transfers: $26,783.
+    Total investment transfers: $16,646.
+    Savings rate: 19.9%.
+    Rent-to-income ratio: 25.7%.
+    Debt-to-income ratio: 5.3%.
+    Emergency buffer estimate: 2.5 months.
+    Spending volatility: $3,522.
+    Top spending categories: Rent, Savings Transfer, Investment Transfer, Groceries, Transport.
+    Strengths: strong savings consistency, rent is reasonably controlled relative to income, low debt repayment pressure, discretionary spending is relatively controlled.
+    Opportunities: reduce month-to-month spending volatility.
+    Financial alignment status: Emerging Alignment."
+36,Emotionally reactive spender,90202.32,104044.98,7516.86,8670.41,-1153.55,2980.06,248.34,0.0,0.033,60089.58,38631.5,0.3713,0.3211,12090.26,0.134,3013.98,326.85,0.34,961403,96140.3,192280.6,375.1,762.3,"Rent, Groceries, Dining Out, Personal Care, Entertainment",,"increase monthly savings rate; rent pressure may be slowing deposit growth; reduce debt repayment pressure before purchase; review dining, shopping, entertainment, and lifestyle spending; reduce month-to-month spending volatility",Long-Term Alignment,"Recommended roadmap:
+    1. Maintain income stability and preserve positive monthly surplus.
+    2. Increase monthly deposit transfers where possible.
+    3. Review top spending categories: Rent, Groceries, Dining Out, Personal Care, Entertainment.
+    4. Reduce avoidable discretionary spending before increasing property budget.
+    5. Strengthen deposit position before pursuing higher-priced properties.
+    6. Speak with a broker or lender for formal borrowing guidance.","This user is best described as a Emotionally reactive spender. Over the last 12 months, they earned approximately $90,202
+    and spent approximately $104,045. Their average monthly surplus is approximately $-1,154.
+    Their savings rate is 3.3%, rent-to-income ratio is 32.1%, and debt-to-income ratio is 13.4%.
+    Current home buying alignment status: Long-Term Alignment.","User 36 financial profile:
+    Archetype: Emotionally reactive spender.
+    Annual income: $90,202.
+    Annual expenses: $104,045.
+    Average monthly income: $7,517.
+    Average monthly expenses: $8,670.
+    Average monthly surplus: $-1,154.
+    Average monthly savings: $248.
+    Total savings transfers: $2,980.
+    Total investment transfers: $0.
+    Savings rate: 3.3%.
+    Rent-to-income ratio: 32.1%.
+    Debt-to-income ratio: 13.4%.
+    Emergency buffer estimate: 0.3 months.
+    Spending volatility: $3,014.
+    Top spending categories: Rent, Groceries, Dining Out, Personal Care, Entertainment.
+    Strengths: .
+    Opportunities: increase monthly savings rate, rent pressure may be slowing deposit growth, reduce debt repayment pressure before purchase, review dining, shopping, entertainment, and lifestyle spending, reduce month-to-month spending volatility.
+    Financial alignment status: Long-Term Alignment."
+37,Financially recovering buyer,85898.77,85352.95,7158.23,7112.75,45.48,7875.77,656.31,1254.35,0.0917,55680.97,18267.52,0.214,0.3038,12695.11,0.1478,2208.82,232.92,1.11,1122027,112202.7,224405.4,159.0,329.9,"Rent, Groceries, Savings Transfer, Credit Card Repayment, Personal Loan Repayment",rent is reasonably controlled relative to income; discretionary spending is relatively controlled,increase monthly savings rate; reduce debt repayment pressure before purchase; reduce month-to-month spending volatility,Long-Term Alignment,"Recommended roadmap:
+    1. Maintain income stability and preserve positive monthly surplus.
+    2. Increase monthly deposit transfers where possible.
+    3. Review top spending categories: Rent, Groceries, Savings Transfer, Credit Card Repayment, Personal Loan Repayment.
+    4. Reduce avoidable discretionary spending before increasing property budget.
+    5. Strengthen deposit position before pursuing higher-priced properties.
+    6. Speak with a broker or lender for formal borrowing guidance.","This user is best described as a Financially recovering buyer. Over the last 12 months, they earned approximately $85,899
+    and spent approximately $85,353. Their average monthly surplus is approximately $45.
+    Their savings rate is 9.2%, rent-to-income ratio is 30.4%, and debt-to-income ratio is 14.8%.
+    Current home buying alignment status: Long-Term Alignment.","User 37 financial profile:
+    Archetype: Financially recovering buyer.
+    Annual income: $85,899.
+    Annual expenses: $85,353.
+    Average monthly income: $7,158.
+    Average monthly expenses: $7,113.
+    Average monthly surplus: $45.
+    Average monthly savings: $656.
+    Total savings transfers: $7,876.
+    Total investment transfers: $1,254.
+    Savings rate: 9.2%.
+    Rent-to-income ratio: 30.4%.
+    Debt-to-income ratio: 14.8%.
+    Emergency buffer estimate: 1.1 months.
+    Spending volatility: $2,209.
+    Top spending categories: Rent, Groceries, Savings Transfer, Credit Card Repayment, Personal Loan Repayment.
+    Strengths: rent is reasonably controlled relative to income, discretionary spending is relatively controlled.
+    Opportunities: increase monthly savings rate, reduce debt repayment pressure before purchase, reduce month-to-month spending volatility.
+    Financial alignment status: Long-Term Alignment."
+38,Highly structured budgeter,96349.14,89229.11,8029.1,7435.76,593.34,23305.61,1942.13,4866.34,0.2419,46884.04,13300.04,0.1491,0.29,2175.16,0.0226,2751.63,179.16,3.13,864216,86421.6,172843.2,32.5,77.0,"Rent, Savings Transfer, Groceries, Investment Transfer, Transport",strong savings consistency; rent is reasonably controlled relative to income; low debt repayment pressure; discretionary spending is relatively controlled,reduce month-to-month spending volatility,Emerging Alignment,"Recommended roadmap:
+    1. Maintain income stability and preserve positive monthly surplus.
+    2. Increase monthly deposit transfers where possible.
+    3. Review top spending categories: Rent, Savings Transfer, Groceries, Investment Transfer, Transport.
+    4. Reduce avoidable discretionary spending before increasing property budget.
+    5. Strengthen deposit position before pursuing higher-priced properties.
+    6. Speak with a broker or lender for formal borrowing guidance.","This user is best described as a Highly structured budgeter. Over the last 12 months, they earned approximately $96,349
+    and spent approximately $89,229. Their average monthly surplus is approximately $593.
+    Their savings rate is 24.2%, rent-to-income ratio is 29.0%, and debt-to-income ratio is 2.3%.
+    Current home buying alignment status: Emerging Alignment.","User 38 financial profile:
+    Archetype: Highly structured budgeter.
+    Annual income: $96,349.
+    Annual expenses: $89,229.
+    Average monthly income: $8,029.
+    Average monthly expenses: $7,436.
+    Average monthly surplus: $593.
+    Average monthly savings: $1,942.
+    Total savings transfers: $23,306.
+    Total investment transfers: $4,866.
+    Savings rate: 24.2%.
+    Rent-to-income ratio: 29.0%.
+    Debt-to-income ratio: 2.3%.
+    Emergency buffer estimate: 3.1 months.
+    Spending volatility: $2,752.
+    Top spending categories: Rent, Savings Transfer, Groceries, Investment Transfer, Transport.
+    Strengths: strong savings consistency, rent is reasonably controlled relative to income, low debt repayment pressure, discretionary spending is relatively controlled.
+    Opportunities: reduce month-to-month spending volatility.
+    Financial alignment status: Emerging Alignment."
+39,Entrepreneur / variable income buyer,111389.52,108323.55,9282.46,9026.96,255.5,13459.61,1121.63,7343.65,0.1208,59661.36,26344.74,0.2432,0.3108,6038.14,0.0542,3034.26,7920.06,1.49,927476,92747.6,185495.2,70.7,153.4,"Rent, Savings Transfer, Groceries, Investment Transfer, Cafes",rent is reasonably controlled relative to income; low debt repayment pressure; discretionary spending is relatively controlled,increase monthly savings rate; reduce month-to-month spending volatility,Long-Term Alignment,"Recommended roadmap:
+    1. Maintain income stability and preserve positive monthly surplus.
+    2. Increase monthly deposit transfers where possible.
+    3. Review top spending categories: Rent, Savings Transfer, Groceries, Investment Transfer, Cafes.
+    4. Reduce avoidable discretionary spending before increasing property budget.
+    5. Strengthen deposit position before pursuing higher-priced properties.
+    6. Speak with a broker or lender for formal borrowing guidance.","This user is best described as a Entrepreneur / variable income buyer. Over the last 12 months, they earned approximately $111,390
+    and spent approximately $108,324. Their average monthly surplus is approximately $255.
+    Their savings rate is 12.1%, rent-to-income ratio is 31.1%, and debt-to-income ratio is 5.4%.
+    Current home buying alignment status: Long-Term Alignment.","User 39 financial profile:
+    Archetype: Entrepreneur / variable income buyer.
+    Annual income: $111,390.
+    Annual expenses: $108,324.
+    Average monthly income: $9,282.
+    Average monthly expenses: $9,027.
+    Average monthly surplus: $255.
+    Average monthly savings: $1,122.
+    Total savings transfers: $13,460.
+    Total investment transfers: $7,344.
+    Savings rate: 12.1%.
+    Rent-to-income ratio: 31.1%.
+    Debt-to-income ratio: 5.4%.
+    Emergency buffer estimate: 1.5 months.
+    Spending volatility: $3,034.
+    Top spending categories: Rent, Savings Transfer, Groceries, Investment Transfer, Cafes.
+    Strengths: rent is reasonably controlled relative to income, low debt repayment pressure, discretionary spending is relatively controlled.
+    Opportunities: increase monthly savings rate, reduce month-to-month spending volatility.
+    Financial alignment status: Long-Term Alignment."
+40,Remote worker lifestyle optimizer,109648.49,102867.51,9137.37,8572.29,565.08,20525.5,1710.46,6065.86,0.1872,55221.49,20132.27,0.1957,0.294,3021.52,0.0276,2967.7,321.25,2.39,1089452,108945.2,217890.4,51.7,115.4,"Rent, Savings Transfer, Groceries, Investment Transfer, Insurance",strong savings consistency; rent is reasonably controlled relative to income; low debt repayment pressure; discretionary spending is relatively controlled,reduce month-to-month spending volatility,Emerging Alignment,"Recommended roadmap:
+    1. Maintain income stability and preserve positive monthly surplus.
+    2. Increase monthly deposit transfers where possible.
+    3. Review top spending categories: Rent, Savings Transfer, Groceries, Investment Transfer, Insurance.
+    4. Reduce avoidable discretionary spending before increasing property budget.
+    5. Strengthen deposit position before pursuing higher-priced properties.
+    6. Speak with a broker or lender for formal borrowing guidance.","This user is best described as a Remote worker lifestyle optimizer. Over the last 12 months, they earned approximately $109,648
+    and spent approximately $102,868. Their average monthly surplus is approximately $565.
+    Their savings rate is 18.7%, rent-to-income ratio is 29.4%, and debt-to-income ratio is 2.8%.
+    Current home buying alignment status: Emerging Alignment.","User 40 financial profile:
+    Archetype: Remote worker lifestyle optimizer.
+    Annual income: $109,648.
+    Annual expenses: $102,868.
+    Average monthly income: $9,137.
+    Average monthly expenses: $8,572.
+    Average monthly surplus: $565.
+    Average monthly savings: $1,710.
+    Total savings transfers: $20,526.
+    Total investment transfers: $6,066.
+    Savings rate: 18.7%.
+    Rent-to-income ratio: 29.4%.
+    Debt-to-income ratio: 2.8%.
+    Emergency buffer estimate: 2.4 months.
+    Spending volatility: $2,968.
+    Top spending categories: Rent, Savings Transfer, Groceries, Investment Transfer, Insurance.
+    Strengths: strong savings consistency, rent is reasonably controlled relative to income, low debt repayment pressure, discretionary spending is relatively controlled.
+    Opportunities: reduce month-to-month spending volatility.
+    Financial alignment status: Emerging Alignment."
+41,Disciplined saver,99634.32,93332.01,8302.86,7777.67,525.19,25089.67,2090.81,6039.55,0.2518,48656.21,12988.54,0.1392,0.293,1751.51,0.0176,3664.84,2308.64,3.23,864216,86421.6,172843.2,29.3,70.7,"Rent, Savings Transfer, Groceries, Investment Transfer, Transport",strong savings consistency; rent is reasonably controlled relative to income; low debt repayment pressure; discretionary spending is relatively controlled,reduce month-to-month spending volatility,Emerging Alignment,"Recommended roadmap:
+    1. Maintain income stability and preserve positive monthly surplus.
+    2. Increase monthly deposit transfers where possible.
+    3. Review top spending categories: Rent, Savings Transfer, Groceries, Investment Transfer, Transport.
+    4. Reduce avoidable discretionary spending before increasing property budget.
+    5. Strengthen deposit position before pursuing higher-priced properties.
+    6. Speak with a broker or lender for formal borrowing guidance.","This user is best described as a Disciplined saver. Over the last 12 months, they earned approximately $99,634
+    and spent approximately $93,332. Their average monthly surplus is approximately $525.
+    Their savings rate is 25.2%, rent-to-income ratio is 29.3%, and debt-to-income ratio is 1.8%.
+    Current home buying alignment status: Emerging Alignment.","User 41 financial profile:
+    Archetype: Disciplined saver.
+    Annual income: $99,634.
+    Annual expenses: $93,332.
+    Average monthly income: $8,303.
+    Average monthly expenses: $7,778.
+    Average monthly surplus: $525.
+    Average monthly savings: $2,091.
+    Total savings transfers: $25,090.
+    Total investment transfers: $6,040.
+    Savings rate: 25.2%.
+    Rent-to-income ratio: 29.3%.
+    Debt-to-income ratio: 1.8%.
+    Emergency buffer estimate: 3.2 months.
+    Spending volatility: $3,665.
+    Top spending categories: Rent, Savings Transfer, Groceries, Investment Transfer, Transport.
+    Strengths: strong savings consistency, rent is reasonably controlled relative to income, low debt repayment pressure, discretionary spending is relatively controlled.
+    Opportunities: reduce month-to-month spending volatility.
+    Financial alignment status: Emerging Alignment."
+42,High income / high spending,176615.4,170449.33,14717.95,14204.11,513.84,18799.77,1566.65,10938.42,0.1064,83043.85,56016.42,0.3286,0.2851,9580.24,0.0542,3245.9,293.12,1.32,1436551,143655.1,287310.2,79.7,171.4,"Rent, Savings Transfer, Groceries, Investment Transfer, Entertainment",rent is reasonably controlled relative to income; low debt repayment pressure,"increase monthly savings rate; review dining, shopping, entertainment, and lifestyle spending; reduce month-to-month spending volatility",Emerging Alignment,"Recommended roadmap:
+    1. Maintain income stability and preserve positive monthly surplus.
+    2. Increase monthly deposit transfers where possible.
+    3. Review top spending categories: Rent, Savings Transfer, Groceries, Investment Transfer, Entertainment.
+    4. Reduce avoidable discretionary spending before increasing property budget.
+    5. Strengthen deposit position before pursuing higher-priced properties.
+    6. Speak with a broker or lender for formal borrowing guidance.","This user is best described as a High income / high spending. Over the last 12 months, they earned approximately $176,615
+    and spent approximately $170,449. Their average monthly surplus is approximately $514.
+    Their savings rate is 10.6%, rent-to-income ratio is 28.5%, and debt-to-income ratio is 5.4%.
+    Current home buying alignment status: Emerging Alignment.","User 42 financial profile:
+    Archetype: High income / high spending.
+    Annual income: $176,615.
+    Annual expenses: $170,449.
+    Average monthly income: $14,718.
+    Average monthly expenses: $14,204.
+    Average monthly surplus: $514.
+    Average monthly savings: $1,567.
+    Total savings transfers: $18,800.
+    Total investment transfers: $10,938.
+    Savings rate: 10.6%.
+    Rent-to-income ratio: 28.5%.
+    Debt-to-income ratio: 5.4%.
+    Emergency buffer estimate: 1.3 months.
+    Spending volatility: $3,246.
+    Top spending categories: Rent, Savings Transfer, Groceries, Investment Transfer, Entertainment.
+    Strengths: rent is reasonably controlled relative to income, low debt repayment pressure.
+    Opportunities: increase monthly savings rate, review dining, shopping, entertainment, and lifestyle spending, reduce month-to-month spending volatility.
+    Financial alignment status: Emerging Alignment."
+43,Young professional building deposit,75631.3,81709.77,6302.61,6809.15,-506.54,14439.97,1203.33,1844.4,0.1909,46196.3,18269.51,0.2236,0.3351,3008.63,0.0398,2156.06,275.5,2.12,1281699,128169.9,256339.8,94.5,201.0,"Rent, Savings Transfer, Groceries, Transport, Insurance",strong savings consistency; low debt repayment pressure; discretionary spending is relatively controlled,rent pressure may be slowing deposit growth; reduce month-to-month spending volatility,Long-Term Alignment,"Recommended roadmap:
+    1. Maintain income stability and preserve positive monthly surplus.
+    2. Increase monthly deposit transfers where possible.
+    3. Review top spending categories: Rent, Savings Transfer, Groceries, Transport, Insurance.
+    4. Reduce avoidable discretionary spending before increasing property budget.
+    5. Strengthen deposit position before pursuing higher-priced properties.
+    6. Speak with a broker or lender for formal borrowing guidance.","This user is best described as a Young professional building deposit. Over the last 12 months, they earned approximately $75,631
+    and spent approximately $81,710. Their average monthly surplus is approximately $-507.
+    Their savings rate is 19.1%, rent-to-income ratio is 33.5%, and debt-to-income ratio is 4.0%.
+    Current home buying alignment status: Long-Term Alignment.","User 43 financial profile:
+    Archetype: Young professional building deposit.
+    Annual income: $75,631.
+    Annual expenses: $81,710.
+    Average monthly income: $6,303.
+    Average monthly expenses: $6,809.
+    Average monthly surplus: $-507.
+    Average monthly savings: $1,203.
+    Total savings transfers: $14,440.
+    Total investment transfers: $1,844.
+    Savings rate: 19.1%.
+    Rent-to-income ratio: 33.5%.
+    Debt-to-income ratio: 4.0%.
+    Emergency buffer estimate: 2.1 months.
+    Spending volatility: $2,156.
+    Top spending categories: Rent, Savings Transfer, Groceries, Transport, Insurance.
+    Strengths: strong savings consistency, low debt repayment pressure, discretionary spending is relatively controlled.
+    Opportunities: rent pressure may be slowing deposit growth, reduce month-to-month spending volatility.
+    Financial alignment status: Long-Term Alignment."
+44,Family under financial pressure,111587.5,114061.95,9298.96,9505.16,-206.2,3592.44,299.37,0.0,0.0322,84339.54,23147.42,0.2029,0.39,15703.22,0.1407,3109.63,386.75,0.38,1002589,100258.9,200517.8,322.9,657.8,"Rent, Groceries, Credit Card Repayment, Personal Loan Repayment, Personal Care",discretionary spending is relatively controlled,increase monthly savings rate; rent pressure may be slowing deposit growth; reduce debt repayment pressure before purchase; reduce month-to-month spending volatility,Long-Term Alignment,"Recommended roadmap:
+    1. Maintain income stability and preserve positive monthly surplus.
+    2. Increase monthly deposit transfers where possible.
+    3. Review top spending categories: Rent, Groceries, Credit Card Repayment, Personal Loan Repayment, Personal Care.
+    4. Reduce avoidable discretionary spending before increasing property budget.
+    5. Strengthen deposit position before pursuing higher-priced properties.
+    6. Speak with a broker or lender for formal borrowing guidance.","This user is best described as a Family under financial pressure. Over the last 12 months, they earned approximately $111,588
+    and spent approximately $114,062. Their average monthly surplus is approximately $-206.
+    Their savings rate is 3.2%, rent-to-income ratio is 39.0%, and debt-to-income ratio is 14.1%.
+    Current home buying alignment status: Long-Term Alignment.","User 44 financial profile:
+    Archetype: Family under financial pressure.
+    Annual income: $111,588.
+    Annual expenses: $114,062.
+    Average monthly income: $9,299.
+    Average monthly expenses: $9,505.
+    Average monthly surplus: $-206.
+    Average monthly savings: $299.
+    Total savings transfers: $3,592.
+    Total investment transfers: $0.
+    Savings rate: 3.2%.
+    Rent-to-income ratio: 39.0%.
+    Debt-to-income ratio: 14.1%.
+    Emergency buffer estimate: 0.4 months.
+    Spending volatility: $3,110.
+    Top spending categories: Rent, Groceries, Credit Card Repayment, Personal Loan Repayment, Personal Care.
+    Strengths: discretionary spending is relatively controlled.
+    Opportunities: increase monthly savings rate, rent pressure may be slowing deposit growth, reduce debt repayment pressure before purchase, reduce month-to-month spending volatility.
+    Financial alignment status: Long-Term Alignment."
+45,Investor-oriented buyer,135929.17,124836.08,11327.43,10403.01,924.42,25828.15,2152.35,16541.71,0.19,62220.68,18907.0,0.1515,0.2442,7191.71,0.0529,3128.55,427.21,2.48,1089452,108945.2,217890.4,38.6,89.2,"Rent, Savings Transfer, Investment Transfer, Groceries, Transport",strong savings consistency; rent is reasonably controlled relative to income; low debt repayment pressure; discretionary spending is relatively controlled,reduce month-to-month spending volatility,Emerging Alignment,"Recommended roadmap:
+    1. Maintain income stability and preserve positive monthly surplus.
+    2. Increase monthly deposit transfers where possible.
+    3. Review top spending categories: Rent, Savings Transfer, Investment Transfer, Groceries, Transport.
+    4. Reduce avoidable discretionary spending before increasing property budget.
+    5. Strengthen deposit position before pursuing higher-priced properties.
+    6. Speak with a broker or lender for formal borrowing guidance.","This user is best described as a Investor-oriented buyer. Over the last 12 months, they earned approximately $135,929
+    and spent approximately $124,836. Their average monthly surplus is approximately $924.
+    Their savings rate is 19.0%, rent-to-income ratio is 24.4%, and debt-to-income ratio is 5.3%.
+    Current home buying alignment status: Emerging Alignment.","User 45 financial profile:
+    Archetype: Investor-oriented buyer.
+    Annual income: $135,929.
+    Annual expenses: $124,836.
+    Average monthly income: $11,327.
+    Average monthly expenses: $10,403.
+    Average monthly surplus: $924.
+    Average monthly savings: $2,152.
+    Total savings transfers: $25,828.
+    Total investment transfers: $16,542.
+    Savings rate: 19.0%.
+    Rent-to-income ratio: 24.4%.
+    Debt-to-income ratio: 5.3%.
+    Emergency buffer estimate: 2.5 months.
+    Spending volatility: $3,129.
+    Top spending categories: Rent, Savings Transfer, Investment Transfer, Groceries, Transport.
+    Strengths: strong savings consistency, rent is reasonably controlled relative to income, low debt repayment pressure, discretionary spending is relatively controlled.
+    Opportunities: reduce month-to-month spending volatility.
+    Financial alignment status: Emerging Alignment."
+46,Emotionally reactive spender,91379.51,100237.18,7614.96,8353.1,-738.14,2960.55,246.71,0.0,0.0324,58477.95,36507.81,0.3642,0.3174,11982.5,0.1311,2158.55,317.96,0.35,1488854,148885.4,297770.8,591.5,1195.0,"Rent, Groceries, Personal Care, Dining Out, Shopping",rent is reasonably controlled relative to income,"increase monthly savings rate; reduce debt repayment pressure before purchase; review dining, shopping, entertainment, and lifestyle spending; reduce month-to-month spending volatility",Long-Term Alignment,"Recommended roadmap:
+    1. Maintain income stability and preserve positive monthly surplus.
+    2. Increase monthly deposit transfers where possible.
+    3. Review top spending categories: Rent, Groceries, Personal Care, Dining Out, Shopping.
+    4. Reduce avoidable discretionary spending before increasing property budget.
+    5. Strengthen deposit position before pursuing higher-priced properties.
+    6. Speak with a broker or lender for formal borrowing guidance.","This user is best described as a Emotionally reactive spender. Over the last 12 months, they earned approximately $91,380
+    and spent approximately $100,237. Their average monthly surplus is approximately $-738.
+    Their savings rate is 3.2%, rent-to-income ratio is 31.7%, and debt-to-income ratio is 13.1%.
+    Current home buying alignment status: Long-Term Alignment.","User 46 financial profile:
+    Archetype: Emotionally reactive spender.
+    Annual income: $91,380.
+    Annual expenses: $100,237.
+    Average monthly income: $7,615.
+    Average monthly expenses: $8,353.
+    Average monthly surplus: $-738.
+    Average monthly savings: $247.
+    Total savings transfers: $2,961.
+    Total investment transfers: $0.
+    Savings rate: 3.2%.
+    Rent-to-income ratio: 31.7%.
+    Debt-to-income ratio: 13.1%.
+    Emergency buffer estimate: 0.4 months.
+    Spending volatility: $2,159.
+    Top spending categories: Rent, Groceries, Personal Care, Dining Out, Shopping.
+    Strengths: rent is reasonably controlled relative to income.
+    Opportunities: increase monthly savings rate, reduce debt repayment pressure before purchase, review dining, shopping, entertainment, and lifestyle spending, reduce month-to-month spending volatility.
+    Financial alignment status: Long-Term Alignment."
+47,Financially recovering buyer,83969.79,86447.97,6997.48,7204.0,-206.52,7720.63,643.39,1217.96,0.0919,55291.79,19291.25,0.2232,0.3177,12734.71,0.1517,1254.47,402.96,1.07,1002589,100258.9,200517.8,143.8,299.7,"Rent, Groceries, Savings Transfer, Credit Card Repayment, Personal Loan Repayment",rent is reasonably controlled relative to income; discretionary spending is relatively controlled,increase monthly savings rate; reduce debt repayment pressure before purchase; reduce month-to-month spending volatility,Long-Term Alignment,"Recommended roadmap:
+    1. Maintain income stability and preserve positive monthly surplus.
+    2. Increase monthly deposit transfers where possible.
+    3. Review top spending categories: Rent, Groceries, Savings Transfer, Credit Card Repayment, Personal Loan Repayment.
+    4. Reduce avoidable discretionary spending before increasing property budget.
+    5. Strengthen deposit position before pursuing higher-priced properties.
+    6. Speak with a broker or lender for formal borrowing guidance.","This user is best described as a Financially recovering buyer. Over the last 12 months, they earned approximately $83,970
+    and spent approximately $86,448. Their average monthly surplus is approximately $-207.
+    Their savings rate is 9.2%, rent-to-income ratio is 31.8%, and debt-to-income ratio is 15.2%.
+    Current home buying alignment status: Long-Term Alignment.","User 47 financial profile:
+    Archetype: Financially recovering buyer.
+    Annual income: $83,970.
+    Annual expenses: $86,448.
+    Average monthly income: $6,997.
+    Average monthly expenses: $7,204.
+    Average monthly surplus: $-207.
+    Average monthly savings: $643.
+    Total savings transfers: $7,721.
+    Total investment transfers: $1,218.
+    Savings rate: 9.2%.
+    Rent-to-income ratio: 31.8%.
+    Debt-to-income ratio: 15.2%.
+    Emergency buffer estimate: 1.1 months.
+    Spending volatility: $1,254.
+    Top spending categories: Rent, Groceries, Savings Transfer, Credit Card Repayment, Personal Loan Repayment.
+    Strengths: rent is reasonably controlled relative to income, discretionary spending is relatively controlled.
+    Opportunities: increase monthly savings rate, reduce debt repayment pressure before purchase, reduce month-to-month spending volatility.
+    Financial alignment status: Long-Term Alignment."
+48,Highly structured budgeter,96144.74,92145.09,8012.06,7678.76,333.3,23332.9,1944.41,4808.55,0.2427,47503.99,15647.18,0.1698,0.2899,2263.24,0.0235,2813.41,361.18,3.04,1488854,148885.4,297770.8,64.6,141.1,"Rent, Savings Transfer, Groceries, Investment Transfer, Travel",strong savings consistency; rent is reasonably controlled relative to income; low debt repayment pressure; discretionary spending is relatively controlled,reduce month-to-month spending volatility,Emerging Alignment,"Recommended roadmap:
+    1. Maintain income stability and preserve positive monthly surplus.
+    2. Increase monthly deposit transfers where possible.
+    3. Review top spending categories: Rent, Savings Transfer, Groceries, Investment Transfer, Travel.
+    4. Reduce avoidable discretionary spending before increasing property budget.
+    5. Strengthen deposit position before pursuing higher-priced properties.
+    6. Speak with a broker or lender for formal borrowing guidance.","This user is best described as a Highly structured budgeter. Over the last 12 months, they earned approximately $96,145
+    and spent approximately $92,145. Their average monthly surplus is approximately $333.
+    Their savings rate is 24.3%, rent-to-income ratio is 29.0%, and debt-to-income ratio is 2.4%.
+    Current home buying alignment status: Emerging Alignment.","User 48 financial profile:
+    Archetype: Highly structured budgeter.
+    Annual income: $96,145.
+    Annual expenses: $92,145.
+    Average monthly income: $8,012.
+    Average monthly expenses: $7,679.
+    Average monthly surplus: $333.
+    Average monthly savings: $1,944.
+    Total savings transfers: $23,333.
+    Total investment transfers: $4,809.
+    Savings rate: 24.3%.
+    Rent-to-income ratio: 29.0%.
+    Debt-to-income ratio: 2.4%.
+    Emergency buffer estimate: 3.0 months.
+    Spending volatility: $2,813.
+    Top spending categories: Rent, Savings Transfer, Groceries, Investment Transfer, Travel.
+    Strengths: strong savings consistency, rent is reasonably controlled relative to income, low debt repayment pressure, discretionary spending is relatively controlled.
+    Opportunities: reduce month-to-month spending volatility.
+    Financial alignment status: Emerging Alignment."
+49,Entrepreneur / variable income buyer,134163.48,109605.05,11180.29,9133.75,2046.54,13182.65,1098.55,7115.45,0.0983,58554.48,29492.27,0.2691,0.2513,5900.36,0.044,1962.95,6022.69,1.44,1257868,125786.8,251573.6,102.5,217.0,"Rent, Savings Transfer, Groceries, Investment Transfer, Travel",rent is reasonably controlled relative to income; low debt repayment pressure; discretionary spending is relatively controlled,increase monthly savings rate; reduce month-to-month spending volatility,Emerging Alignment,"Recommended roadmap:
+    1. Maintain income stability and preserve positive monthly surplus.
+    2. Increase monthly deposit transfers where possible.
+    3. Review top spending categories: Rent, Savings Transfer, Groceries, Investment Transfer, Travel.
+    4. Reduce avoidable discretionary spending before increasing property budget.
+    5. Strengthen deposit position before pursuing higher-priced properties.
+    6. Speak with a broker or lender for formal borrowing guidance.","This user is best described as a Entrepreneur / variable income buyer. Over the last 12 months, they earned approximately $134,163
+    and spent approximately $109,605. Their average monthly surplus is approximately $2,047.
+    Their savings rate is 9.8%, rent-to-income ratio is 25.1%, and debt-to-income ratio is 4.4%.
+    Current home buying alignment status: Emerging Alignment.","User 49 financial profile:
+    Archetype: Entrepreneur / variable income buyer.
+    Annual income: $134,163.
+    Annual expenses: $109,605.
+    Average monthly income: $11,180.
+    Average monthly expenses: $9,134.
+    Average monthly surplus: $2,047.
+    Average monthly savings: $1,099.
+    Total savings transfers: $13,183.
+    Total investment transfers: $7,115.
+    Savings rate: 9.8%.
+    Rent-to-income ratio: 25.1%.
+    Debt-to-income ratio: 4.4%.
+    Emergency buffer estimate: 1.4 months.
+    Spending volatility: $1,963.
+    Top spending categories: Rent, Savings Transfer, Groceries, Investment Transfer, Travel.
+    Strengths: rent is reasonably controlled relative to income, low debt repayment pressure, discretionary spending is relatively controlled.
+    Opportunities: increase monthly savings rate, reduce month-to-month spending volatility.
+    Financial alignment status: Emerging Alignment."
+50,Remote worker lifestyle optimizer,110070.17,102504.25,9172.51,8542.02,630.49,20438.44,1703.2,5978.45,0.1857,53560.33,21893.8,0.2136,0.2902,3096.08,0.0281,2664.7,332.21,2.39,740031,74003.1,148006.2,31.4,74.9,"Rent, Savings Transfer, Groceries, Investment Transfer, Transport",strong savings consistency; rent is reasonably controlled relative to income; low debt repayment pressure; discretionary spending is relatively controlled,reduce month-to-month spending volatility,Emerging Alignment,"Recommended roadmap:
+    1. Maintain income stability and preserve positive monthly surplus.
+    2. Increase monthly deposit transfers where possible.
+    3. Review top spending categories: Rent, Savings Transfer, Groceries, Investment Transfer, Transport.
+    4. Reduce avoidable discretionary spending before increasing property budget.
+    5. Strengthen deposit position before pursuing higher-priced properties.
+    6. Speak with a broker or lender for formal borrowing guidance.","This user is best described as a Remote worker lifestyle optimizer. Over the last 12 months, they earned approximately $110,070
+    and spent approximately $102,504. Their average monthly surplus is approximately $630.
+    Their savings rate is 18.6%, rent-to-income ratio is 29.0%, and debt-to-income ratio is 2.8%.
+    Current home buying alignment status: Emerging Alignment.","User 50 financial profile:
+    Archetype: Remote worker lifestyle optimizer.
+    Annual income: $110,070.
+    Annual expenses: $102,504.
+    Average monthly income: $9,173.
+    Average monthly expenses: $8,542.
+    Average monthly surplus: $630.
+    Average monthly savings: $1,703.
+    Total savings transfers: $20,438.
+    Total investment transfers: $5,978.
+    Savings rate: 18.6%.
+    Rent-to-income ratio: 29.0%.
+    Debt-to-income ratio: 2.8%.
+    Emergency buffer estimate: 2.4 months.
+    Spending volatility: $2,665.
+    Top spending categories: Rent, Savings Transfer, Groceries, Investment Transfer, Transport.
+    Strengths: strong savings consistency, rent is reasonably controlled relative to income, low debt repayment pressure, discretionary spending is relatively controlled.
+    Opportunities: reduce month-to-month spending volatility.
+    Financial alignment status: Emerging Alignment."
