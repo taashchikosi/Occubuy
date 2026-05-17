@@ -1,6 +1,5 @@
 import streamlit as st
 import os
-import re
 from typing import Dict, List, Optional
 
 from financial_analysis_engine import FinancialAnalysisEngine
@@ -8,11 +7,10 @@ from rag_utils import RAGRetriever
 from matching_engine import PropertyMatchingEngine
 
 try:
-    from google import genai
-    from google.genai import types as gtypes
-    GEMINI_AVAILABLE = True
+    from openai import OpenAI
+    OPENAI_AVAILABLE = True
 except ImportError:
-    GEMINI_AVAILABLE = False
+    OPENAI_AVAILABLE = False
 
 st.set_page_config(
     page_title="Occubuy",
@@ -28,50 +26,47 @@ def load_engines():
     return FinancialAnalysisEngine(), RAGRetriever(), PropertyMatchingEngine()
 
 
-def get_gemini_client():
-    if not GEMINI_AVAILABLE:
+def get_openai_client():
+    if not OPENAI_AVAILABLE:
         return None
     api_key = None
     try:
-        api_key = st.secrets["GEMINI_API_KEY"]
+        api_key = st.secrets["OPENAI_API_KEY"]
     except Exception:
-        api_key = os.environ.get("GEMINI_API_KEY")
+        api_key = os.environ.get("OPENAI_API_KEY")
     if not api_key:
         return None
     try:
-        return genai.Client(api_key=api_key)
+        return OpenAI(api_key=api_key)
     except Exception:
         return None
 
 
-# ── Gemini calls ───────────────────────────────────────────────────────────────
+# ── OpenAI calls ───────────────────────────────────────────────────────────────
 
-def gemini_chat(client, system_prompt: str, history: List[Dict], user_message: str) -> str:
-    """Call Gemini with conversation history. History is list of {role, text} dicts."""
+def ai_chat(client, system_prompt: str, history: List[Dict], user_message: str) -> str:
+    """Call OpenAI with conversation history. History is list of {role, text} dicts."""
     if not client:
-        return "_Gemini unavailable — please set GEMINI_API_KEY._"
+        return "_OpenAI unavailable — please set OPENAI_API_KEY._"
     try:
-        contents = [
-            gtypes.Content(role=h["role"], parts=[gtypes.Part(text=h["text"])])
-            for h in history
-        ]
-        contents.append(gtypes.Content(role="user", parts=[gtypes.Part(text=user_message)]))
-        resp = client.models.generate_content(
-            model="gemini-2.0-flash",
-            contents=contents,
-            config=gtypes.GenerateContentConfig(
-                system_instruction=system_prompt,
-                max_output_tokens=600,
-                temperature=0.75,
-            ),
+        messages = [{"role": "system", "content": system_prompt}]
+        for h in history:
+            messages.append({"role": h["role"], "content": h["text"]})
+        messages.append({"role": "user", "content": user_message})
+
+        resp = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=messages,
+            max_tokens=600,
+            temperature=0.75,
         )
-        return resp.text.strip()
+        return resp.choices[0].message.content.strip()
     except Exception as e:
-        return f"_Error contacting Gemini: {e}_"
+        return f"_Error contacting OpenAI: {e}_"
 
 
-def gemini_extract_keywords(client, history: List[Dict]) -> str:
-    """Ask Gemini to distil lifestyle search keywords from the Layer 1 conversation."""
+def ai_extract_keywords(client, history: List[Dict]) -> str:
+    """Ask the model to distil lifestyle search keywords from the Layer 1 conversation."""
     transcript = "\n".join(f"{h['role'].upper()}: {h['text']}" for h in history)
     prompt = (
         "From this home buyer conversation extract 6–10 comma-separated keywords that describe "
@@ -82,17 +77,18 @@ def gemini_extract_keywords(client, history: List[Dict]) -> str:
     if not client:
         return " ".join(h["text"] for h in history if h["role"] == "user")
     try:
-        resp = client.models.generate_content(
-            model="gemini-2.0-flash",
-            contents=[gtypes.Content(role="user", parts=[gtypes.Part(text=prompt)])],
-            config=gtypes.GenerateContentConfig(max_output_tokens=80, temperature=0.1),
+        resp = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[{"role": "user", "content": prompt}],
+            max_tokens=80,
+            temperature=0.1,
         )
-        return resp.text.strip()
+        return resp.choices[0].message.content.strip()
     except Exception:
         return " ".join(h["text"] for h in history if h["role"] == "user")
 
 
-def gemini_match_explanation(client, prop: Dict, history: List[Dict], rank: int) -> str:
+def ai_match_explanation(client, prop: Dict, history: List[Dict], rank: int) -> str:
     """Generate a personalised reason why this property suits this person."""
     transcript = "\n".join(f"{h['role'].upper()}: {h['text']}" for h in history[-8:])
     rank_word = ["best", "second", "third"][rank]
@@ -111,12 +107,13 @@ def gemini_match_explanation(client, prop: Dict, history: List[Dict], rank: int)
     if not client:
         return prop.get("match_summary", "")
     try:
-        resp = client.models.generate_content(
-            model="gemini-2.0-flash",
-            contents=[gtypes.Content(role="user", parts=[gtypes.Part(text=prompt)])],
-            config=gtypes.GenerateContentConfig(max_output_tokens=120, temperature=0.7),
+        resp = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[{"role": "user", "content": prompt}],
+            max_tokens=120,
+            temperature=0.7,
         )
-        return resp.text.strip()
+        return resp.choices[0].message.content.strip()
     except Exception:
         return prop.get("match_summary", "")
 
@@ -200,8 +197,8 @@ def init():
     defaults = {
         "messages": [],        # Chat display history [{role, type, content}]
         "stage": "layer1",     # layer1 | selecting | layer2
-        "l1_history": [],      # Gemini Layer 1 exchange history
-        "l2_history": [],      # Gemini Layer 2 exchange history
+        "l1_history": [],      # AI Layer 1 exchange history
+        "l2_history": [],      # AI Layer 2 exchange history
         "exchanges": 0,        # Layer 1 exchange count
         "properties": [],      # Top 3 matched properties
         "explanations": [],    # Personalised match explanations
@@ -252,10 +249,10 @@ def render_msg(msg: Dict):
 def handle_layer1(user_input: str, client, rag_retriever, matching_engine) -> List[Dict]:
     st.session_state.exchanges += 1
 
-    response = gemini_chat(client, LAYER1_PROMPT, st.session_state.l1_history, user_input)
+    response = ai_chat(client, LAYER1_PROMPT, st.session_state.l1_history, user_input)
 
     st.session_state.l1_history.append({"role": "user", "text": user_input})
-    st.session_state.l1_history.append({"role": "model", "text": response})
+    st.session_state.l1_history.append({"role": "assistant", "text": response})
 
     ready = "[MATCH_READY]" in response or st.session_state.exchanges >= 9
     clean = response.replace("[MATCH_READY]", "").strip()
@@ -263,7 +260,7 @@ def handle_layer1(user_input: str, client, rag_retriever, matching_engine) -> Li
     out = [{"role": "assistant", "type": "text", "content": clean}]
 
     if ready:
-        keywords = gemini_extract_keywords(client, st.session_state.l1_history)
+        keywords = ai_extract_keywords(client, st.session_state.l1_history)
 
         matches = rag_retriever.retrieve_properties_by_lifestyle(keywords, top_k=5)
         if not matches:
@@ -271,7 +268,7 @@ def handle_layer1(user_input: str, client, rag_retriever, matching_engine) -> Li
 
         top3 = matches[:3]
         explanations = [
-            gemini_match_explanation(client, p, st.session_state.l1_history, i)
+            ai_match_explanation(client, p, st.session_state.l1_history, i)
             for i, p in enumerate(top3)
         ]
 
@@ -306,7 +303,7 @@ def select_property(idx: int, client, financial_engine) -> List[Dict]:
     st.session_state.stage = "layer2"
 
     system = layer2_prompt(prop, profile, affordability)
-    opening = gemini_chat(
+    opening = ai_chat(
         client,
         system,
         [],
@@ -320,7 +317,7 @@ def select_property(idx: int, client, financial_engine) -> List[Dict]:
 
     st.session_state.l2_history = [
         {"role": "user", "text": "[property selected]"},
-        {"role": "model", "text": opening},
+        {"role": "assistant", "text": opening},
     ]
 
     return [
@@ -339,10 +336,10 @@ def handle_layer2(user_input: str, client, financial_engine) -> List[Dict]:
         st.session_state.profile,
         st.session_state.affordability,
     )
-    response = gemini_chat(client, system, st.session_state.l2_history, user_input)
+    response = ai_chat(client, system, st.session_state.l2_history, user_input)
 
     st.session_state.l2_history.append({"role": "user", "text": user_input})
-    st.session_state.l2_history.append({"role": "model", "text": response})
+    st.session_state.l2_history.append({"role": "assistant", "text": response})
 
     return [{"role": "assistant", "type": "text", "content": response}]
 
@@ -352,7 +349,7 @@ def handle_layer2(user_input: str, client, financial_engine) -> List[Dict]:
 def main():
     init()
     financial_engine, rag_retriever, matching_engine = load_engines()
-    client = get_gemini_client()
+    client = get_openai_client()
 
     # Sidebar
     with st.sidebar:
@@ -380,7 +377,7 @@ def main():
             st.rerun()
 
         if not client:
-            st.error("⚠️ GEMINI_API_KEY not set")
+            st.error("⚠️ OPENAI_API_KEY not set")
 
     # Seed welcome message
     if not st.session_state.messages:
