@@ -1,483 +1,443 @@
 import streamlit as st
-import pandas as pd
-from typing import Dict, List
 import os
+import re
+from typing import Dict, List, Optional
 
 from financial_analysis_engine import FinancialAnalysisEngine
 from rag_utils import RAGRetriever
 from matching_engine import PropertyMatchingEngine
-from roadmap_generator import RoadmapGenerator
+
+try:
+    from google import genai
+    from google.genai import types as gtypes
+    GEMINI_AVAILABLE = True
+except ImportError:
+    GEMINI_AVAILABLE = False
 
 st.set_page_config(
-    page_title="Occubuy - Home Buying Assistant",
+    page_title="Occubuy",
     page_icon="🏠",
-    layout="wide",
-    initial_sidebar_state="expanded"
+    layout="centered",
+    initial_sidebar_state="collapsed"
 )
+
+# ── Engines ────────────────────────────────────────────────────────────────────
 
 @st.cache_resource
 def load_engines():
-    financial_engine = FinancialAnalysisEngine()
-    rag_retriever = RAGRetriever()
-    matching_engine = PropertyMatchingEngine()
-    roadmap_gen = RoadmapGenerator()
-    return financial_engine, rag_retriever, matching_engine, roadmap_gen
+    return FinancialAnalysisEngine(), RAGRetriever(), PropertyMatchingEngine()
 
-def initialize_session():
-    if 'current_layer' not in st.session_state:
-        st.session_state.current_layer = 1
-    if 'selected_property' not in st.session_state:
-        st.session_state.selected_property = None
-    if 'user_id' not in st.session_state:
-        st.session_state.user_id = 1
 
-def render_layer1(financial_engine, rag_retriever, matching_engine, roadmap_gen):
-    st.header("🏠 Layer 1: Dream Home Discovery")
-    st.write("Tell me about your ideal home. What matters to you?")
+def get_gemini_client():
+    if not GEMINI_AVAILABLE:
+        return None
+    api_key = None
+    try:
+        api_key = st.secrets["GEMINI_API_KEY"]
+    except Exception:
+        api_key = os.environ.get("GEMINI_API_KEY")
+    if not api_key:
+        return None
+    try:
+        return genai.Client(api_key=api_key)
+    except Exception:
+        return None
 
-    col1, col2 = st.columns([2, 1])
 
-    with col1:
-        lifestyle_query = st.text_input(
-            "What's your ideal lifestyle?",
-            placeholder="e.g., Family-friendly, peaceful, urban, creative, investment-focused"
+# ── Gemini calls ───────────────────────────────────────────────────────────────
+
+def gemini_chat(client, system_prompt: str, history: List[Dict], user_message: str) -> str:
+    """Call Gemini with conversation history. History is list of {role, text} dicts."""
+    if not client:
+        return "_Gemini unavailable — please set GEMINI_API_KEY._"
+    try:
+        contents = [
+            gtypes.Content(role=h["role"], parts=[gtypes.Part(text=h["text"])])
+            for h in history
+        ]
+        contents.append(gtypes.Content(role="user", parts=[gtypes.Part(text=user_message)]))
+        resp = client.models.generate_content(
+            model="gemini-2.0-flash",
+            contents=contents,
+            config=gtypes.GenerateContentConfig(
+                system_instruction=system_prompt,
+                max_output_tokens=600,
+                temperature=0.75,
+            ),
         )
+        return resp.text.strip()
+    except Exception as e:
+        return f"_Error contacting Gemini: {e}_"
 
-    with col2:
-        budget = st.number_input(
-            "Budget ($)",
-            min_value=100000,
-            max_value=5000000,
-            value=1000000,
-            step=50000
+
+def gemini_extract_keywords(client, history: List[Dict]) -> str:
+    """Ask Gemini to distil lifestyle search keywords from the Layer 1 conversation."""
+    transcript = "\n".join(f"{h['role'].upper()}: {h['text']}" for h in history)
+    prompt = (
+        "From this home buyer conversation extract 6–10 comma-separated keywords that describe "
+        "their ideal property lifestyle (e.g. family, peaceful, garden, suburban, near schools, "
+        "urban, spacious, character home). Return ONLY the keywords, nothing else.\n\n"
+        f"Conversation:\n{transcript}"
+    )
+    if not client:
+        return " ".join(h["text"] for h in history if h["role"] == "user")
+    try:
+        resp = client.models.generate_content(
+            model="gemini-2.0-flash",
+            contents=[gtypes.Content(role="user", parts=[gtypes.Part(text=prompt)])],
+            config=gtypes.GenerateContentConfig(max_output_tokens=80, temperature=0.1),
         )
+        return resp.text.strip()
+    except Exception:
+        return " ".join(h["text"] for h in history if h["role"] == "user")
 
-    if st.button("Find My Dream Home", key="find_home"):
-        if lifestyle_query:
-            with st.spinner("Searching for your perfect match..."):
-                matches = rag_retriever.retrieve_properties_by_lifestyle(
-                    lifestyle_query,
-                    top_k=5
-                )
 
-                if not matches:
-                    matches = matching_engine.match_properties_by_lifestyle(
-                        lifestyle_query,
-                        budget_range=(0, budget),
-                        top_k=5
-                    )
+def gemini_match_explanation(client, prop: Dict, history: List[Dict], rank: int) -> str:
+    """Generate a personalised reason why this property suits this person."""
+    transcript = "\n".join(f"{h['role'].upper()}: {h['text']}" for h in history[-8:])
+    rank_word = ["best", "second", "third"][rank]
+    prop_desc = (
+        f"Property type: {prop.get('ideal_buyer_archetype', '')}\n"
+        f"Suburb: {prop.get('suburb', '')}\n"
+        f"Lifestyle supported: {prop.get('lifestyle_supported', '')}\n"
+        f"Home feeling: {prop.get('desired_home_feeling', '')}\n"
+        f"Summary: {prop.get('match_summary', '')}"
+    )
+    prompt = (
+        f"Based on this conversation, write 1–2 sentences explaining why this is the {rank_word} "
+        f"match for this person. Be specific to what they shared. Warm, conversational tone.\n\n"
+        f"Conversation:\n{transcript}\n\nProperty:\n{prop_desc}\n\nExplanation only:"
+    )
+    if not client:
+        return prop.get("match_summary", "")
+    try:
+        resp = client.models.generate_content(
+            model="gemini-2.0-flash",
+            contents=[gtypes.Content(role="user", parts=[gtypes.Part(text=prompt)])],
+            config=gtypes.GenerateContentConfig(max_output_tokens=120, temperature=0.7),
+        )
+        return resp.text.strip()
+    except Exception:
+        return prop.get("match_summary", "")
 
-                if matches:
-                    st.success(f"Found {len(matches)} properties that match your preferences!")
 
-                    for idx, prop in enumerate(matches, 1):
-                        with st.expander(
-                            f"#{idx} {prop.get('ideal_buyer_archetype', 'Property')} in {prop.get('suburb', 'Unknown')} - ${prop.get('price', 0):,.0f}",
-                            expanded=(idx == 1)
-                        ):
-                            col1, col2 = st.columns(2)
+# ── System prompts ─────────────────────────────────────────────────────────────
 
-                            with col1:
-                                st.subheader("Property Details")
-                                details = {
-                                    "Bedrooms": prop.get('bedrooms'),
-                                    "Bathrooms": prop.get('bathrooms'),
-                                    "Parking": prop.get('parking'),
-                                    "Internal Size": f"{prop.get('internal_size_sqm', 0):.0f} sqm",
-                                    "Land Size": f"{prop.get('land_size_sqm', 0):.0f} sqm",
-                                    "Year Built": prop.get('year_built'),
-                                    "Days on Market": prop.get('days_on_market'),
-                                }
-                                for key, val in details.items():
-                                    st.write(f"**{key}:** {val}")
+LAYER1_PROMPT = """You are Occubuy, a warm and empathetic home advisor. Your only job right now is to help this person emotionally and conversationally discover the kind of home and lifestyle that genuinely fits the life they want to build.
 
-                            with col2:
-                                st.subheader("Investment & Lifestyle")
-                                investment = {
-                                    "Capital Growth": f"{prop.get('capital_growth_score', 0)}/100",
-                                    "Rental Yield": f"{prop.get('estimated_rental_yield_percent', 0):.2f}%",
-                                    "Investment Quality": f"{prop.get('investment_quality_score', 0)}/100",
-                                    "Lifestyle Match": f"{prop.get('lifestyle_match_score', 0)}/100",
-                                }
-                                for key, val in investment.items():
-                                    st.write(f"**{key}:** {val}")
+Through natural conversation, gently explore:
+- Their current living situation and what they want to change
+- Their daily life — how they actually use their home, morning routines, evenings, weekends
+- Family situation: partner, children, pets, family nearby
+- What "home" means to them emotionally — how they want to feel walking through the door
+- Their ideal neighbourhood: quiet streets, urban energy, near nature, schools, cafes, walkability
+- Their vision for the next 5–10 years
+- What matters most: outdoor space, natural light, character, modern design, room to grow
 
-                            st.write(f"**Why this matches you:** {prop.get('match_summary', 'N/A')}")
-                            st.write(f"**Emotional feel:** {prop.get('desired_home_feeling', 'N/A')}")
+Rules:
+- Ask ONE question at a time
+- Keep responses SHORT: 1–2 warm sentences, then your question
+- Be genuinely curious — make them feel deeply heard, not like they're filling in a form
+- Reference what they've said in your follow-up to show you're truly listening
+- NEVER mention prices, budgets, mortgages, deposits, finance, or money in any form
+- After 6–8 meaningful exchanges where you have a clear picture, end your message with the exact token: [MATCH_READY]"""
 
-                            if st.button(f"Explore Affordability for Property #{idx}", key=f"explore_{idx}"):
-                                st.session_state.selected_property = prop
-                                st.session_state.current_layer = 2
-                                st.rerun()
-                else:
-                    st.warning("No properties found matching your criteria. Try different keywords!")
-        else:
-            st.info("Please describe your ideal lifestyle to get started!")
 
-def render_layer2(financial_engine, rag_retriever, matching_engine, roadmap_gen):
-    st.header("💰 Layer 2: Financial Feasibility & Roadmap")
+def layer2_prompt(prop: Dict, profile: Dict, affordability: Dict) -> str:
+    price = prop.get("price", 0)
+    name = f"{prop.get('ideal_buyer_archetype', 'Property')} in {prop.get('suburb', 'Unknown')}"
+    readiness = affordability.get("readiness_status", "Unknown")
+    m10 = affordability.get("months_to_10pct_deposit", 0)
+    m20 = affordability.get("months_to_20pct_deposit", 0)
+    monthly_income = affordability.get("monthly_income", 0)
+    monthly_savings = affordability.get("monthly_savings", 0)
+    current_savings = affordability.get("current_savings", 0)
+    repayment = affordability.get("estimated_monthly_repayment", 0)
+    repayment_ratio = affordability.get("repayment_to_income_ratio", 0)
+    dti = profile.get("debt_to_income_ratio", 0)
+    buffer = profile.get("estimated_emergency_buffer_months", 0)
 
-    if not st.session_state.selected_property:
-        st.warning("Please select a property from Layer 1 first.")
-        if st.button("← Back to Layer 1"):
-            st.session_state.current_layer = 1
-            st.rerun()
-        return
+    return f"""You are Occubuy, a knowledgeable and empathetic home buying advisor. The user has chosen their dream home and you are now helping them understand their financial readiness.
 
-    property_data = st.session_state.selected_property
-    property_name = f"{property_data.get('ideal_buyer_archetype', 'Property')} in {property_data.get('suburb', 'Unknown')}"
-    property_price = property_data.get('price', 0)
+THEIR CHOSEN HOME:
+- {name}
+- Price: ${price:,.0f}
+- Estimated monthly repayment: ${repayment:,.0f}/mo
 
-    st.subheader(f"📍 {property_name}")
-    st.write(f"**Listed at: ${property_price:,.0f}**")
+THEIR FINANCIAL PROFILE (from their real data):
+- Financial archetype: {profile.get('financial_archetype', 'Unknown')}
+- Monthly income: ${monthly_income:,.0f}
+- Monthly savings rate: ${monthly_savings:,.0f}/mo
+- Current savings balance: ${current_savings:,.0f}
+- 10% deposit target: ${affordability.get('deposit_10pct', 0):,.0f} — approx {m10:.0f} months away at current pace
+- 20% deposit target: ${affordability.get('deposit_20pct', 0):,.0f} — approx {m20:.0f} months away
+- Repayment as % of income: {repayment_ratio * 100:.1f}%
+- Debt-to-income ratio: {dti * 100:.1f}%
+- Emergency buffer: {buffer:.1f} months
+- Readiness status: {readiness}
 
-    # Key situational question — shapes the roadmap
-    st.markdown("---")
-    has_preapproval = st.radio(
-        "Do you have pre-mortgage approval?",
-        ["No, not yet", "Yes, I have it", "I'm not sure what that is"],
-        horizontal=True,
-        key="preapproval_status"
+YOUR ROLE — conduct a genuine financial readiness conversation:
+1. Ask about their income, savings, debts, job security, partner income, upcoming expenses — one question at a time
+2. Use the real data above to give specific, accurate, personalised guidance
+3. Build toward an honest picture of their readiness
+
+IF READY: Congratulate them warmly. Walk them step by step through the purchase process — pre-approval, inspections, making an offer, exchange, settlement. Explain what pre-mortgage approval is and why to get it first.
+
+IF EMERGING ({m10:.0f} months to 10% deposit): Be encouraging — they're on track. Explain the 10% deposit path (with LMI) vs the 20% path (no LMI). Give a real timeline. Suggest specific ways to accelerate savings.
+
+IF NOT YET: Be compassionate and direct. Explain specifically what needs to change with real numbers. Give a realistic roadmap — what to save, over how long. Consider whether a more affordable property makes sense. Talk about government schemes, co-buying, income growth.
+
+Rules:
+- ONE question at a time — this is still a conversation, not a report
+- Use real numbers from the financial data — be specific
+- Stay empathetic — buying a home is emotional and stressful
+- Reveal the picture gradually through conversation, don't dump everything at once"""
+
+
+# ── Session state ──────────────────────────────────────────────────────────────
+
+def init():
+    defaults = {
+        "messages": [],        # Chat display history [{role, type, content}]
+        "stage": "layer1",     # layer1 | selecting | layer2
+        "l1_history": [],      # Gemini Layer 1 exchange history
+        "l2_history": [],      # Gemini Layer 2 exchange history
+        "exchanges": 0,        # Layer 1 exchange count
+        "properties": [],      # Top 3 matched properties
+        "explanations": [],    # Personalised match explanations
+        "selected": None,      # Chosen property
+        "user_id": 1,
+        "affordability": None,
+        "profile": None,
+    }
+    for k, v in defaults.items():
+        if k not in st.session_state:
+            st.session_state[k] = v
+
+
+# ── Rendering ──────────────────────────────────────────────────────────────────
+
+def render_property_card(prop: Dict, explanation: str, rank: int):
+    labels = ["⭐ Best Match", "✦ Second Pick", "◈ Third Pick"]
+    with st.container(border=True):
+        col1, col2 = st.columns([3, 1])
+        with col1:
+            st.markdown(f"**{labels[rank]} — {prop.get('ideal_buyer_archetype', 'Property')}**")
+            st.markdown(
+                f"📍 {prop.get('suburb', 'Unknown')}, {prop.get('state', '')} &nbsp;|&nbsp; "
+                f"💰 ${prop.get('price', 0):,.0f}"
+            )
+        with col2:
+            st.markdown(
+                f"🛏 {prop.get('bedrooms', '?')} &nbsp; 🚿 {prop.get('bathrooms', '?')}"
+            )
+        if explanation:
+            st.caption(explanation)
+
+
+def render_msg(msg: Dict):
+    t = msg.get("type", "text")
+    c = msg["content"]
+    if t == "text":
+        st.markdown(c)
+    elif t == "properties":
+        st.markdown(c["intro"])
+        for i, (prop, exp) in enumerate(zip(c["props"], c["explanations"])):
+            render_property_card(prop, exp, i)
+        st.markdown(c["prompt"])
+
+
+# ── Layer handlers ─────────────────────────────────────────────────────────────
+
+def handle_layer1(user_input: str, client, rag_retriever, matching_engine) -> List[Dict]:
+    st.session_state.exchanges += 1
+
+    response = gemini_chat(client, LAYER1_PROMPT, st.session_state.l1_history, user_input)
+
+    st.session_state.l1_history.append({"role": "user", "text": user_input})
+    st.session_state.l1_history.append({"role": "model", "text": response})
+
+    ready = "[MATCH_READY]" in response or st.session_state.exchanges >= 9
+    clean = response.replace("[MATCH_READY]", "").strip()
+
+    out = [{"role": "assistant", "type": "text", "content": clean}]
+
+    if ready:
+        keywords = gemini_extract_keywords(client, st.session_state.l1_history)
+
+        matches = rag_retriever.retrieve_properties_by_lifestyle(keywords, top_k=5)
+        if not matches:
+            matches = matching_engine.match_properties_by_lifestyle(keywords, top_k=5)
+
+        top3 = matches[:3]
+        explanations = [
+            gemini_match_explanation(client, p, st.session_state.l1_history, i)
+            for i, p in enumerate(top3)
+        ]
+
+        st.session_state.properties = top3
+        st.session_state.explanations = explanations
+        st.session_state.stage = "selecting"
+
+        out.append({
+            "role": "assistant",
+            "type": "properties",
+            "content": {
+                "intro": "Based on everything you've shared, here are your top 3 matches:",
+                "props": top3,
+                "explanations": explanations,
+                "prompt": "Which one feels most like home to you?",
+            },
+        })
+
+    return out
+
+
+def select_property(idx: int, client, financial_engine) -> List[Dict]:
+    prop = st.session_state.properties[idx]
+    st.session_state.selected = prop
+
+    affordability = financial_engine.calculate_affordability(
+        st.session_state.user_id, prop.get("price", 0)
+    )
+    profile = financial_engine.get_user_financial_profile(st.session_state.user_id)
+    st.session_state.affordability = affordability
+    st.session_state.profile = profile
+    st.session_state.stage = "layer2"
+
+    system = layer2_prompt(prop, profile, affordability)
+    opening = gemini_chat(
+        client,
+        system,
+        [],
+        (
+            f"The user has just chosen their dream home: {prop.get('ideal_buyer_archetype', 'property')} "
+            f"in {prop.get('suburb', 'Unknown')} at ${prop.get('price', 0):,.0f}. "
+            "Acknowledge their exciting choice warmly (1–2 sentences), then ask your first question "
+            "to begin understanding their financial situation. Keep it to 3–4 sentences total."
+        ),
     )
 
-    affordability = financial_engine.calculate_affordability(st.session_state.user_id, property_price)
-    roadmap = financial_engine.generate_financial_roadmap(st.session_state.user_id, property_price)
-
-    if has_preapproval == "I'm not sure what that is":
-        st.info(
-            "**Pre-mortgage approval** (also called conditional approval) means a lender has reviewed "
-            "your finances and confirmed they'd lend you up to a certain amount. It doesn't commit you "
-            "to buying — but it shows sellers you're serious and lets you move fast when you find the right property."
-        )
-
-    if "error" not in affordability:
-        readiness = affordability['readiness_status']
-        months_10pct = affordability['months_to_10pct_deposit']
-        months_20pct = affordability['months_to_20pct_deposit']
-
-        st.markdown("---")
-        col1, col2, col3, col4 = st.columns(4)
-
-        with col1:
-            if readiness == "Ready":
-                st.success(f"### ✅ {readiness}")
-            elif readiness == "Emerging":
-                st.warning(f"### ⏳ {readiness}")
-            else:
-                st.error(f"### ⏸️ {readiness}")
-
-        with col2:
-            st.metric("Monthly Savings", f"${affordability['monthly_savings']:,.0f}")
-
-        with col3:
-            st.metric("Est. Monthly Repayment", f"${affordability['estimated_monthly_repayment']:,.0f}")
-
-        with col4:
-            repay_pct = affordability['repayment_to_income_ratio'] * 100
-            color = "normal" if repay_pct <= 30 else "inverse"
-            st.metric("Repayment/Income", f"{repay_pct:.1f}%", delta=f"{'✓ healthy' if repay_pct <= 30 else '↑ high'}")
-
-        st.subheader("Your Financial Position")
-        tab1, tab2, tab3 = st.tabs(["Overview", "Deposit Timeline", "Budget Scenarios"])
-
-        with tab1:
-            col1, col2 = st.columns(2)
-
-            with col1:
-                st.write("**Income & Savings**")
-                income_metrics = {
-                    "Monthly Income": f"${affordability['monthly_income']:,.0f}",
-                    "Monthly Surplus": f"${affordability['monthly_surplus']:,.0f}",
-                    "Monthly Savings": f"${affordability['monthly_savings']:,.0f}",
-                    "Savings Rate": f"{affordability['savings_rate']*100:.1f}%",
-                    "Current Savings Balance": f"${affordability['current_savings']:,.0f}",
-                }
-                for key, val in income_metrics.items():
-                    st.write(f"- {key}: **{val}**")
-
-            with col2:
-                st.write("**Deposit Needs**")
-                deposit_metrics = {
-                    "10% Deposit (+ LMI path)": f"${affordability['deposit_10pct']:,.0f}",
-                    "Months to 10% deposit": f"{months_10pct:.0f} months",
-                    "20% Deposit (no LMI)": f"${affordability['deposit_20pct']:,.0f}",
-                    "Months to 20% deposit": f"{months_20pct:.0f} months",
-                    "Debt-to-Income Ratio": f"{affordability['debt_to_income']*100:.1f}%",
-                }
-                for key, val in deposit_metrics.items():
-                    st.write(f"- {key}: **{val}**")
-
-        with tab2:
-            st.write("**Your deposit savings progress:**")
-            for step in roadmap['roadmap_steps']:
-                st.write(f"- {step}")
-
-        with tab3:
-            st.write("**What if you saved more each month?**")
-            col1, col2, col3 = st.columns(3)
-            with col1:
-                st.write("**Scenario**")
-            with col2:
-                st.write("**Months to 10% deposit**")
-            with col3:
-                st.write("**Notes**")
-            for scenario in roadmap['budget_scenarios']:
-                col1, col2, col3 = st.columns(3)
-                with col1:
-                    st.write(f"{scenario['name']}")
-                with col2:
-                    months = scenario['months_to_deposit']
-                    st.write(f"{months:.0f} months" if months != float('inf') else "∞")
-                with col3:
-                    st.write(f"_{scenario['feasibility']}_")
-
-        st.divider()
-        st.subheader("What happens next?")
-
-        if readiness == "Ready":
-            pre_note = (
-                "You already have pre-approval — great! You can move fast."
-                if has_preapproval == "Yes, I have it"
-                else "**First step:** Get pre-mortgage approval before making an offer."
-            )
-            st.success(f"""
-            ### You're in a strong position! ✅
-
-            {pre_note}
-
-            **Your Next Steps (in order):**
-            1. {'Make an offer — your pre-approval is ready' if has_preapproval == "Yes, I have it" else 'Get pre-mortgage approval from 2–3 lenders (takes ~1–2 weeks)'}
-            2. Arrange building & pest inspections
-            3. Review the contract with a conveyancer/solicitor
-            4. Exchange contracts & pay deposit
-            5. Settlement — you own it!
-            """)
-
-        elif readiness == "Emerging":
-            pre_timing = max(1, int(months_10pct) - 3)
-            pre_note = (
-                "You have pre-approval — keep it current (it usually expires in 90 days)."
-                if has_preapproval == "Yes, I have it"
-                else f"Get pre-approval around month {pre_timing} (3 months before your deposit target)."
-            )
-            st.warning(f"""
-            ### You're on track! ⏳
-
-            **10% deposit path:** ~{months_10pct:.0f} months away (you can use LMI to enter with 10%)
-            **20% deposit path:** ~{months_20pct:.0f} months away (no LMI needed)
-
-            **Pre-approval:** {pre_note}
-
-            **Your Next Steps:**
-            1. Maintain or boost monthly savings (currently ${affordability['monthly_savings']:,.0f}/mo)
-            2. Can you redirect $500–1,000/month more? Check the Budget Scenarios tab
-            3. {f'Keep pre-approval current — reapply if it expires' if has_preapproval == "Yes, I have it" else f'Plan to get pre-approval in ~{pre_timing} months'}
-            4. Keep watching this property or similar ones in this suburb
-            5. Once deposit is ready — move quickly, don't wait for "perfect" timing
-            """)
-
-        else:
-            st.error(f"""
-            ### Let's reframe this ⏸️
-
-            This property is a stretch right now:
-            - 10% deposit is **{months_10pct:.0f} months away** at current savings rate
-            - Monthly repayments would be **{affordability['repayment_to_income_ratio']*100:.1f}% of income** (aim for ≤30%)
-
-            **What you can do:**
-            1. Look at properties in the **${property_price*0.5:,.0f}–${property_price*0.7:,.0f}** range first
-            2. Boost monthly savings — review your top spending categories
-            3. Set a 12-month savings sprint target
-            4. Explore co-buying with a partner or family member
-            {'5. **Pre-approval:** Hold off — apply when you are 2–3 months from your deposit goal' if has_preapproval != 'Yes, I have it' else '5. Pre-approval noted — but focus on deposit savings first'}
-
-            **Ask below** for more affordable alternatives or budget help.
-            """)
-
-        st.divider()
-        st.subheader("Ask me anything about affordability")
-
-        user_input = st.text_input(
-            "Your question:",
-            placeholder="e.g., Can I afford this? What if I save more? Show me cheaper options...",
-            key="layer2_input"
-        )
-
-        if user_input:
-            response = roadmap_gen.generate_conversational_response(user_input, affordability, layer=2)
-            st.info(f"**Assistant:** {response}")
-
-        col1, col2 = st.columns(2)
-        with col1:
-            if st.button("← Back to Layer 1"):
-                st.session_state.current_layer = 1
-                st.rerun()
-
-        with col2:
-            if st.button("Proceed to Layer 3 (Action Plan) →"):
-                st.session_state.current_layer = 3
-                st.rerun()
-
-    else:
-        st.error(f"Error: {affordability['error']}")
-
-def render_layer3(financial_engine, rag_retriever, matching_engine, roadmap_gen):
-    st.header("📋 Layer 3: Action Plan")
-
-    if not st.session_state.selected_property:
-        st.warning("Please select a property from Layer 1 first.")
-        if st.button("← Back to Layer 1"):
-            st.session_state.current_layer = 1
-            st.rerun()
-        return
-
-    property_data = st.session_state.selected_property
-    property_name = f"{property_data.get('ideal_buyer_archetype', 'Property')} in {property_data.get('suburb', 'Unknown')}"
-    property_price = property_data.get('price', 0)
-
-    st.subheader(f"📍 {property_name}")
-
-    action_plan = roadmap_gen.generate_layer_3_action_plan(st.session_state.user_id, property_price)
-    readiness = action_plan['readiness_status']
-
-    st.subheader(f"Your Timeline ({readiness})")
-
-    timeline = action_plan['timeline']
-    for phase, actions in timeline.items():
-        with st.expander(phase, expanded=True):
-            for action in actions:
-                st.write(f"✓ {action}")
-
-    st.subheader("Documents You'll Need")
-    for doc in action_plan['documents_needed']:
-        st.write(f"- {doc}")
-
-    st.subheader("Pre-Purchase Checklist")
-    checklist_items = [
-        "Get pre-mortgage approval",
-        "Arrange property inspection",
-        "Review inspection results",
-        "Finalize financing terms",
-        "Get home and contents insurance quotes",
-        "Arrange pest/building report",
-        "Exchange contracts",
-        "Final settlement preparations",
-        "Settlement day!",
+    st.session_state.l2_history = [
+        {"role": "user", "text": "[property selected]"},
+        {"role": "model", "text": opening},
     ]
 
-    cols = st.columns(2)
-    for idx, item in enumerate(checklist_items):
-        with cols[idx % 2]:
-            st.checkbox(item)
+    return [
+        {
+            "role": "user",
+            "type": "text",
+            "content": f"I'd love to go with the {prop.get('ideal_buyer_archetype', 'property')} in {prop.get('suburb', 'Unknown')}.",
+        },
+        {"role": "assistant", "type": "text", "content": opening},
+    ]
 
-    st.divider()
-    st.subheader("Your Immediate Next Actions")
 
-    if readiness == "Ready":
-        st.success("""
-        1. **Today:** Research 2-3 mortgage lenders
-        2. **This week:** Get pre-approval (have documents ready)
-        3. **Next week:** Schedule property inspection
-        4. **Within 2 weeks:** Make an offer
-        """)
-    elif readiness == "Emerging":
-        st.warning("""
-        1. **This month:** Review budget for savings optimization
-        2. **Next month:** Start conversations with lenders (even if not ready yet)
-        3. **In 2-3 months:** Get formal pre-approval
-        4. **In months:** Begin property hunting
-        """)
-    else:
-        st.error("""
-        1. **This week:** Review your full budget
-        2. **Next week:** Identify $500-1000/month to redirect to savings
-        3. **This month:** Research first-home buyer schemes in your state
-        4. **Month 3+:** Get pre-approval conversations started
-        """)
+def handle_layer2(user_input: str, client, financial_engine) -> List[Dict]:
+    system = layer2_prompt(
+        st.session_state.selected,
+        st.session_state.profile,
+        st.session_state.affordability,
+    )
+    response = gemini_chat(client, system, st.session_state.l2_history, user_input)
 
-    col1, col2, col3 = st.columns(3)
-    with col1:
-        if st.button("← Back to Layer 2"):
-            st.session_state.current_layer = 2
-            st.rerun()
+    st.session_state.l2_history.append({"role": "user", "text": user_input})
+    st.session_state.l2_history.append({"role": "model", "text": response})
 
-    with col3:
-        if st.button("← Start Over (Layer 1)"):
-            st.session_state.selected_property = None
-            st.session_state.current_layer = 1
-            st.rerun()
+    return [{"role": "assistant", "type": "text", "content": response}]
 
-def render_debug_tab(financial_engine, rag_retriever, matching_engine, roadmap_gen):
-    st.header("🔧 Debug & Data")
 
-    tab1, tab2, tab3, tab4 = st.tabs(["User Data", "Properties", "Transactions", "Logs"])
-
-    with tab1:
-        st.subheader("User Financial Profiles")
-        users = financial_engine.get_all_users()
-        selected_user = st.selectbox("Select user:", users)
-
-        if selected_user:
-            profile = financial_engine.get_user_financial_profile(selected_user)
-            st.json({k: v for k, v in profile.items() if not isinstance(v, (list, dict))})
-
-    with tab2:
-        st.subheader("Property Knowledge Base")
-        properties = rag_retriever.property_kb
-        st.write(f"Total properties: {len(properties)}")
-        st.dataframe(
-            properties[['property_id', 'suburb', 'price', 'bedrooms', 'investment_quality_score']],
-            use_container_width=True
-        )
-
-    with tab3:
-        st.subheader("Transaction Data")
-        transactions = rag_retriever.financial_kb
-        st.write(f"Total financial profiles: {len(transactions)}")
-        st.dataframe(transactions[['user_id', 'financial_archetype', 'annual_income', 'savings_rate']], use_container_width=True)
-
-    with tab4:
-        st.subheader("System Status")
-        st.write("✅ Financial Analysis Engine: Ready")
-        st.write("✅ RAG Retriever: Ready")
-        st.write("✅ Property Matching: Ready")
-        st.write("✅ Roadmap Generator: Ready")
-        if rag_retriever.faiss_index:
-            st.write("✅ Vector DB (FAISS): Loaded")
-        else:
-            st.write("⚠️ Vector DB: Using TF-IDF fallback")
+# ── Main ───────────────────────────────────────────────────────────────────────
 
 def main():
-    initialize_session()
+    init()
+    financial_engine, rag_retriever, matching_engine = load_engines()
+    client = get_gemini_client()
 
-    financial_engine, rag_retriever, matching_engine, roadmap_gen = load_engines()
+    # Sidebar
+    with st.sidebar:
+        st.title("🏠 Occubuy")
+        st.caption("AI home buying assistant")
+        st.divider()
 
-    st.sidebar.title("🏠 Occubuy")
-    st.sidebar.write("Your AI home buying assistant")
+        users = financial_engine.get_all_users()
+        uid = st.selectbox("Demo profile:", users, index=0)
+        if uid != st.session_state.user_id:
+            st.session_state.user_id = uid
 
-    page = st.sidebar.radio(
-        "Choose your path:",
-        ["🏠 Layers 1-3 (Home Buying Flow)", "🔧 Debug & Data"]
-    )
+        st.divider()
+        stage_labels = {
+            "layer1": "🏠 Layer 1: Discovering your home",
+            "selecting": "🏠 Layer 1: Choose your home",
+            "layer2": "💰 Layer 2: Financial readiness",
+        }
+        st.info(stage_labels.get(st.session_state.stage, ""))
 
-    if page == "🏠 Layers 1-3 (Home Buying Flow)":
-        st.sidebar.markdown("---")
-        st.sidebar.write(f"**Current Layer:** {st.session_state.current_layer}/3")
-        progress = st.session_state.current_layer / 3
-        st.sidebar.progress(progress)
+        st.divider()
+        if st.button("🔄 Start Over", use_container_width=True):
+            for k in list(st.session_state.keys()):
+                del st.session_state[k]
+            st.rerun()
 
-        if st.session_state.current_layer == 1:
-            render_layer1(financial_engine, rag_retriever, matching_engine, roadmap_gen)
-        elif st.session_state.current_layer == 2:
-            render_layer2(financial_engine, rag_retriever, matching_engine, roadmap_gen)
-        else:
-            render_layer3(financial_engine, rag_retriever, matching_engine, roadmap_gen)
+        if not client:
+            st.error("⚠️ GEMINI_API_KEY not set")
 
-    else:
-        render_debug_tab(financial_engine, rag_retriever, matching_engine, roadmap_gen)
+    # Seed welcome message
+    if not st.session_state.messages:
+        st.session_state.messages.append({
+            "role": "assistant",
+            "type": "text",
+            "content": (
+                "👋 Hi! I'm **Occubuy** — your home buying assistant.\n\n"
+                "Before we look at anything, I want to get to know *you* a little. "
+                "The best home isn't just about rooms and price — it's about the life you want to live.\n\n"
+                "**So let's start simply: what does your life look like right now, "
+                "and what are you hoping to change or create with a new home?**"
+            ),
+        })
 
-    st.sidebar.markdown("---")
-    st.sidebar.write("Built with ❤️ for home buyers")
+    # Render all messages
+    for msg in st.session_state.messages:
+        with st.chat_message(msg["role"]):
+            render_msg(msg)
+
+    # Property selection buttons — shown below the chat when in selecting stage
+    if st.session_state.stage == "selecting" and st.session_state.properties:
+        st.divider()
+        st.markdown("**Choose the one that feels right:**")
+        labels = ["⭐ Best Match", "✦ Second Pick", "◈ Third Pick"]
+        cols = st.columns(3)
+        for i, (prop, col) in enumerate(zip(st.session_state.properties, cols)):
+            with col:
+                if st.button(
+                    f"{labels[i]}\n\n{prop.get('ideal_buyer_archetype', 'Property')}\n{prop.get('suburb', '')}",
+                    key=f"pick_{i}",
+                    use_container_width=True,
+                ):
+                    with st.spinner("Getting your financial picture ready..."):
+                        new_msgs = select_property(i, client, financial_engine)
+                    for m in new_msgs:
+                        st.session_state.messages.append(m)
+                    st.rerun()
+
+    # Chat input — hidden only during property selection
+    if st.session_state.stage != "selecting":
+        if prompt := st.chat_input("Type your message..."):
+            st.session_state.messages.append({"role": "user", "type": "text", "content": prompt})
+
+            with st.spinner("..."):
+                if st.session_state.stage == "layer1":
+                    new_msgs = handle_layer1(prompt, client, rag_retriever, matching_engine)
+                elif st.session_state.stage == "layer2":
+                    new_msgs = handle_layer2(prompt, client, financial_engine)
+                else:
+                    new_msgs = []
+
+            for m in new_msgs:
+                st.session_state.messages.append(m)
+
+            st.rerun()
+
 
 if __name__ == "__main__":
     main()
